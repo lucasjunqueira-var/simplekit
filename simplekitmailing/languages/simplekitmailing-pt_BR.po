@@ -1,0 +1,472 @@
+# Simple Kit Mailing Plugin - Portuguese (Brazil) Translation
+# Copyright (C) 2025 Simple Kit Mailing
+# This file is distributed under the same license as the Simple Kit Mailing plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Simple Kit Mailing 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: simplekitmailing.php:49
+msgid "A cada 2 minutos"
+msgstr "A cada 2 minutos"
+
+#: includes/admin-menu.php:16
+msgid "Simple Kit Mailing"
+msgstr "Simple Kit Mailing"
+
+#: includes/admin-menu.php:24
+msgid "Cadastros"
+msgstr "Cadastros"
+
+#: includes/admin-menu.php:31
+msgid "Criar mensagem"
+msgstr "Criar mensagem"
+
+#: includes/admin-menu.php:38
+msgid "Envios"
+msgstr "Envios"
+
+#: includes/admin-menu.php:45
+msgid "Configurações"
+msgstr "Configurações"
+
+#: includes/settings.php:86
+msgid "Acesso negado."
+msgstr "Acesso negado."
+
+#: includes/settings.php:91
+msgid "Configurações do Simple Kit Mailing"
+msgstr "Configurações do Simple Kit Mailing"
+
+#: includes/settings.php:97
+msgid "Remetente"
+msgstr "Remetente"
+
+#: includes/settings.php:100
+msgid "Nome do remetente"
+msgstr "Nome do remetente"
+
+#: includes/settings.php:103
+msgid "E-mail do remetente"
+msgstr "E-mail do remetente"
+
+#: includes/settings.php:106
+msgid "Responder para - Nome"
+msgstr "Responder para - Nome"
+
+#: includes/settings.php:109
+msgid "Responder para - E-mail"
+msgstr "Responder para - E-mail"
+
+#: includes/settings.php:114
+msgid "Configurações SMTP"
+msgstr "Configurações SMTP"
+
+#: includes/settings.php:117
+msgid "Servidor SMTP"
+msgstr "Servidor SMTP"
+
+#: includes/settings.php:120
+msgid "Porta SMTP"
+msgstr "Porta SMTP"
+
+#: includes/settings.php:123
+msgid "Usuário SMTP"
+msgstr "Usuário SMTP"
+
+#: includes/settings.php:126
+msgid "Senha SMTP"
+msgstr "Senha SMTP"
+
+#: includes/settings.php:129
+msgid "Criptografia"
+msgstr "Criptografia"
+
+#: includes/settings.php:137
+msgid "Nenhuma"
+msgstr "Nenhuma"
+
+#: includes/settings.php:143
+msgid "Idioma do plugin"
+msgstr "Idioma do plugin"
+
+#: includes/settings.php:160
+msgid "Página após cadastro"
+msgstr "Página após cadastro"
+
+#: includes/settings.php:170
+msgid "— Selecionar —"
+msgstr "— Selecionar —"
+
+#: includes/settings.php:173
+msgid "Página para onde o visitante será redirecionado após se cadastrar."
+msgstr "Página para onde o visitante será redirecionado após se cadastrar."
+
+#: includes/subscribers.php:96
+msgid "Buscar cadastros:"
+msgstr "Buscar cadastros:"
+
+#: includes/subscribers.php:100
+msgid "Buscar"
+msgstr "Buscar"
+
+#: includes/subscribers.php:104
+msgid "E-mails cadastrados"
+msgstr "E-mails cadastrados"
+
+#: includes/subscribers.php:112
+msgid "E-mail"
+msgstr "E-mail"
+
+#: includes/subscribers.php:113
+msgid "IP"
+msgstr "IP"
+
+#: includes/subscribers.php:114
+msgid "Data/Hora"
+msgstr "Data/Hora"
+
+#: includes/subscribers.php:115
+msgid "Ações"
+msgstr "Ações"
+
+#: includes/subscribers.php:119
+msgid "Nenhum cadastro encontrado."
+msgstr "Nenhum cadastro encontrado."
+
+#: includes/subscribers.php:130
+msgid "Remover"
+msgstr "Remover"
+
+#: includes/subscribers.php:131
+msgid "Remover este e-mail?"
+msgstr "Remover este e-mail?"
+
+#: includes/subscribers.php:140
+msgid "Ações em massa"
+msgstr "Ações em massa"
+
+#: includes/subscribers.php:143
+msgid "Remover selecionados"
+msgstr "Remover selecionados"
+
+#: includes/subscribers.php:144
+msgid "Aplicar"
+msgstr "Aplicar"
+
+#: includes/subscribers.php:167
+msgid "Exportar CSV"
+msgstr "Exportar CSV"
+
+#: includes/subscribers.php:177
+msgid "Importar CSV"
+msgstr "Importar CSV"
+
+#: includes/subscribers.php:183
+msgid "E-mails removidos"
+msgstr "E-mails removidos"
+
+#: includes/subscribers.php:191
+msgid "Nenhum e-mail removido."
+msgstr "Nenhum e-mail removido."
+
+#: includes/subscribers.php:201
+msgid "Adicionar e-mail aos removidos"
+msgstr "Adicionar e-mail aos removidos"
+
+#: includes/subscribers.php:206
+msgid "Digite o e-mail"
+msgstr "Digite o e-mail"
+
+#: includes/subscribers.php:207
+msgid "Adicionar"
+msgstr "Adicionar"
+
+#: includes/subscribers.php:230
+msgid "E-mail removido com sucesso."
+msgstr "E-mail removido com sucesso."
+
+#: includes/subscribers.php:242
+msgid "E-mails removidos com sucesso."
+msgstr "E-mails removidos com sucesso."
+
+#: includes/subscribers.php:277
+msgid "Importação concluída: %d cadastrados, %d ignorados (estavam na lista de removidos)."
+msgstr "Importação concluída: %d cadastrados, %d ignorados (estavam na lista de removidos)."
+
+#: includes/subscribers.php:289
+msgid "E-mail adicionado aos removidos."
+msgstr "E-mail adicionado aos removidos."
+
+#: includes/messages.php:30
+msgid "Assunto"
+msgstr "Assunto"
+
+#: includes/messages.php:33
+msgid "Conteúdo do e-mail"
+msgstr "Conteúdo do e-mail"
+
+#: includes/messages.php:46
+msgid "Salvar mensagem"
+msgstr "Salvar mensagem"
+
+#: includes/messages.php:53
+msgid "Enviar teste"
+msgstr "Enviar teste"
+
+#: includes/messages.php:59
+msgid "E-mail de teste"
+msgstr "E-mail de teste"
+
+#: includes/messages.php:66
+msgid "Enviar teste"
+msgstr "Enviar teste"
+
+#: includes/messages.php:73
+msgid "Enviar para cadastrados"
+msgstr "Enviar para cadastrados"
+
+#: includes/messages.php:79
+msgid "Tem certeza que deseja enviar esta mensagem para todos os cadastrados?"
+msgstr "Tem certeza que deseja enviar esta mensagem para todos os cadastrados?"
+
+#: includes/messages.php:80
+msgid "Enviar para os cadastrados"
+msgstr "Enviar para os cadastrados"
+
+#: includes/messages.php:103
+msgid "Mensagem salva com sucesso."
+msgstr "Mensagem salva com sucesso."
+
+#: includes/messages.php:117
+msgid "E-mail de teste inválido."
+msgstr "E-mail de teste inválido."
+
+#: includes/messages.php:128
+msgid "Teste enviado com sucesso!"
+msgstr "Teste enviado com sucesso!"
+
+#: includes/messages.php:134
+msgid "Falha ao enviar o teste. Verifique as configurações de SMTP."
+msgstr "Falha ao enviar o teste. Verifique as configurações de SMTP."
+
+#: includes/messages.php:146
+msgid "Salve a mensagem antes de enviar."
+msgstr "Salve a mensagem antes de enviar."
+
+#: includes/messages.php:160
+msgid "Envio registrado. Os disparos começarão em breve."
+msgstr "Envio registrado. Os disparos começarão em breve."
+
+#: includes/send-handler.php:38
+msgid "ID"
+msgstr "ID"
+
+#: includes/send-handler.php:39
+msgid "Assunto"
+msgstr "Assunto"
+
+#: includes/send-handler.php:40
+msgid "Criado em"
+msgstr "Criado em"
+
+#: includes/send-handler.php:41
+msgid "Pendentes"
+msgstr "Pendentes"
+
+#: includes/send-handler.php:42
+msgid "Último envio"
+msgstr "Último envio"
+
+#: includes/send-handler.php:43
+msgid "Status"
+msgstr "Status"
+
+#: includes/send-handler.php:44
+msgid "Ações"
+msgstr "Ações"
+
+#: includes/send-handler.php:47
+msgid "Nenhum envio registrado."
+msgstr "Nenhum envio registrado."
+
+#: includes/send-handler.php:63
+msgid "Pausar"
+msgstr "Pausar"
+
+#: includes/send-handler.php:68
+msgid "Cancelar este envio? Não será possível retomá-lo."
+msgstr "Cancelar este envio? Não será possível retomá-lo."
+
+#: includes/send-handler.php:69
+msgid "Cancelar"
+msgstr "Cancelar"
+
+#: includes/send-handler.php:73
+msgid "Retomar"
+msgstr "Retomar"
+
+#: includes/send-handler.php:77
+msgid "Cancelar"
+msgstr "Cancelar"
+
+#: includes/send-handler.php:97
+msgid "Rascunho"
+msgstr "Rascunho"
+
+#: includes/send-handler.php:98
+msgid "Ativo"
+msgstr "Ativo"
+
+#: includes/send-handler.php:99
+msgid "Pausado"
+msgstr "Pausado"
+
+#: includes/send-handler.php:100
+msgid "Cancelado"
+msgstr "Cancelado"
+
+#: includes/send-handler.php:101
+msgid "Concluído"
+msgstr "Concluído"
+
+#: includes/send-handler.php:122
+msgid "Envio pausado."
+msgstr "Envio pausado."
+
+#: includes/send-handler.php:125
+msgid "Envio cancelado."
+msgstr "Envio cancelado."
+
+#: includes/send-handler.php:128
+msgid "Envio retomado."
+msgstr "Envio retomado."
+
+#: includes/send-handler.php:168
+msgid "Se não deseja mais receber nossos e-mails, <a href=\"%s\">clique aqui para descadastrar</a>."
+msgstr "Se não deseja mais receber nossos e-mails, <a href=\"%s\">clique aqui para descadastrar</a>."
+
+#: includes/ajax-handlers.php:18
+msgid "Verifique o endereço de e-mail informado."
+msgstr "Verifique o endereço de e-mail informado."
+
+#: includes/ajax-handlers.php:22
+msgid "Você precisa concordar com nossos termos para cadastrar o seu e-mail."
+msgstr "Você precisa concordar com nossos termos para cadastrar o seu e-mail."
+
+#: includes/ajax-handlers.php:31
+msgid "Este e-mail está na lista de removidos e não pode ser cadastrado novamente."
+msgstr "Este e-mail está na lista de removidos e não pode ser cadastrado novamente."
+
+#: includes/ajax-handlers.php:36
+msgid "Este e-mail já está cadastrado."
+msgstr "Este e-mail já está cadastrado."
+
+#: includes/ajax-handlers.php:52
+msgid "Erro ao cadastrar. Tente novamente."
+msgstr "Erro ao cadastrar. Tente novamente."
+
+#: includes/block.php:18
+msgid "Receba nossas novidades"
+msgstr "Receba nossas novidades"
+
+#: includes/block.php:35
+msgid "Digite seu e-mail"
+msgstr "Digite seu e-mail"
+
+#: includes/block.php:36
+msgid "Eu concordo com os termos de cadastro"
+msgstr "Eu concordo com os termos de cadastro"
+
+#: includes/block.php:37
+msgid "Cadastrar"
+msgstr "Cadastrar"
+
+#: includes/block.php:38
+msgid "Enviando..."
+msgstr "Enviando..."
+
+#: includes/block.php:117
+msgid "Você precisa concordar com nossos termos para cadastrar o seu e-mail."
+msgstr "Você precisa concordar com nossos termos para cadastrar o seu e-mail."
+
+#: includes/block.php:122
+msgid "Verifique o endereço de e-mail informado."
+msgstr "Verifique o endereço de e-mail informado."
+
+#: includes/block.php:152
+msgid "Cadastro realizado com sucesso!"
+msgstr "Cadastro realizado com sucesso!"
+
+#: includes/block.php:156
+msgid "Erro ao cadastrar. Tente novamente."
+msgstr "Erro ao cadastrar. Tente novamente."
+
+#: includes/block.php:161
+msgid "Erro de conexão. Tente novamente."
+msgstr "Erro de conexão. Tente novamente."
+
+#: includes/unsubscribe.php:16
+msgid "Link de descadastro inválido ou expirado."
+msgstr "Link de descadastro inválido ou expirado."
+
+#: includes/unsubscribe.php:17
+msgid "Erro"
+msgstr "Erro"
+
+#: includes/unsubscribe.php:29
+msgid "Seu e-mail foi removido da nossa lista de envio. Você não receberá mais nossas mensagens."
+msgstr "Seu e-mail foi removido da nossa lista de envio. Você não receberá mais nossas mensagens."
+
+#: includes/unsubscribe.php:38
+msgid "Descadastro realizado"
+msgstr "Descadastro realizado"
+
+#: includes/unsubscribe.php:40
+msgid "Voltar ao início"
+msgstr "Voltar ao início"
+
+#: includes/unsubscribe.php:41
+msgid "Descadastro"
+msgstr "Descadastro"
+
+#: assets/block.js:14
+msgid "Simple Kit Mailing Collect"
+msgstr "Simple Kit Mailing Collect"
+
+#: assets/block.js:15
+msgid "Formulário de coleta de e-mails para newsletter."
+msgstr "Formulário de coleta de e-mails para newsletter."
+
+#: assets/block.js:23
+msgid "Receba nossas novidades"
+msgstr "Receba nossas novidades"
+
+#: assets/block.js:38
+msgid "[Formulário de cadastro de e-mail]"
+msgstr "[Formulário de cadastro de e-mail]"
+
+#: assets/block.js:40
+msgid "Checkbox: Eu concordo com os termos"
+msgstr "Checkbox: Eu concordo com os termos"
+
+#: assets/block.js:42
+msgid "Botão: Cadastrar"
+msgstr "Botão: Cadastrar"
+
+#: assets/block.js:47
+msgid "Configurações"
+msgstr "Configurações"
+
+#: assets/block.js:48
+msgid "Título do bloco"
+msgstr "Título do bloco"
