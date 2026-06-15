@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Simple Kit Mailing
  * Plugin URI:  https://github.com/example/simplekitmailing
- * Description: The "Simple Kit Mailing" plugin is part of the "Simple Kit" suite and offers a simplified way to manage both contact registration in mailing lists and sending messages to limited numbers of recipients, directly from your dashboard.
+ * Description: Simple Kit Mailing offers a simplified way to manage contact registration in mailing lists and sending messages to limited numbers of recipients.
  * Version:     1.0.0
  * Requires at least: 6.8
  * Tested up to: 7.0

@@ -8,7 +8,7 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The "Simple Kit Mailing" plugin is part of the "Simple Kit" suite and offers a simplified way to manage both contact registration in mailing lists and sending messages to limited numbers of recipients, directly from your dashboard.
+Simple Kit Mailing offers a simplified way to manage contact registration in mailing lists and sending messages to limited numbers of recipients.
 
 == Description ==
 

@@ -1,0 +1,162 @@
+/* Simple Kit Forms - Admin Styles */
+
+.sf-palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f0f0f1;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+}
+
+.sf-palette .button {
+    flex: 0 0 auto;
+}
+
+.sf-fields-container {
+    margin-bottom: 20px;
+}
+
+.sf-field-row {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.sf-field-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #f6f7f7;
+    border-bottom: 1px solid #dcdcde;
+    cursor: move;
+    user-select: none;
+}
+
+.sf-drag-handle {
+    cursor: move;
+    color: #8c8f94;
+}
+
+.sf-field-type-label {
+    min-width: 120px;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #50575e;
+    letter-spacing: 0.5px;
+}
+
+.sf-field-label-preview {
+    flex: 1;
+    color: #1d2327;
+    font-weight: 500;
+}
+
+.sf-field-header .button {
+    cursor: pointer;
+}
+
+.sf-field-config {
+    padding: 14px;
+    background: #fff;
+}
+
+.sf-field-config label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.sf-field-config input[type="text"],
+.sf-field-config input.regular-text {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 4px;
+}
+
+.sf-field-config input[type="checkbox"] {
+    margin-right: 6px;
+}
+
+.sf-options-group {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+}
+
+.sf-options-group p {
+    margin-bottom: 8px;
+}
+
+.sf-options-list {
+    margin-bottom: 8px;
+}
+
+.sf-option-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    padding: 2px 4px;
+}
+
+.sf-option-drag-handle {
+    cursor: move;
+    color: #8c8f94;
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.sf-option-row input[type="text"] {
+    flex: 1;
+    max-width: 280px;
+}
+
+.sf-option-placeholder {
+    border: 2px dashed #72aee6;
+    background: #e5f5fa;
+    border-radius: 3px;
+    min-height: 32px;
+}
+
+.sf-add-option {
+    font-size: 12px;
+}
+
+.sf-field-row.ui-sortable-helper {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0.95;
+}
+
+.sf-field-row.ui-sortable-placeholder {
+    visibility: visible !important;
+    background: #e5f5fa;
+    border: 2px dashed #72aee6;
+    border-radius: 4px;
+    min-height: 48px;
+}
+
+.wp-list-table code {
+    font-size: 12px;
+    background: #f0f0f1;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.button-link-delete {
+    color: #d63638 !important;
+}
+
+.button-link-delete:hover {
+    color: #b32d2e !important;
+}
