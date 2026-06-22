@@ -49,7 +49,7 @@ function simplekitmailing_ajax_collect() {
         }
     }
 
-    // Validate protection (Akismet / reCAPTCHA)
+    // Validate protection (reCAPTCHA)
     $recaptcha_token = sanitize_text_field(wp_unslash($_POST['recaptcha_token'] ?? ''));
     $protection_check = simplekitmailing_validate_protection($list_id, $email, $name, $recaptcha_token);
     if (!$protection_check['valid']) {

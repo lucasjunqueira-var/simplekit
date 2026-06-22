@@ -8,7 +8,7 @@ defined('ABSPATH') or exit;
 /**
  * Get the protection type for a list.
  *
- * Values: 'none', 'akismet', 'recaptcha'
+ * Values: 'none', 'recaptcha'
  */
 function simplekitmailing_get_protection($list_id) {
     return simplekitmailing_get_list_setting($list_id, 'protection', '', 'none');
@@ -26,66 +26,6 @@ function simplekitmailing_get_recaptcha_site_key($list_id = 0) {
  */
 function simplekitmailing_get_recaptcha_secret_key($list_id = 0) {
     return simplekitmailing_get_list_setting($list_id, 'recaptcha_secret_key', 'simplekitmailing_recaptcha_secret_key', '');
-}
-
-// ---------------------------------------------------------------------------
-// Akismet validation
-// ---------------------------------------------------------------------------
-
-/**
- * Check if Akismet is active and available.
- */
-function simplekitmailing_akismet_available() {
-    return function_exists('akismet_http_post') || function_exists('akismet_check_spam');
-}
-
-/**
- * Validate a submission against Akismet.
- *
- * @param string $email      Submitter email.
- * @param string $name       Submitter name (optional).
- * @param string $content    Additional content / comment to check (optional).
- * @param string $ip         Submitter IP address (optional).
- * @return bool              True if marked as spam, false if ham.
- */
-function simplekitmailing_akismet_check($email, $name = '', $content = '', $ip = '') {
-    // If Akismet is not available, skip the check
-    if (!simplekitmailing_akismet_available()) {
-        return false;
-    }
-
-    $blog_url = get_home_url();
-    $blog_lang = get_bloginfo('language');
-
-    $data = array(
-        'blog'                 => $blog_url,
-        'blog_lang'            => $blog_lang,
-        'blog_charset'         => get_bloginfo('charset'),
-        'user_ip'              => $ip ?: simplekitmailing_get_client_ip(),
-        'user_agent'           => sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'] ?? '')),
-        'referrer'             => sanitize_text_field(wp_unslash($_SERVER['HTTP_REFERER'] ?? '')),
-        'comment_type'         => 'contact-form',
-        'comment_author'       => $name,
-        'comment_author_email' => $email,
-        'comment_content'      => $content ?: __('Newsletter signup from', 'simplekitmailing') . ' ' . $blog_url,
-        'permalink'            => sanitize_text_field(wp_unslash($_SERVER['HTTP_REFERER'] ?? $blog_url)),
-    );
-
-    $data_string = '';
-    foreach ($data as $key => $value) {
-        $data_string .= $key . '=' . rawurlencode(wp_strip_all_tags($value ?? '')) . '&';
-    }
-    $data_string = rtrim($data_string, '&');
-
-    // Use WordPress Akismet API if available
-    if (function_exists('akismet_http_post')) {
-        $response = akismet_http_post($data_string, 'comment-check');
-        if (isset($response[1]) && $response[1] === 'true') {
-            return true; // Spam
-        }
-    }
-
-    return false; // Ham
 }
 
 // ---------------------------------------------------------------------------
@@ -155,18 +95,6 @@ function simplekitmailing_validate_protection($list_id, $email, $name = '', $rec
     $protection = simplekitmailing_get_protection($list_id);
 
     if ($protection === 'none' || empty($protection)) {
-        return array('valid' => true);
-    }
-
-    if ($protection === 'akismet') {
-        // Akismet check
-        $is_spam = simplekitmailing_akismet_check($email, $name, '', '');
-        if ($is_spam) {
-            return array(
-                'valid'         => false,
-                'error_message' => __('Your submission has been flagged as spam. Please try again.', 'simplekitmailing'),
-            );
-        }
         return array('valid' => true);
     }
 

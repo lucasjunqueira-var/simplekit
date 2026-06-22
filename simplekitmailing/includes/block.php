@@ -2,6 +2,159 @@
 defined('ABSPATH') or exit;
 
 // ---------------------------------------------------------------------------
+// Default CSS for each block type
+// ---------------------------------------------------------------------------
+
+/**
+ * Returns the default CSS for the Collect block.
+ */
+function simplekitmailing_get_default_collect_css() {
+    return <<<CSS
+.simplekitmailing-collect-block {
+    max-width: 400px;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+.simplekitmailing-collect-block h3 {
+    margin-top: 0;
+}
+.simplekitmailing-collect-block .sm-field {
+    margin-bottom: 12px;
+}
+.simplekitmailing-collect-block .sm-field input[type="email"],
+.simplekitmailing-collect-block .sm-field input[type="text"],
+.simplekitmailing-collect-block .sm-field input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.simplekitmailing-collect-block .sm-field label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.simplekitmailing-collect-block .sm-field label input[type="checkbox"] {
+    margin-top: 2px;
+}
+.simplekitmailing-collect-block .sm-submit {
+    background: #0073aa;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.simplekitmailing-collect-block .sm-submit:hover {
+    background: #005a87;
+}
+.simplekitmailing-collect-block .sm-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.simplekitmailing-collect-block .sm-message {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    display: none;
+}
+.simplekitmailing-collect-block .sm-message.error {
+    display: block;
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+.simplekitmailing-collect-block .sm-message.success {
+    display: block;
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+CSS;
+}
+
+/**
+ * Returns the default CSS for the Unsubscribe block.
+ */
+function simplekitmailing_get_default_unsubscribe_css() {
+    return <<<CSS
+.simplekitmailing-unsubscribe-block {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    text-align: center;
+}
+.simplekitmailing-unsubscribe-block h2 {
+    margin-top: 0;
+    color: #333;
+}
+.simplekitmailing-unsubscribe-block .sm-unsubscribed {
+    color: #155724;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+.simplekitmailing-unsubscribe-block .sm-no-email {
+    color: #856404;
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+CSS;
+}
+
+/**
+ * Returns the default CSS for the Confirm block.
+ */
+function simplekitmailing_get_default_confirm_css() {
+    return <<<CSS
+.simplekitmailing-confirm-block {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    text-align: center;
+}
+.simplekitmailing-confirm-block h2 {
+    margin-top: 0;
+    color: #333;
+}
+.simplekitmailing-confirm-block .sm-confirm-success {
+    color: #155724;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+.simplekitmailing-confirm-block .sm-confirm-error {
+    color: #721c24;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+CSS;
+}
+
+// ---------------------------------------------------------------------------
 // Register Gutenberg block "Simple Kit Mailing Collect"
 // ---------------------------------------------------------------------------
 add_action('init', 'simplekitmailing_register_block');
@@ -16,7 +169,7 @@ function simplekitmailing_register_block() {
         true
     );
 
-    // Pass available lists to the block editor
+    // Pass available lists and default CSS to the block editor
     $lists = simplekitmailing_get_lists();
     $list_options = [];
     foreach ($lists as $list) {
@@ -27,9 +180,12 @@ function simplekitmailing_register_block() {
     }
 
     wp_localize_script('simplekitmailing-block', 'simplekitmailing_block_data', [
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'nonce'    => wp_create_nonce('simplekitmailing_collect_nonce'),
-        'lists'    => $list_options,
+        'ajax_url'           => admin_url('admin-ajax.php'),
+        'nonce'              => wp_create_nonce('simplekitmailing_collect_nonce'),
+        'lists'              => $list_options,
+        'default_collect_css' => simplekitmailing_get_default_collect_css(),
+        'default_unsubscribe_css' => simplekitmailing_get_default_unsubscribe_css(),
+        'default_confirm_css' => simplekitmailing_get_default_confirm_css(),
     ]);
 
     // Register the collect block
@@ -45,6 +201,10 @@ function simplekitmailing_register_block() {
                 'type'    => 'integer',
                 'default' => 0,
             ],
+            'custom_css' => [
+                'type'    => 'string',
+                'default' => '',
+            ],
         ],
     ]);
 
@@ -58,6 +218,14 @@ function simplekitmailing_register_block() {
                 'default' => '',
             ],
             'message' => [
+                'type'    => 'string',
+                'default' => '',
+            ],
+            'error_message' => [
+                'type'    => 'string',
+                'default' => '',
+            ],
+            'custom_css' => [
                 'type'    => 'string',
                 'default' => '',
             ],
@@ -85,6 +253,10 @@ function simplekitmailing_register_block() {
                 'type'    => 'string',
                 'default' => '',
             ],
+            'custom_css' => [
+                'type'    => 'string',
+                'default' => '',
+            ],
         ],
     ]);
 }
@@ -102,7 +274,7 @@ function simplekitmailing_render_block($attributes) {
     }
 
     // Block texts from list settings (with fallback to block attribute or default translation)
-    $block_title       = !empty($attributes['title']) ? $attributes['title'] : simplekitmailing_get_block_text($list_id, 'block_title', __('Receive our news', 'simplekitmailing'));
+    $block_title       = $attributes['title'] ?? simplekitmailing_get_block_text($list_id, 'block_title', __('Receive our news', 'simplekitmailing'));
     $email_placeholder = simplekitmailing_get_block_text($list_id, 'email_placeholder', __('Enter your email', 'simplekitmailing'));
     $name_placeholder  = simplekitmailing_get_block_text($list_id, 'name_placeholder', __('Enter your name', 'simplekitmailing'));
     $phone_placeholder = simplekitmailing_get_block_text($list_id, 'phone_placeholder', __('Enter your phone / WhatsApp', 'simplekitmailing'));
@@ -119,77 +291,14 @@ function simplekitmailing_render_block($attributes) {
     $protection = simplekitmailing_get_protection($list_id);
     $use_recaptcha = ($protection === 'recaptcha');
 
+    // Use custom CSS if provided, otherwise use default
+    $block_css = !empty($attributes['custom_css']) ? $attributes['custom_css'] : simplekitmailing_get_default_collect_css();
+
     ob_start();
     ?>
     <div class="simplekitmailing-collect-block">
         <style>
-            .simplekitmailing-collect-block {
-                max-width: 400px;
-                margin: 20px 0;
-                padding: 20px;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                background: #f9f9f9;
-            }
-            .simplekitmailing-collect-block h3 {
-                margin-top: 0;
-            }
-            .simplekitmailing-collect-block .sm-field {
-                margin-bottom: 12px;
-            }
-            .simplekitmailing-collect-block .sm-field input[type="email"],
-            .simplekitmailing-collect-block .sm-field input[type="text"],
-            .simplekitmailing-collect-block .sm-field input[type="tel"] {
-                width: 100%;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                box-sizing: border-box;
-            }
-            .simplekitmailing-collect-block .sm-field label {
-                display: flex;
-                align-items: flex-start;
-                gap: 8px;
-                font-size: 14px;
-                cursor: pointer;
-            }
-            .simplekitmailing-collect-block .sm-field label input[type="checkbox"] {
-                margin-top: 2px;
-            }
-            .simplekitmailing-collect-block .sm-submit {
-                background: #0073aa;
-                color: #fff;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 16px;
-            }
-            .simplekitmailing-collect-block .sm-submit:hover {
-                background: #005a87;
-            }
-            .simplekitmailing-collect-block .sm-submit:disabled {
-                opacity: 0.6;
-                cursor: not-allowed;
-            }
-            .simplekitmailing-collect-block .sm-message {
-                margin-top: 10px;
-                padding: 8px 12px;
-                border-radius: 4px;
-                display: none;
-            }
-            .simplekitmailing-collect-block .sm-message.error {
-                display: block;
-                background: #f8d7da;
-                color: #721c24;
-                border: 1px solid #f5c6cb;
-            }
-            .simplekitmailing-collect-block .sm-message.success {
-                display: block;
-                background: #d4edda;
-                color: #155724;
-                border: 1px solid #c3e6cb;
-            }
+            <?php echo wp_kses_post($block_css); ?>
             <?php if ($use_recaptcha) : ?>
             .simplekitmailing-collect-block .g-recaptcha {
                 margin-bottom: 12px;
@@ -208,7 +317,9 @@ function simplekitmailing_render_block($attributes) {
             }, 10, 2);
         endif; ?>
 
+        <?php if (!empty($block_title)) : ?>
         <h3><?php echo esc_html($block_title); ?></h3>
+        <?php endif; ?>
 
         <form class="simplekitmailing-form" method="post">
             <div class="sm-field">
@@ -379,26 +490,42 @@ function simplekitmailing_render_block($attributes) {
         $list_id = isset($_GET['list_id']) ? absint($_GET['list_id']) : 0;
 
         // Block texts from list settings (with fallback to block attribute or default translation)
-        $unsub_title    = !empty($attributes['title']) ? $attributes['title'] : simplekitmailing_get_block_text($list_id, 'unsub_title', __('Unsubscribe email', 'simplekitmailing'));
-        $unsub_message  = !empty($attributes['message']) ? $attributes['message'] : simplekitmailing_get_block_text($list_id, 'unsub_message', __('Your email has been removed from our mailing list.', 'simplekitmailing'));
-        $unsub_no_email = simplekitmailing_get_block_text($list_id, 'unsub_no_email', __('No email provided for unsubscription.', 'simplekitmailing'));
-        $unsub_instructions = simplekitmailing_get_block_text($list_id, 'unsub_instructions', __('Use the unsubscribe link sent in the email to remove your registration.', 'simplekitmailing'));
+        $unsub_title          = $attributes['title'] ?? simplekitmailing_get_block_text($list_id, 'unsub_title', __('Unsubscribe email', 'simplekitmailing'));
+        $unsub_message        = !empty($attributes['message']) ? $attributes['message'] : simplekitmailing_get_block_text($list_id, 'unsub_message', __('Your email has been removed from our mailing list.', 'simplekitmailing'));
+        $unsub_error_message  = !empty($attributes['error_message']) ? $attributes['error_message'] : simplekitmailing_get_block_text($list_id, 'unsub_error_message', __('The email address was not found in our mailing list.', 'simplekitmailing'));
+        if (empty($unsub_error_message)) {
+            $unsub_error_message = __('The email address was not found in our mailing list.', 'simplekitmailing');
+        }
+        $unsub_no_email       = simplekitmailing_get_block_text($list_id, 'unsub_no_email', __('No email provided for unsubscription.', 'simplekitmailing'));
+        $unsub_instructions   = simplekitmailing_get_block_text($list_id, 'unsub_instructions', __('Use the unsubscribe link sent in the email to remove your registration.', 'simplekitmailing'));
+
+        $unsub_success = false;
 
         if (!empty($email) && is_email($email)) {
             global $wpdb;
             $table_subscribers = $wpdb->prefix . 'sm_subscribers';
             $table_removed     = $wpdb->prefix . 'sm_removed';
             $table_pending     = $wpdb->prefix . 'sm_pending';
+            $deleted_total     = 0;
 
             // data is being changed on plugin's custom tables at the lines below. no caching is possible.
             if ($list_id) {
                 // Remove only from the specific list
                 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
-                $wpdb->delete($table_subscribers, ['email' => $email, 'list_id' => $list_id]);
+                $deleted = $wpdb->delete($table_subscribers, ['email' => $email, 'list_id' => $list_id]);
+                if ($deleted !== false) {
+                    $deleted_total += $deleted;
+                }
                 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
-                $wpdb->delete($table_pending, ['email' => $email, 'list_id' => $list_id]);
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
-                $wpdb->replace($table_removed, ['list_id' => $list_id, 'email' => $email]);
+                $deleted = $wpdb->delete($table_pending, ['email' => $email, 'list_id' => $list_id]);
+                if ($deleted !== false) {
+                    $deleted_total += $deleted;
+                }
+                if ($deleted_total > 0) {
+                    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
+                    $wpdb->replace($table_removed, ['list_id' => $list_id, 'email' => $email]);
+                    $unsub_success = true;
+                }
             } else {
                 // Remove from all lists (fallback for compatibility)
                 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
@@ -406,61 +533,56 @@ function simplekitmailing_render_block($attributes) {
                 foreach ($subs as $s) {
                     $lid = $s->list_id ?: 0;
                     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
-                    $wpdb->delete($table_subscribers, ['email' => $email, 'list_id' => $lid]);
+                    $deleted = $wpdb->delete($table_subscribers, ['email' => $email, 'list_id' => $lid]);
+                    if ($deleted !== false) {
+                        $deleted_total += $deleted;
+                    }
                     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
-                    $wpdb->delete($table_pending, ['email' => $email, 'list_id' => $lid]);
-                    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
-                    $wpdb->replace($table_removed, ['list_id' => $lid, 'email' => $email]);
+                    $deleted = $wpdb->delete($table_pending, ['email' => $email, 'list_id' => $lid]);
+                    if ($deleted !== false) {
+                        $deleted_total += $deleted;
+                    }
+                }
+                if ($deleted_total > 0) {
+                    foreach ($subs as $s) {
+                        $lid = $s->list_id ?: 0;
+                        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
+                        $wpdb->replace($table_removed, ['list_id' => $lid, 'email' => $email]);
+                    }
+                    $unsub_success = true;
                 }
             }
         }
+
+        // Use custom CSS if provided, otherwise use default
+        $block_css = !empty($attributes['custom_css']) ? $attributes['custom_css'] : simplekitmailing_get_default_unsubscribe_css();
 
         ob_start();
         ?>
         <div class="simplekitmailing-unsubscribe-block">
             <style>
-                .simplekitmailing-unsubscribe-block {
-                    max-width: 500px;
-                    margin: 40px auto;
-                    padding: 30px;
-                    border: 1px solid #ddd;
-                    border-radius: 8px;
-                    background: #f9f9f9;
-                    text-align: center;
-                }
-                .simplekitmailing-unsubscribe-block h2 {
-                    margin-top: 0;
-                    color: #333;
-                }
-                .simplekitmailing-unsubscribe-block .sm-unsubscribed {
-                    color: #155724;
-                    background: #d4edda;
-                    border: 1px solid #c3e6cb;
-                    padding: 15px;
-                    border-radius: 4px;
-                    margin-top: 20px;
-                }
-                .simplekitmailing-unsubscribe-block .sm-no-email {
-                    color: #856404;
-                    background: #fff3cd;
-                    border: 1px solid #ffeeba;
-                    padding: 15px;
-                    border-radius: 4px;
-                    margin-top: 20px;
-                }
+                <?php echo wp_kses_post($block_css); ?>
             </style>
 
+            <?php if (!empty($unsub_title)) : ?>
             <h2><?php echo esc_html($unsub_title); ?></h2>
+            <?php endif; ?>
 
             <?php if (!empty($email) && is_email($email)) : ?>
+                <?php if ($unsub_success) : ?>
                 <div class="sm-unsubscribed">
                     <p><?php echo esc_html($unsub_message); ?></p>
                     <p><strong><?php echo esc_html($email); ?></strong></p>
                 </div>
+                <?php else : ?>
+                <div class="sm-no-email" style="color:#721c24;background:#f8d7da;border-color:#f5c6cb;">
+                    <p><?php echo esc_html($unsub_error_message); ?></p>
+                    <p><strong><?php echo esc_html($email); ?></strong></p>
+                </div>
+                <?php endif; ?>
             <?php else : ?>
-                <div class="sm-no-email">
-                    <p><?php echo esc_html($unsub_no_email); ?></p>
-                    <p><?php echo esc_html($unsub_instructions); ?></p>
+                <div class="sm-no-email" style="color:#721c24;background:#f8d7da;border-color:#f5c6cb;">
+                    <p><?php echo esc_html($unsub_error_message); ?></p>
                 </div>
             <?php endif; ?>
         </div>
@@ -480,7 +602,7 @@ function simplekitmailing_render_confirm_block($attributes) {
     $list_id = isset($_GET['list_id']) ? absint($_GET['list_id']) : 0;
 
     // Texts from block attributes or defaults
-    $title           = !empty($attributes['title']) ? $attributes['title'] : __('Confirm your subscription', 'simplekitmailing');
+    $title           = $attributes['title'] ?? __('Confirm your subscription', 'simplekitmailing');
     $success_message = !empty($attributes['success_message']) ? $attributes['success_message'] : __('Your email has been confirmed! You are now subscribed to our mailing list.', 'simplekitmailing');
     $error_message   = !empty($attributes['error_message']) ? $attributes['error_message'] : __('Invalid or expired confirmation link. Please try registering again.', 'simplekitmailing');
     $removed_message = !empty($attributes['removed_message']) ? $attributes['removed_message'] : __('This email is in our removed list and cannot be subscribed.', 'simplekitmailing');
@@ -511,42 +633,19 @@ function simplekitmailing_render_confirm_block($attributes) {
         $result_type = 'error';
     }
 
+    // Use custom CSS if provided, otherwise use default
+    $block_css = !empty($attributes['custom_css']) ? $attributes['custom_css'] : simplekitmailing_get_default_confirm_css();
+
     ob_start();
     ?>
     <div class="simplekitmailing-confirm-block">
         <style>
-            .simplekitmailing-confirm-block {
-                max-width: 500px;
-                margin: 40px auto;
-                padding: 30px;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                background: #f9f9f9;
-                text-align: center;
-            }
-            .simplekitmailing-confirm-block h2 {
-                margin-top: 0;
-                color: #333;
-            }
-            .simplekitmailing-confirm-block .sm-confirm-success {
-                color: #155724;
-                background: #d4edda;
-                border: 1px solid #c3e6cb;
-                padding: 15px;
-                border-radius: 4px;
-                margin-top: 20px;
-            }
-            .simplekitmailing-confirm-block .sm-confirm-error {
-                color: #721c24;
-                background: #f8d7da;
-                border: 1px solid #f5c6cb;
-                padding: 15px;
-                border-radius: 4px;
-                margin-top: 20px;
-            }
+            <?php echo wp_kses_post($block_css); ?>
         </style>
 
+        <?php if (!empty($title)) : ?>
         <h2><?php echo esc_html($title); ?></h2>
+        <?php endif; ?>
 
         <div class="sm-confirm-<?php echo esc_attr($result_type); ?>">
             <p><?php echo esc_html($result); ?></p>

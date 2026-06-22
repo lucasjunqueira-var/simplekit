@@ -194,15 +194,16 @@ function simplekitmailing_page_settings() {
                     'submit_text'         => sanitize_text_field(wp_unslash($_POST['submit_text'] ?? '')),
                     'sending_text'        => sanitize_text_field(wp_unslash($_POST['sending_text'] ?? '')),
                     'success_message'     => sanitize_text_field(wp_unslash($_POST['success_message'] ?? '')),
-                    'unsub_title'         => sanitize_text_field(wp_unslash($_POST['unsub_title'] ?? '')),
-                    'unsub_message'       => sanitize_text_field(wp_unslash($_POST['unsub_message'] ?? '')),
-                    'unsub_no_email'      => sanitize_text_field(wp_unslash($_POST['unsub_no_email'] ?? '')),
-                    'unsub_instructions'  => sanitize_text_field(wp_unslash($_POST['unsub_instructions'] ?? '')),
+                    'unsub_title'          => sanitize_text_field(wp_unslash($_POST['unsub_title'] ?? '')),
+                    'unsub_message'        => sanitize_text_field(wp_unslash($_POST['unsub_message'] ?? '')),
+                    'unsub_error_message'  => sanitize_text_field(wp_unslash($_POST['unsub_error_message'] ?? '')),
+                    'unsub_no_email'       => sanitize_text_field(wp_unslash($_POST['unsub_no_email'] ?? '')),
+                    'unsub_instructions'   => sanitize_text_field(wp_unslash($_POST['unsub_instructions'] ?? '')),
                     'double_optin'        => isset($_POST['double_optin']) ? '1' : '0',
                     'confirm_page_id'     => absint(wp_unslash($_POST['confirm_page_id'] ?? 0)),
                     'confirm_email_subject' => sanitize_text_field(wp_unslash($_POST['confirm_email_subject'] ?? '')),
                     'confirm_email_content' => wp_kses_post(wp_unslash($_POST['confirm_email_content'] ?? '')),
-                    'protection'          => in_array(wp_unslash($_POST['protection'] ?? ''), array('none', 'akismet', 'recaptcha')) ? sanitize_text_field(wp_unslash($_POST['protection'])) : 'none',
+                    'protection'          => in_array(wp_unslash($_POST['protection'] ?? ''), array('none', 'recaptcha')) ? sanitize_text_field(wp_unslash($_POST['protection'])) : 'none',
                     'recaptcha_site_key'  => sanitize_text_field(wp_unslash($_POST['recaptcha_site_key'] ?? '')),
                     'recaptcha_secret_key' => sanitize_text_field(wp_unslash($_POST['recaptcha_secret_key'] ?? '')),
                 );
@@ -498,6 +499,10 @@ function simplekitmailing_page_settings() {
                         <td><input type="text" id="unsub_message" name="unsub_message" value="<?php echo esc_attr($v('unsub_message', '', __('Your email has been removed from our mailing list.', 'simplekitmailing'))); ?>" class="regular-text" /></td>
                     </tr>
                     <tr>
+                        <th scope="row"><label for="unsub_error_message"><?php esc_html_e('Error message', 'simplekitmailing'); ?></label></th>
+                        <td><input type="text" id="unsub_error_message" name="unsub_error_message" value="<?php echo esc_attr($v('unsub_error_message', '', __('The email address was not found in our mailing list.', 'simplekitmailing'))); ?>" class="regular-text" /></td>
+                    </tr>
+                    <tr>
                         <th scope="row"><label for="unsub_no_email"><?php esc_html_e('"No email" message', 'simplekitmailing'); ?></label></th>
                         <td><input type="text" id="unsub_no_email" name="unsub_no_email" value="<?php echo esc_attr($v('unsub_no_email', '', __('No email provided for unsubscription.', 'simplekitmailing'))); ?>" class="regular-text" /></td>
                     </tr>
@@ -515,10 +520,9 @@ function simplekitmailing_page_settings() {
                         <td>
                             <select id="protection" name="protection" onchange="toggleRecaptchaFields(this.value);">
                                 <option value="none" <?php selected($v('protection', '', 'none'), 'none'); ?>><?php esc_html_e('No protection', 'simplekitmailing'); ?></option>
-                                <option value="akismet" <?php selected($v('protection', '', 'none'), 'akismet'); ?>><?php esc_html_e('Akismet', 'simplekitmailing'); ?></option>
                                 <option value="recaptcha" <?php selected($v('protection', '', 'none'), 'recaptcha'); ?>><?php esc_html_e('reCAPTCHA', 'simplekitmailing'); ?></option>
                             </select>
-                            <p class="description"><?php esc_html_e('Akismet requires the Akismet plugin to be installed and active. reCAPTCHA requires valid site and secret keys from Google.', 'simplekitmailing'); ?></p>
+                            <p class="description"><?php esc_html_e('reCAPTCHA requires valid site and secret keys from Google.', 'simplekitmailing'); ?></p>
                         </td>
                     </tr>
                 </table>

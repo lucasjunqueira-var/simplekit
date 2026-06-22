@@ -1,6 +1,6 @@
 /**
  * Simple Kit Mailing - Gutenberg Blocks
- * "Simple Kit Mailing Collect" and "Simple Kit Mailing Unsubscribe" blocks
+ * "Simple Kit Mailing Collect", "Simple Kit Mailing Unsubscribe" and "Simple Kit Mailing Confirm" blocks
  */
 (function(wp) {
     var el       = wp.element.createElement;
@@ -29,11 +29,22 @@
                 type:    'integer',
                 default: 0,
             },
+            custom_css: {
+                type:    'string',
+                default: '',
+            },
         },
 
         edit: function(props) {
-            var title   = props.attributes.title;
-            var list_id = props.attributes.list_id;
+            var title      = props.attributes.title;
+            var list_id    = props.attributes.list_id;
+            var custom_css = props.attributes.custom_css;
+
+            // Initialize custom_css with default if empty
+            if (!custom_css && simplekitmailing_block_data && simplekitmailing_block_data.default_collect_css) {
+                props.setAttributes({ custom_css: simplekitmailing_block_data.default_collect_css });
+                custom_css = simplekitmailing_block_data.default_collect_css;
+            }
 
             function onChangeTitle(newTitle) {
                 props.setAttributes({ title: newTitle });
@@ -41,6 +52,10 @@
 
             function onChangeListId(newListId) {
                 props.setAttributes({ list_id: parseInt(newListId, 10) });
+            }
+
+            function onChangeCss(newCss) {
+                props.setAttributes({ custom_css: newCss });
             }
 
             // Build list selector options
@@ -88,6 +103,15 @@
                             options: listOptions,
                             onChange: onChangeListId,
                         })
+                    ),
+                    el(PanelBody, { title: __('Custom CSS', 'simplekitmailing'), initialOpen: false },
+                        el(TextareaControl, {
+                            label:   __('CSS code', 'simplekitmailing'),
+                            help:    __('Customize the block appearance with CSS. Leave empty to use default styles.', 'simplekitmailing'),
+                            value:   custom_css,
+                            onChange: onChangeCss,
+                            rows:    20,
+                        })
                     )
                 )
             );
@@ -116,11 +140,27 @@
                 type:    'string',
                 default: __('Your email has been removed from our mailing list.', 'simplekitmailing'),
             },
+            error_message: {
+                type:    'string',
+                default: __('The email address was not found in our mailing list.', 'simplekitmailing'),
+            },
+            custom_css: {
+                type:    'string',
+                default: '',
+            },
         },
 
         edit: function(props) {
-            var title   = props.attributes.title;
-            var message = props.attributes.message;
+            var title         = props.attributes.title;
+            var message       = props.attributes.message;
+            var error_message = props.attributes.error_message;
+            var custom_css    = props.attributes.custom_css;
+
+            // Initialize custom_css with default if empty
+            if (!custom_css && simplekitmailing_block_data && simplekitmailing_block_data.default_unsubscribe_css) {
+                props.setAttributes({ custom_css: simplekitmailing_block_data.default_unsubscribe_css });
+                custom_css = simplekitmailing_block_data.default_unsubscribe_css;
+            }
 
             function onChangeTitle(newTitle) {
                 props.setAttributes({ title: newTitle });
@@ -128,6 +168,14 @@
 
             function onChangeMessage(newMessage) {
                 props.setAttributes({ message: newMessage });
+            }
+
+            function onChangeError(newMessage) {
+                props.setAttributes({ error_message: newMessage });
+            }
+
+            function onChangeCss(newCss) {
+                props.setAttributes({ custom_css: newCss });
             }
 
             return el('div', { className: 'simplekitmailing-unsubscribe-block' },
@@ -146,6 +194,21 @@
                             label:   __('Confirmation message', 'simplekitmailing'),
                             value:   message,
                             onChange: onChangeMessage,
+                        }),
+                        el(TextareaControl, {
+                            label:   __('Error message', 'simplekitmailing'),
+                            help:    __('Shown when the email address is not found in the mailing list.', 'simplekitmailing'),
+                            value:   error_message,
+                            onChange: onChangeError,
+                        })
+                    ),
+                    el(PanelBody, { title: __('Custom CSS', 'simplekitmailing'), initialOpen: false },
+                        el(TextareaControl, {
+                            label:   __('CSS code', 'simplekitmailing'),
+                            help:    __('Customize the block appearance with CSS. Leave empty to use default styles.', 'simplekitmailing'),
+                            value:   custom_css,
+                            onChange: onChangeCss,
+                            rows:    20,
                         })
                     )
                 )
@@ -183,6 +246,10 @@
                 type:    'string',
                 default: __('This email is in our removed list and cannot be subscribed.', 'simplekitmailing'),
             },
+            custom_css: {
+                type:    'string',
+                default: '',
+            },
         },
 
         edit: function(props) {
@@ -190,6 +257,13 @@
             var success_message = props.attributes.success_message;
             var error_message   = props.attributes.error_message;
             var removed_message = props.attributes.removed_message;
+            var custom_css      = props.attributes.custom_css;
+
+            // Initialize custom_css with default if empty
+            if (!custom_css && simplekitmailing_block_data && simplekitmailing_block_data.default_confirm_css) {
+                props.setAttributes({ custom_css: simplekitmailing_block_data.default_confirm_css });
+                custom_css = simplekitmailing_block_data.default_confirm_css;
+            }
 
             function onChangeTitle(newTitle) {
                 props.setAttributes({ title: newTitle });
@@ -205,6 +279,10 @@
 
             function onChangeRemoved(newMessage) {
                 props.setAttributes({ removed_message: newMessage });
+            }
+
+            function onChangeCss(newCss) {
+                props.setAttributes({ custom_css: newCss });
             }
 
             return el('div', { className: 'simplekitmailing-confirm-block' },
@@ -233,6 +311,15 @@
                             label:   __('Removed message', 'simplekitmailing'),
                             value:   removed_message,
                             onChange: onChangeRemoved,
+                        })
+                    ),
+                    el(PanelBody, { title: __('Custom CSS', 'simplekitmailing'), initialOpen: false },
+                        el(TextareaControl, {
+                            label:   __('CSS code', 'simplekitmailing'),
+                            help:    __('Customize the block appearance with CSS. Leave empty to use default styles.', 'simplekitmailing'),
+                            value:   custom_css,
+                            onChange: onChangeCss,
+                            rows:    20,
                         })
                     )
                 )

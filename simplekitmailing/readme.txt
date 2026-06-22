@@ -22,7 +22,7 @@ Simple Kit Mailing allows you to manage mailing lists, collect subscribers via G
 * Double opt-in confirmation
 * CSV import/export
 * SMTP integration
-* reCAPTCHA and Akismet protection
+* reCAPTCHA protection
 * WP-Cron based gradual sending
 * Backup and restore
 
