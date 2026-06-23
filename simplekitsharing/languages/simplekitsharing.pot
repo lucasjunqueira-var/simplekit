@@ -1,0 +1,254 @@
+# Simple Kit Sharing - Translation Template
+# Copyright (C) 2025 Simple Kit Sharing
+# This file is distributed under the same license as the Simple Kit Sharing plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Simple Kit Sharing 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-01-01T00:00:00+00:00\n"
+"PO-Revision-Date: \n"
+
+#: includes/settings.php:45
+msgid "Access denied."
+msgstr ""
+
+#: includes/settings.php:52
+msgid "Simple Kit Sharing Settings"
+msgstr ""
+
+#: includes/settings.php:53
+msgid "These settings define the default social sharing meta tags for your site. If a page or post has its own sharing settings, those will override these defaults."
+msgstr ""
+
+#: includes/settings.php:59
+msgid "Sharing Defaults"
+msgstr ""
+
+#: includes/settings.php:62
+msgid "Icon (Favicon)"
+msgstr ""
+
+#: includes/settings.php:65
+msgid "Upload"
+msgstr ""
+
+#: includes/settings.php:72
+msgid "URL of the icon to be used as favicon / share icon."
+msgstr ""
+
+#: includes/settings.php:77
+msgid "Share Text"
+msgstr ""
+
+#: includes/settings.php:81
+msgid "Default description used in Open Graph / Twitter Card meta tags (e.g., og:description)."
+msgstr ""
+
+#: includes/settings.php:86
+msgid "Share Image"
+msgstr ""
+
+#: includes/settings.php:101
+msgid "Default image used in Open Graph / Twitter Card meta tags (e.g., og:image)."
+msgstr ""
+
+#: includes/settings.php:106
+msgid "Tags (for articles)"
+msgstr ""
+
+#: includes/settings.php:110
+msgid "Comma-separated tags used in the article:tag meta property (e.g., wordpress, plugin, sharing)."
+msgstr ""
+
+#: includes/settings.php:123
+msgid "Save Changes"
+msgstr ""
+
+#: includes/admin-menu.php:12
+msgid "Simple Kit Sharing"
+msgstr ""
+
+#: includes/admin-menu.php:13
+msgid "SK Sharing"
+msgstr ""
+
+#: includes/admin-menu.php:28
+msgid "Help"
+msgstr ""
+
+#: includes/admin-menu.php:35
+msgid "Donate"
+msgstr ""
+
+#: includes/admin-menu.php:59 includes/admin-menu.php:60
+msgid "Select or Upload Image"
+msgstr ""
+
+#: includes/admin-menu.php:61
+msgid "Use this image"
+msgstr ""
+
+#: includes/meta-box.php:15
+msgid "Simple Kit Sharing"
+msgstr ""
+
+#: includes/meta-box.php:31
+msgid "Icon (Favicon)"
+msgstr ""
+
+#: includes/meta-box.php:35
+msgid "Upload"
+msgstr ""
+
+#: includes/meta-box.php:47
+msgid "Share Text"
+msgstr ""
+
+#: includes/meta-box.php:52
+msgid "Share Image"
+msgstr ""
+
+#: includes/meta-box.php:64
+msgid "Tags (for articles)"
+msgstr ""
+
+#: includes/meta-box.php:68
+msgid "Leave fields empty to use the general sharing settings."
+msgstr ""
+
+#: includes/help.php:16
+msgid "Help & Documentation"
+msgstr ""
+
+#: includes/help.php:19
+msgid "The Simple Kit Sharing Plugin"
+msgstr ""
+
+#: includes/help.php:20
+msgid "Simple Kit Sharing is a lightweight plugin that manages social sharing meta tags for your WordPress site. It automatically inserts Open Graph (og:) and Twitter Card meta tags into the head section of your pages, ensuring that when someone shares a link from your site on social media platforms (Facebook, Twitter/X, LinkedIn, WhatsApp, etc.), the preview includes a proper title, description, and image."
+msgstr ""
+
+#: includes/help.php:21
+msgid "The plugin works entirely within your WordPress environment and does not rely on any external services. All settings are stored in your site's options and post meta tables."
+msgstr ""
+
+#: includes/help.php:24
+msgid "How It Works"
+msgstr ""
+
+#: includes/help.php:25
+msgid "Simple Kit Sharing provides two levels of configuration:"
+msgstr ""
+
+#: includes/help.php:28
+msgid "1. General Settings"
+msgstr ""
+
+#: includes/help.php:29
+msgid "The main Settings page lets you define default values for the share icon (favicon), share text (description), share image, and article tags. These defaults are used globally on every page of your site unless overridden."
+msgstr ""
+
+#: includes/help.php:33
+msgid "2. Per-Page Override (Meta Box)"
+msgstr ""
+
+#: includes/help.php:34
+msgid "When editing a post or page, a \"Simple Kit Sharing\" meta box appears in the sidebar. Here you can set custom values for that specific page or post. If a field is left empty, the corresponding global default will be used instead."
+msgstr ""
+
+#: includes/help.php:38
+msgid "Meta Tags Generated"
+msgstr ""
+
+#: includes/help.php:39
+msgid "When a page is loaded, the plugin automatically inserts the following meta tags into the HTML head:"
+msgstr ""
+
+#: includes/help.php:42
+msgid "Open Graph (og:)"
+msgstr ""
+
+#: includes/help.php:46
+msgid "Twitter Cards"
+msgstr ""
+
+#: includes/help.php:50
+msgid "Article Tags"
+msgstr ""
+
+#: includes/help.php:52
+msgid "when tags are configured"
+msgstr ""
+
+#: includes/help.php:55
+msgid "Favicon / Icon"
+msgstr ""
+
+#: includes/help.php:57
+msgid "when an icon URL is provided"
+msgstr ""
+
+#: includes/help.php:63
+msgid "Tips for Best Results"
+msgstr ""
+
+#: includes/help.php:65
+msgid "Share Image Size"
+msgstr ""
+
+#: includes/help.php:66
+msgid "For optimal display on social media platforms, use a share image that is at least 1200x630 pixels. This is the standard Open Graph image size recommended by Facebook and most other platforms."
+msgstr ""
+
+#: includes/help.php:71
+msgid "Share Text Length"
+msgstr ""
+
+#: includes/help.php:72
+msgid "Keep your share text between 50 and 160 characters. Most social media platforms truncate longer descriptions."
+msgstr ""
+
+#: includes/help.php:77
+msgid "Favicon Image"
+msgstr ""
+
+#: includes/help.php:78
+msgid "For the favicon, upload a square PNG image. The plugin automatically generates a properly sized 32x32 pixel version for browser tab display."
+msgstr ""
+
+#: includes/help.php:83
+msgid "Cache"
+msgstr ""
+
+#: includes/help.php:84
+msgid "Social media platforms cache shared URLs. If you update your sharing settings, use the sharing debugger tools from Facebook and Twitter/X to refresh the cached preview for your URL."
+msgstr ""
+
+#: includes/donate.php:17
+msgid "Donate"
+msgstr ""
+
+#: includes/donate.php:19
+msgid "This is a free plugin. If you find its features useful, please consider making a donation of any amount to its creator, Lucas Junqueira. To do so, use the form below to donate via PayPal."
+msgstr ""
+
+#: includes/donate.php:31
+msgid "Donate with PayPal button"
+msgstr ""
+
+#: includes/donate.php:35
+msgid "Thank you for your support!"
+msgstr ""
+
+#: includes/donate.php:59
+msgid "This is a free plugin. If you find its features useful, please consider making a donation of any amount to its creator. To do so, Please access the Donate sub menu."
+msgstr ""
+
+#: includes/donate.php:62
+msgid "Donate"
+msgstr ""

@@ -1,0 +1,17 @@
+/* Simple Kit Sharing - Admin Styles */
+
+.simplesharing-image-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.simplesharing-image-wrapper .simplesharing-image-input {
+    flex: 1;
+    min-width: 250px;
+}
+
+.simplesharing-image-wrapper img {
+    display: block;
+}
