@@ -7,9 +7,12 @@
     var InspectorControls = wp.blockEditor.InspectorControls;
     var PanelBody         = wp.components.PanelBody;
     var SelectControl     = wp.components.SelectControl;
+    var TextareaControl   = wp.components.TextareaControl;
     var Placeholder       = wp.components.Placeholder;
 
-    var forms = window.simplekitforms_block_data ? window.simplekitforms_block_data.forms || [] : [];
+    var data       = window.simplekitforms_block_data || {};
+    var forms      = data.forms || [];
+    var defaultCss = data.default_css || '';
 
     var formOptions = [{ label: '-- Select form --', value: 0 }];
     for (var i = 0; i < forms.length; i++) {
@@ -29,10 +32,15 @@
                 type:    'number',
                 default: 0,
             },
+            custom_css: {
+                type:    'string',
+                default: defaultCss,
+            },
         },
 
         edit: function(props) {
-            var formId   = props.attributes.form_id;
+            var formId     = props.attributes.form_id;
+            var customCss  = props.attributes.custom_css || '';
             var selectedForm = null;
 
             for (var j = 0; j < forms.length; j++) {
@@ -44,6 +52,10 @@
 
             function onChangeForm(newId) {
                 props.setAttributes({ form_id: parseInt(newId, 10) });
+            }
+
+            function onChangeCss(value) {
+                props.setAttributes({ custom_css: value });
             }
 
             var previewContent;
@@ -80,6 +92,18 @@
                             value:   formId,
                             options: formOptions,
                             onChange: onChangeForm,
+                        })
+                    ),
+                    el(PanelBody, { title: 'Custom CSS', initialOpen: false },
+                        el('p', { style: { color: '#666', fontSize: '12px', fontStyle: 'italic', marginTop: 0 } },
+                            'Leave empty to use the plugin default CSS. Add your own CSS rules to override the default styling for this form.'
+                        ),
+                        el(TextareaControl, {
+                            label:   'Custom CSS',
+                            help:    'Enter CSS rules (without <style> tags). These will override the plugin default styles for this block instance.',
+                            value:   customCss,
+                            onChange: onChangeCss,
+                            rows:    12,
                         })
                     )
                 )

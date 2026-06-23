@@ -16,6 +16,106 @@ function simplekitforms_shortcode($atts) {
 }
 
 // ---------------------------------------------------------------------------
+// Default plugin CSS (used as initial value for blocks and fallback for shortcode)
+// ---------------------------------------------------------------------------
+function simplekitforms_get_default_css() {
+    return '
+        .simplekitforms-form-block {
+            max-width: 600px;
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .simplekitforms-form-block h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .simplekitforms-form-block .sf-field {
+            margin-bottom: 16px;
+        }
+        .simplekitforms-form-block .sf-field label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .simplekitforms-form-block .sf-field label.sf-checkbox-label,
+        .simplekitforms-form-block .sf-field label.sf-radio-label {
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 2px;
+        }
+        .simplekitforms-form-block .sf-field .required-star {
+            color: #d63638;
+        }
+        .simplekitforms-form-block .sf-field input[type="text"],
+        .simplekitforms-form-block .sf-field input[type="email"],
+        .simplekitforms-form-block .sf-field input[type="password"],
+        .simplekitforms-form-block .sf-field input[type="url"],
+        .simplekitforms-form-block .sf-field input[type="number"],
+        .simplekitforms-form-block .sf-field input[type="tel"],
+        .simplekitforms-form-block .sf-field textarea,
+        .simplekitforms-form-block .sf-field select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .simplekitforms-form-block .sf-field textarea {
+            min-height: 100px;
+        }
+        .simplekitforms-form-block .sf-submit {
+            background: #0073aa;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .simplekitforms-form-block .sf-submit:hover {
+            background: #005a87;
+        }
+        .simplekitforms-form-block .sf-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .simplekitforms-form-block .sf-message {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 4px;
+            display: none;
+        }
+        .simplekitforms-form-block .sf-message.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .simplekitforms-form-block .sf-message.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .simplekitforms-form-block .sf-thank-you {
+            padding: 20px;
+            text-align: center;
+            font-size: 16px;
+            color: #155724;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+        }
+    ';
+}
+
+// ---------------------------------------------------------------------------
 // Registro do bloco Gutenberg "Simple Kit Form"
 // ---------------------------------------------------------------------------
 add_action('init', 'simplekitforms_register_block');
@@ -29,7 +129,7 @@ function simplekitforms_register_block() {
         true
     );
 
-    // Passa a lista de formulários para o bloco
+    // Passa a lista de formulários e o CSS padrão para o bloco
     $forms = simplekitforms_get_all_forms();
     $forms_data = [];
     foreach ($forms as $f) {
@@ -40,9 +140,12 @@ function simplekitforms_register_block() {
     }
 
     wp_localize_script('simplekitforms-block', 'simplekitforms_block_data', [
-        'forms'    => $forms_data,
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'nonce'    => wp_create_nonce('simplekitforms_submit_nonce'),
+        'forms'        => $forms_data,
+        'ajax_url'     => admin_url('admin-ajax.php'),
+        'rest_url'     => esc_url_raw(rest_url('simplekitforms/v1/submit')),
+        'rest_nonce'   => wp_create_nonce('wp_rest'),
+        'nonce'        => wp_create_nonce('simplekitforms_submit_nonce'),
+        'default_css'  => simplekitforms_get_default_css(),
     ]);
 
     register_block_type('simplekitforms/form', [
@@ -53,6 +156,10 @@ function simplekitforms_register_block() {
                 'type'    => 'number',
                 'default' => 0,
             ],
+            'custom_css' => [
+                'type'    => 'string',
+                'default' => '',
+            ],
         ],
     ]);
 }
@@ -61,17 +168,18 @@ function simplekitforms_register_block() {
 // Renderização do bloco no frontend
 // ---------------------------------------------------------------------------
 function simplekitforms_render_block($attributes) {
-    $form_id = (int) ($attributes['form_id'] ?? 0);
+    $form_id    = (int) ($attributes['form_id'] ?? 0);
+    $custom_css = $attributes['custom_css'] ?? '';
     if ($form_id <= 0) {
         return '<p>Select a form in the block settings.</p>';
     }
-    return simplekitforms_render_form($form_id);
+    return simplekitforms_render_form($form_id, $custom_css);
 }
 
 // ---------------------------------------------------------------------------
 // Renderizar formulário no frontend (usado pelo shortcode e bloco)
 // ---------------------------------------------------------------------------
-function simplekitforms_render_form($form_id) {
+function simplekitforms_render_form($form_id, $custom_css = '') {
     $form = simplekitforms_get_form($form_id);
     if (!$form) {
         return '<p>Form not found.</p>';
@@ -83,237 +191,104 @@ function simplekitforms_render_form($form_id) {
         ? wp_kses_post($form->thank_you_message)
         : 'Thank you! Your form has been submitted successfully.';
 
+    // Use custom CSS if provided, otherwise fall back to the default
+    $css = !empty($custom_css) ? wp_strip_all_tags($custom_css) : simplekitforms_get_default_css();
+
     ob_start();
+
+    $sf_protection = simplekitforms_get_protection();
+    $sf_site_key   = simplekitforms_get_recaptcha_site_key();
     ?>
-    <div class="simplekitforms-form-block" data-form-id="<?php echo (int) $form->id; ?>">
+    <div class="simplekitforms-form-block" data-form-id="<?php echo (int) $form->id; ?>" data-rest-url="<?php echo esc_url(rest_url('simplekitforms/v1/submit')); ?>" data-rest-nonce="<?php echo esc_attr(wp_create_nonce('wp_rest')); ?>"<?php if ($sf_protection === 'recaptcha' && !empty($sf_site_key)) : ?> data-site-key="<?php echo esc_attr($sf_site_key); ?>"<?php endif; ?>>
         <style>
-            .simplekitforms-form-block {
-                max-width: 600px;
-                margin: 20px 0;
-                padding: 20px;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                background: #f9f9f9;
-            }
-            .simplekitforms-form-block h3 {
-                margin-top: 0;
-                color: #333;
-            }
-            .simplekitforms-form-block .sf-field {
-                margin-bottom: 16px;
-            }
-            .simplekitforms-form-block .sf-field label {
-                display: block;
-                margin-bottom: 4px;
-                font-weight: 600;
-            }
-            .simplekitforms-form-block .sf-field label.sf-checkbox-label,
-            .simplekitforms-form-block .sf-field label.sf-radio-label {
-                font-weight: 400;
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                margin-bottom: 2px;
-            }
-            .simplekitforms-form-block .sf-field .required-star {
-                color: #d63638;
-            }
-            .simplekitforms-form-block .sf-field input[type="text"],
-            .simplekitforms-form-block .sf-field input[type="email"],
-            .simplekitforms-form-block .sf-field input[type="password"],
-            .simplekitforms-form-block .sf-field input[type="url"],
-            .simplekitforms-form-block .sf-field input[type="number"],
-            .simplekitforms-form-block .sf-field input[type="tel"],
-            .simplekitforms-form-block .sf-field textarea,
-            .simplekitforms-form-block .sf-field select {
-                width: 100%;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                box-sizing: border-box;
-                font-size: 14px;
-            }
-            .simplekitforms-form-block .sf-field textarea {
-                min-height: 100px;
-            }
-            .simplekitforms-form-block .sf-submit {
-                background: #0073aa;
-                color: #fff;
-                border: none;
-                padding: 12px 24px;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 16px;
-            }
-            .simplekitforms-form-block .sf-submit:hover {
-                background: #005a87;
-            }
-            .simplekitforms-form-block .sf-submit:disabled {
-                opacity: 0.6;
-                cursor: not-allowed;
-            }
-            .simplekitforms-form-block .sf-message {
-                margin-top: 12px;
-                padding: 10px 14px;
-                border-radius: 4px;
-                display: none;
-            }
-            .simplekitforms-form-block .sf-message.error {
-                display: block;
-                background: #f8d7da;
-                color: #721c24;
-                border: 1px solid #f5c6cb;
-            }
-            .simplekitforms-form-block .sf-message.success {
-                display: block;
-                background: #d4edda;
-                color: #155724;
-                border: 1px solid #c3e6cb;
-            }
-            .simplekitforms-form-block .sf-thank-you {
-                padding: 20px;
-                text-align: center;
-                font-size: 16px;
-                color: #155724;
-                background: #d4edda;
-                border: 1px solid #c3e6cb;
-                border-radius: 4px;
-            }
+            <?php echo $css; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS is either default (safe) or wp_strip_all_tags() sanitized. ?>
         </style>
-
-        <?php
-        $sf_protection = simplekitforms_get_protection();
-        $sf_site_key   = simplekitforms_get_recaptcha_site_key();
-        ?>
-
         <div class="sf-form-wrapper">
             <h3><?php echo esc_html($form->title); ?></h3>
-
             <form class="simplekitforms-form" method="post">
                 <?php foreach ($fields as $field) : ?>
-                    <?php
-                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- function internally uses esc_html() on all values.
-                    echo simplekitforms_render_frontend_field($field);
-                    ?>
+                    <?php echo simplekitforms_render_frontend_field($field); ?>
                 <?php endforeach; ?>
-
                 <?php if ($sf_protection === 'recaptcha' && !empty($sf_site_key)) : ?>
                     <input type="hidden" name="sf_recaptcha_token" class="sf-recaptcha-token" value="" />
                 <?php endif; ?>
-
                 <div class="sf-field">
-                    <button type="submit" class="sf-submit"><?php echo esc_html($submit_text); ?></button>
+                    <button type="button" class="sf-submit"><?php echo esc_html($submit_text); ?></button>
                 </div>
                 <div class="sf-message"></div>
             </form>
         </div>
-
-        <?php if ($sf_protection === 'recaptcha' && !empty($sf_site_key)) : ?>
-        <?php
-        wp_enqueue_script(
-            'google-recaptcha',
-            'https://www.google.com/recaptcha/api.js?render=' . urlencode($sf_site_key),
-            array(),
-            null,
-            true
-        );
-        ?>
-        <?php endif; ?>
-
+        <?php if ($sf_protection === 'recaptcha' && !empty($sf_site_key)) : wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?render=' . urlencode($sf_site_key), array(), null, true); endif; ?>
         <script>
-        (function() {
-            var container = document.querySelector('.simplekitforms-form-block[data-form-id="<?php echo (int) $form->id; ?>"]');
-            if (!container) return;
-            var form = container.querySelector('.simplekitforms-form');
-            if (!form) return;
+        /* <![CDATA[ */
+        (function(){
+            var c=document.querySelector('.simplekitforms-form-block[data-form-id="<?php echo (int) $form->id; ?>"]');
+            if(!c){return}
+            var b=c.querySelector('.sf-submit');
+            if(!b){return}
+            var f=c.querySelector('.simplekitforms-form');
+            if(!f){return}
+            var u=c.getAttribute('data-rest-url');
+            var n=c.getAttribute('data-rest-nonce');
+            var i=<?php echo (int) $form->id; ?>;
+            var s=c.getAttribute('data-site-key'); // reCAPTCHA site key (if set)
+            var recaptchaInput=c.querySelector('.sf-recaptcha-token');
+            if(!u||!n){return}
 
-            var sfRecaptchaLoading = false;
+            function doFetch() {
+                var m=c.querySelector('.sf-message');
+                var d=new FormData(f);
+                d.append('form_id',i);
+                d.append('nonce','<?php echo esc_js(wp_create_nonce('simplekitforms_submit_nonce')); ?>');
+                b.disabled=true;
+                b.textContent='Sending...';
+                if(m){m.className='sf-message';m.textContent=''}
+                fetch(u,{method:'POST',headers:{'X-WP-Nonce':n},body:d})
+                .then(function(r){return r.json().then(function(d){return{status:r.status,data:d}})})
+                .then(function(r){
+                    var ok=true;
+                    if(r.status<200){ok=false}
+                    if(r.status>=300){ok=false}
+                    if(!r.data){ok=false}
+                    if(!r.data.success){ok=false}
+                    if(ok){
+                        var w=c.querySelector('.sf-form-wrapper');
+                        if(w){w.innerHTML='<div class=sf-thank-you>'+r.data.message+'</div>'}
+                    }else{
+                        var g=[];
+                        if(r.data){
+                            if(r.data.data&&r.data.data.messages){g=r.data.data.messages}
+                            else if(r.data.message){g=[r.data.message]}
+                        }
+                        if(g.length===0){g=['Error submitting. Please try again.']}
+                        if(m){m.className='sf-message error';m.innerHTML=g.join('<br>')}
+                    }
+                })
+                .catch(function(){
+                    if(m){m.className='sf-message error';m.textContent='Connection error. Please try again.'}
+                })
+                .finally(function(){
+                    b.disabled=false;
+                    b.textContent='<?php echo esc_js($submit_text); ?>'
+                })
+            }
 
-            form.addEventListener('submit', function(e) {
+            b.addEventListener('click',function(e){
                 e.preventDefault();
-
-                <?php if ($sf_protection === 'recaptcha' && !empty($sf_site_key)) : ?>
-                // If reCAPTCHA token not yet obtained, fetch it first
-                var tokenInput = form.querySelector('.sf-recaptcha-token');
-                if (tokenInput && !tokenInput.value && !sfRecaptchaLoading) {
-                    sfRecaptchaLoading = true;
-                    grecaptcha.ready(function() {
-                        grecaptcha.execute('<?php echo esc_js($sf_site_key); ?>', {action: 'submit'}).then(function(token) {
-                            tokenInput.value = token;
-                            sfRecaptchaLoading = false;
-                            form.dispatchEvent(new Event('submit'));
+                // If reCAPTCHA is enabled, get token first
+                if(s&&recaptchaInput&&typeof grecaptcha!=='undefined'){
+                    grecaptcha.ready(function(){
+                        grecaptcha.execute(s,{action:'submit'}).then(function(token){
+                            recaptchaInput.value=token;
+                            doFetch();
                         });
                     });
-                    return;
+                }else{
+                    doFetch();
                 }
-                <?php endif; ?>
-
-                var button = form.querySelector('.sf-submit');
-                var message = form.querySelector('.sf-message');
-                var formData = new FormData();
-
-                formData.append('action', 'simplekitforms_submit');
-                formData.append('form_id', '<?php echo (int) $form->id; ?>');
-                formData.append('nonce', '<?php echo esc_js(wp_create_nonce('simplekitforms_submit_nonce')); ?>');
-
-                var inputs = form.querySelectorAll('input, textarea, select');
-                inputs.forEach(function(input) {
-                    if (input.type === 'checkbox') {
-                        if (input.checked) {
-                            formData.append(input.name, input.value);
-                        }
-                    } else if (input.type === 'radio') {
-                        if (input.checked) {
-                            formData.append(input.name, input.value);
-                        }
-                    } else if (input.type === 'submit' || input.type === 'button') {
-                    } else if (input.multiple) {
-                        var selected = [];
-                        for (var i = 0; i < input.options.length; i++) {
-                            if (input.options[i].selected) {
-                                selected.push(input.options[i].value);
-                            }
-                        }
-                        selected.forEach(function(val) {
-                            formData.append(input.name, val);
-                        });
-                    } else {
-                        formData.append(input.name, input.value);
-                    }
-                });
-
-                button.disabled = true;
-                button.textContent = 'Sending...';
-                message.className = 'sf-message';
-                message.textContent = '';
-
-                fetch('<?php echo esc_js(admin_url('admin-ajax.php')); ?>', {
-                    method: 'POST',
-                    body: formData,
-                })
-                .then(function(r) { return r.json(); })
-                .then(function(response) {
-                    if (response.success) {
-                        var wrapper = container.querySelector('.sf-form-wrapper');
-                        if (wrapper) {
-                            wrapper.innerHTML = '<div class="sf-thank-you">' + response.data.message + '</div>';
-                        }
-                    } else {
-                        var msgs = response.data.messages || [response.data.message || 'Error submitting. Please try again.'];
-                        message.className = 'sf-message error';
-                        message.innerHTML = msgs.join('<br>');
-                    }
-                })
-                .catch(function() {
-                    message.className = 'sf-message error';
-                    message.textContent = 'Connection error. Please try again.';
-                })
-                .finally(function() {
-                    button.disabled = false;
-                    button.textContent = '<?php echo esc_js($submit_text); ?>';
-                });
-            });
+            })
         })();
+        /* ]]> */
         </script>
     </div>
     <?php
