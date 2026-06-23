@@ -31,6 +31,7 @@ class SimpleKitQRCode {
         $this->table_name = $wpdb->prefix . 'qr_code_stats';
 
         register_activation_hook(__FILE__, array($this, 'activate'));
+        register_deactivation_hook(__FILE__, array($this, 'deactivate'));
         add_action('admin_menu', array($this, 'add_admin_menu'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
         add_action('wp_ajax_simplekitqrcode_generate', array($this, 'ajax_generate_qr_code'));
@@ -58,6 +59,22 @@ class SimpleKitQRCode {
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
+    }
+
+    public function deactivate() {
+        global $wpdb;
+
+        // Export data to JSON backup before dropping the table
+        if (function_exists('simplekitqrcode_export_backup')) {
+            $data    = simplekitqrcode_export_backup();
+            $json    = wp_json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            $filepath = simplekitqrcode_backup_file_path();
+            file_put_contents($filepath, $json);
+        }
+
+        // Drop the plugin table
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
+        $wpdb->query($wpdb->prepare("DROP TABLE IF EXISTS %i", $this->table_name));
     }
 
     public function add_admin_menu() {
