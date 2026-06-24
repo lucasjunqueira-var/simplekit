@@ -43,7 +43,7 @@ function simplekitsharing_page_settings() {
     $settings = simplekitsharing_get_general_settings();
     ?>
     <div class="wrap">
-        <h1><?php esc_html_e('Simple Kit Sharing Settings', 'simplekitsharing'); ?></h1>
+        <h1><?php esc_html_e('Global', 'simplekitsharing'); ?></h1>
         <p><?php esc_html_e('These settings define the default social sharing meta tags for your site. If a page or post has its own sharing settings, those will override these defaults.', 'simplekitsharing'); ?></p>
 
         <form method="post" action="options.php">

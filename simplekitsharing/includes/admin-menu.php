@@ -17,6 +17,16 @@ function simplekitsharing_admin_menu() {
         27
     );
 
+    // First submenu (same slug as parent to override the auto-generated duplicate)
+    add_submenu_page(
+        'simplekitsharing',
+        __('Simple Kit Sharing', 'simplekitsharing'),
+        __('Global', 'simplekitsharing'),
+        'manage_options',
+        'simplekitsharing',
+        'simplekitsharing_page_settings'
+    );
+
     // Help submenu (second-to-last)
     add_submenu_page(
         'simplekitsharing',
