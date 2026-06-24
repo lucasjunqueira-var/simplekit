@@ -207,7 +207,7 @@ function simplekitforms_render_form($form_id, $custom_css = '') {
             <h3><?php echo esc_html($form->title); ?></h3>
             <form class="simplekitforms-form" method="post">
                 <?php foreach ($fields as $field) : ?>
-                    <?php echo simplekitforms_render_frontend_field($field); ?>
+                    <?php echo wp_kses_post(simplekitforms_render_frontend_field($field)); ?>
                 <?php endforeach; ?>
                 <?php if ($sf_protection === 'recaptcha' && !empty($sf_site_key)) : ?>
                     <input type="hidden" name="sf_recaptcha_token" class="sf-recaptcha-token" value="" />
@@ -218,7 +218,7 @@ function simplekitforms_render_form($form_id, $custom_css = '') {
                 <div class="sf-message"></div>
             </form>
         </div>
-        <?php if ($sf_protection === 'recaptcha' && !empty($sf_site_key)) : wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?render=' . urlencode($sf_site_key), array(), null, true); endif; ?>
+        <?php if ($sf_protection === 'recaptcha' && !empty($sf_site_key)) : wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?render=' . urlencode($sf_site_key), array(), SIMPLEKITFORMS_VERSION, true); endif; ?>
         <script>
         /* <![CDATA[ */
         (function(){

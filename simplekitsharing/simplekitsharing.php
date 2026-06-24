@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Simple Kit Sharing
- * Plugin URI:  https://github.com/example/simplekitsharing
+ * Plugin URI:  https://github.com/lucasjunqueira-var/simplekit
  * Description: Manage social sharing meta tags (Open Graph, Twitter Cards) for pages and posts.
  * Version:     1.0.0
  * Requires at least: 6.8

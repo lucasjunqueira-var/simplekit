@@ -1,5 +1,5 @@
 === Simple Kit Sharing ===
-Contributors: simplekitsharing
+Contributors: chokito76
 Tags: sharing, social sharing, open graph, twitter cards, meta tags
 Requires at least: 6.8
 Tested up to: 7.0
@@ -28,20 +28,6 @@ Simple Kit Sharing automatically inserts Open Graph and Twitter Card meta tags i
 1. Upload the `simplekitsharing` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Go to SK Sharing → Settings to configure your default sharing settings.
-
-== Frequently Asked Questions ==
-
-= How do I set default sharing values? =
-
-Go to SK Sharing → Settings and configure the default share text, share image, icon, and article tags. These values are used globally on every page.
-
-= How do I override settings for a specific page or post? =
-
-When editing a post or page, look for the "Simple Kit Sharing" meta box in the sidebar. Fill in the fields you want to customize — any field left empty will use the global default.
-
-= My favicon doesn't appear in the browser tab =
-
-The plugin automatically generates a properly sized 32x32 pixel version of your uploaded image for browser tab display. Clear your browser cache and reload the page.
 
 == Changelog ==
 

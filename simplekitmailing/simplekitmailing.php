@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: Simple Kit Mailing
- * Plugin URI:  https://github.com/example/simplekitmailing
- * Description: Simple Kit Mailing offers a simplified way to manage contact registration in mailing lists and sending messages to limited numbers of recipients.
+ * Plugin URI:  https://github.com/lucasjunqueira-var/simplekit
+ * Description: Manage contact registration and send messages to a limited numbers of recipients.
  * Version:     1.0.0
  * Requires at least: 6.8
  * Tested up to: 7.0
  * Requires PHP: 7.4
- * Author:      Simple Kit Mailing
+ * Author:      Lucas Junqueira
  * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: simplekitmailing

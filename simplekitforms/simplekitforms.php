@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: Simple Kit Forms
- * Plugin URI:  https://github.com/example/simplekitforms
- * Description: Create simple forms and manage responses directly from WordPress.
+ * Plugin URI:  https://github.com/lucasjunqueira-var/simplekit
+ * Description: Create forms and manage responses directly from your dashboard.
  * Version:     1.0.0
  * Requires at least: 6.8
  * Tested up to: 7.0
  * Requires PHP: 7.4
- * Author:      Simple Kit Forms
+ * Author:      Lucas Junqueira
  * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: simplekitforms

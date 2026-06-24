@@ -9,149 +9,143 @@ defined('ABSPATH') or exit;
  * Returns the default CSS for the Collect block.
  */
 function simplekitmailing_get_default_collect_css() {
-    return <<<CSS
-.simplekitmailing-collect-block {
-    max-width: 400px;
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #f9f9f9;
-}
-.simplekitmailing-collect-block h3 {
-    margin-top: 0;
-}
-.simplekitmailing-collect-block .sm-field {
-    margin-bottom: 12px;
-}
-.simplekitmailing-collect-block .sm-field input[type="email"],
-.simplekitmailing-collect-block .sm-field input[type="text"],
-.simplekitmailing-collect-block .sm-field input[type="tel"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-.simplekitmailing-collect-block .sm-field label {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 14px;
-    cursor: pointer;
-}
-.simplekitmailing-collect-block .sm-field label input[type="checkbox"] {
-    margin-top: 2px;
-}
-.simplekitmailing-collect-block .sm-submit {
-    background: #0073aa;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-.simplekitmailing-collect-block .sm-submit:hover {
-    background: #005a87;
-}
-.simplekitmailing-collect-block .sm-submit:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-.simplekitmailing-collect-block .sm-message {
-    margin-top: 10px;
-    padding: 8px 12px;
-    border-radius: 4px;
-    display: none;
-}
-.simplekitmailing-collect-block .sm-message.error {
-    display: block;
-    background: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-.simplekitmailing-collect-block .sm-message.success {
-    display: block;
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-CSS;
+    return '.simplekitmailing-collect-block {' .
+        'max-width: 400px;' .
+        'margin: 20px 0;' .
+        'padding: 20px;' .
+        'border: 1px solid #ddd;' .
+        'border-radius: 8px;' .
+        'background: #f9f9f9;' .
+    '}' .
+    '.simplekitmailing-collect-block h3 {' .
+        'margin-top: 0;' .
+    '}' .
+    '.simplekitmailing-collect-block .sm-field {' .
+        'margin-bottom: 12px;' .
+    '}' .
+    '.simplekitmailing-collect-block .sm-field input[type="email"],' .
+    '.simplekitmailing-collect-block .sm-field input[type="text"],' .
+    '.simplekitmailing-collect-block .sm-field input[type="tel"] {' .
+        'width: 100%;' .
+        'padding: 10px;' .
+        'border: 1px solid #ccc;' .
+        'border-radius: 4px;' .
+        'box-sizing: border-box;' .
+    '}' .
+    '.simplekitmailing-collect-block .sm-field label {' .
+        'display: flex;' .
+        'align-items: flex-start;' .
+        'gap: 8px;' .
+        'font-size: 14px;' .
+        'cursor: pointer;' .
+    '}' .
+    '.simplekitmailing-collect-block .sm-field label input[type="checkbox"] {' .
+        'margin-top: 2px;' .
+    '}' .
+    '.simplekitmailing-collect-block .sm-submit {' .
+        'background: #0073aa;' .
+        'color: #fff;' .
+        'border: none;' .
+        'padding: 10px 20px;' .
+        'border-radius: 4px;' .
+        'cursor: pointer;' .
+        'font-size: 16px;' .
+    '}' .
+    '.simplekitmailing-collect-block .sm-submit:hover {' .
+        'background: #005a87;' .
+    '}' .
+    '.simplekitmailing-collect-block .sm-submit:disabled {' .
+        'opacity: 0.6;' .
+        'cursor: not-allowed;' .
+    '}' .
+    '.simplekitmailing-collect-block .sm-message {' .
+        'margin-top: 10px;' .
+        'padding: 8px 12px;' .
+        'border-radius: 4px;' .
+        'display: none;' .
+    '}' .
+    '.simplekitmailing-collect-block .sm-message.error {' .
+        'display: block;' .
+        'background: #f8d7da;' .
+        'color: #721c24;' .
+        'border: 1px solid #f5c6cb;' .
+    '}' .
+    '.simplekitmailing-collect-block .sm-message.success {' .
+        'display: block;' .
+        'background: #d4edda;' .
+        'color: #155724;' .
+        'border: 1px solid #c3e6cb;' .
+    '}';
 }
 
 /**
  * Returns the default CSS for the Unsubscribe block.
  */
 function simplekitmailing_get_default_unsubscribe_css() {
-    return <<<CSS
-.simplekitmailing-unsubscribe-block {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 30px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #f9f9f9;
-    text-align: center;
-}
-.simplekitmailing-unsubscribe-block h2 {
-    margin-top: 0;
-    color: #333;
-}
-.simplekitmailing-unsubscribe-block .sm-unsubscribed {
-    color: #155724;
-    background: #d4edda;
-    border: 1px solid #c3e6cb;
-    padding: 15px;
-    border-radius: 4px;
-    margin-top: 20px;
-}
-.simplekitmailing-unsubscribe-block .sm-no-email {
-    color: #856404;
-    background: #fff3cd;
-    border: 1px solid #ffeeba;
-    padding: 15px;
-    border-radius: 4px;
-    margin-top: 20px;
-}
-CSS;
+    return '.simplekitmailing-unsubscribe-block {' .
+        'max-width: 500px;' .
+        'margin: 40px auto;' .
+        'padding: 30px;' .
+        'border: 1px solid #ddd;' .
+        'border-radius: 8px;' .
+        'background: #f9f9f9;' .
+        'text-align: center;' .
+    '}' .
+    '.simplekitmailing-unsubscribe-block h2 {' .
+        'margin-top: 0;' .
+        'color: #333;' .
+    '}' .
+    '.simplekitmailing-unsubscribe-block .sm-unsubscribed {' .
+        'color: #155724;' .
+        'background: #d4edda;' .
+        'border: 1px solid #c3e6cb;' .
+        'padding: 15px;' .
+        'border-radius: 4px;' .
+        'margin-top: 20px;' .
+    '}' .
+    '.simplekitmailing-unsubscribe-block .sm-no-email {' .
+        'color: #856404;' .
+        'background: #fff3cd;' .
+        'border: 1px solid #ffeeba;' .
+        'padding: 15px;' .
+        'border-radius: 4px;' .
+        'margin-top: 20px;' .
+    '}';
 }
 
 /**
  * Returns the default CSS for the Confirm block.
  */
 function simplekitmailing_get_default_confirm_css() {
-    return <<<CSS
-.simplekitmailing-confirm-block {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 30px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #f9f9f9;
-    text-align: center;
-}
-.simplekitmailing-confirm-block h2 {
-    margin-top: 0;
-    color: #333;
-}
-.simplekitmailing-confirm-block .sm-confirm-success {
-    color: #155724;
-    background: #d4edda;
-    border: 1px solid #c3e6cb;
-    padding: 15px;
-    border-radius: 4px;
-    margin-top: 20px;
-}
-.simplekitmailing-confirm-block .sm-confirm-error {
-    color: #721c24;
-    background: #f8d7da;
-    border: 1px solid #f5c6cb;
-    padding: 15px;
-    border-radius: 4px;
-    margin-top: 20px;
-}
-CSS;
+    return '.simplekitmailing-confirm-block {' .
+        'max-width: 500px;' .
+        'margin: 40px auto;' .
+        'padding: 30px;' .
+        'border: 1px solid #ddd;' .
+        'border-radius: 8px;' .
+        'background: #f9f9f9;' .
+        'text-align: center;' .
+    '}' .
+    '.simplekitmailing-confirm-block h2 {' .
+        'margin-top: 0;' .
+        'color: #333;' .
+    '}' .
+    '.simplekitmailing-confirm-block .sm-confirm-success {' .
+        'color: #155724;' .
+        'background: #d4edda;' .
+        'border: 1px solid #c3e6cb;' .
+        'padding: 15px;' .
+        'border-radius: 4px;' .
+        'margin-top: 20px;' .
+    '}' .
+    '.simplekitmailing-confirm-block .sm-confirm-error {' .
+        'color: #721c24;' .
+        'background: #f8d7da;' .
+        'border: 1px solid #f5c6cb;' .
+        'padding: 15px;' .
+        'border-radius: 4px;' .
+        'margin-top: 20px;' .
+    '}';
 }
 
 // ---------------------------------------------------------------------------
@@ -308,7 +302,7 @@ function simplekitmailing_render_block($attributes) {
 
         <?php if ($use_recaptcha) :
             $recaptcha_key = simplekitmailing_get_recaptcha_site_key($list_id);
-            wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?render=' . urlencode($recaptcha_key), array(), null, true);
+            wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?render=' . urlencode($recaptcha_key), array(), SIMPLEKITMAILING_VERSION, true);
             add_filter('script_loader_tag', function($tag, $handle) {
                 if ($handle === 'google-recaptcha') {
                     return str_replace(' src', ' async defer src', $tag);
@@ -483,7 +477,9 @@ function simplekitmailing_render_block($attributes) {
     // Frontend rendering of "Simple Kit Mailing Unsubscribe" block
     // ---------------------------------------------------------------------------
     function simplekitmailing_render_unsubscribe_block($attributes) {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Front-end block reads URL parameters for display; nonce verified in unsubscribe handler.
         $email   = isset($_GET['em']) ? sanitize_email(wp_unslash($_GET['em'])) : '';
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Front-end block reads URL parameters for display.
         $list_id = isset($_GET['list_id']) ? absint($_GET['list_id']) : 0;
 
         // Block texts from list settings (with fallback to block attribute or default translation)
@@ -591,8 +587,11 @@ function simplekitmailing_render_block($attributes) {
 // Frontend rendering of "Simple Kit Mailing Confirm" block (double opt-in)
 // ---------------------------------------------------------------------------
 function simplekitmailing_render_confirm_block($attributes) {
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Front-end block reads URL parameters for display; nonce verified in confirm handler.
     $email   = isset($_GET['sm_email']) ? sanitize_email(wp_unslash($_GET['sm_email'])) : '';
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Front-end block reads URL parameters for display.
     $code    = isset($_GET['sm_code']) ? sanitize_text_field(wp_unslash($_GET['sm_code'])) : '';
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Front-end block reads URL parameters for display.
     $list_id = isset($_GET['list_id']) ? absint($_GET['list_id']) : 0;
 
     // Texts from block attributes or defaults

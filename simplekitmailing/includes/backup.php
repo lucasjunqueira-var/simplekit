@@ -144,6 +144,7 @@ function simplekitmailing_page_backup() {
             $msg  = __('Error uploading the backup file.', 'simplekitmailing');
             $type = 'error';
         } else {
+            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- $_FILES['tmp_name'] is an internal PHP path, not user input. Sanitizing would corrupt Windows paths (removes backslashes), and wp_unslash() is unnecessary on $_FILES.
             $tmp_path = isset($_FILES['backup_file']['tmp_name']) ? $_FILES['backup_file']['tmp_name'] : '';
             $contents = file_get_contents($tmp_path);
             $data     = json_decode($contents, true);
@@ -255,6 +256,7 @@ function simplekitmailing_donation_notice() {
     }
 
     // Only show on the main page (not sub-pages)
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin page URL detection, not a state-changing action.
     if (!isset($_GET['page']) || $_GET['page'] !== 'simplekitmailing') {
         return;
     }

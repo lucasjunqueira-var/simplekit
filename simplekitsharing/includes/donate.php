@@ -45,6 +45,7 @@ function simplekitsharing_donation_notice() {
     }
 
     // Only show on the main page (not sub-pages)
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin page URL detection, not a state-changing action.
     if (!isset($_GET['page']) || $_GET['page'] !== 'simplekitsharing') {
         return;
     }

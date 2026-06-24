@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Simple Kit QRCode
- * Plugin URI:  https://github.com/example/simplekitqrcode
- * Description: Generate QR codes for WordPress posts and pages with download in PNG 2048x2048px and access tracking.
- * Version:     1.1.0
+ * Plugin URI:  https://github.com/lucasjunqueira-var/simplekit
+ * Description: Generate QR codes for posts and pages with access tracking.
+ * Version:     1.0.0
  * Requires at least: 6.8
  * Tested up to: 7.0
  * Requires PHP: 7.4
@@ -141,7 +141,7 @@ class SimpleKitQRCode {
 
         wp_enqueue_script('jquery');
 
-        wp_register_style('simplekitqrcode-admin', false);
+        wp_register_style('simplekitqrcode-admin', false, array(), SIMPLEKITQRCODE_VERSION);
         wp_enqueue_style('simplekitqrcode-admin');
         wp_add_inline_style('simplekitqrcode-admin', $this->get_inline_css());
 

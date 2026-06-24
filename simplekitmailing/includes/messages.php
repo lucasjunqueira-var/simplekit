@@ -17,8 +17,8 @@ function simplekitmailing_page_message() {
     $message_id    = 0;
 
     // If redirected after registering a send
-    if (isset($_GET['message_id'])) {
-        $message_id = absint($_GET['message_id']);
+    if (isset($_GET['message_id'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read after redirect for display, nonce verified in send handler.
+        $message_id = absint($_GET['message_id']); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read after redirect for display.
         // data is being adjusted at processing time directly from the plugin's table at the database, no caching is possible
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
         $msg_data = $wpdb->get_row($wpdb->prepare("SELECT * FROM %i WHERE id = %d", $table_messages, $message_id));
@@ -29,6 +29,7 @@ function simplekitmailing_page_message() {
     }
 
     // Preserve subject and content after test/send redirect via transient
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Transient key from redirect for display purposes.
     $preserve_key = isset($_GET['sm_preserve']) ? preg_replace('/[^a-f0-9]/', '', sanitize_text_field(wp_unslash($_GET['sm_preserve']))) : '';
     if ($preserve_key) {
         $preserved = get_transient('sm_preserve_' . $preserve_key);
@@ -51,8 +52,11 @@ function simplekitmailing_page_message() {
     <div class="wrap">
         <h1><?php esc_html_e('Create Message', 'simplekitmailing'); ?></h1>
 
-        <?php if (isset($_GET['msg'])) :
+        <?php // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only message after redirect.
+        if (isset($_GET['msg'])) :
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only message type after redirect.
             $msg_type = isset($_GET['type']) ? sanitize_text_field(wp_unslash($_GET['type'])) : 'success';
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only message text after redirect.
             $msg_text = isset($_GET['msg']) ? sanitize_text_field(wp_unslash($_GET['msg'])) : '';
         ?>
             <div class="notice notice-<?php echo esc_attr($msg_type); ?> is-dismissible">

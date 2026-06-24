@@ -251,11 +251,12 @@ function simplekitforms_ajax_keep_recent_entries() {
 
     // Delete all entries NOT in the keep list
     $ids_placeholder = implode(',', array_fill(0, count($keep_ids), '%d'));
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+    // phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber
     $deleted = $wpdb->query($wpdb->prepare(
         "DELETE FROM %i WHERE form_id = %d AND id NOT IN ($ids_placeholder)",
         array_merge([$table, $form_id], $keep_ids)
     ));
+    // phpcs:enable
 
     wp_send_json_success(['message' => sprintf('%d responses deleted, keeping the %d most recent.', $deleted, $keep)]);
 }
@@ -382,7 +383,7 @@ function simplekitforms_page_entries() {
                         <tr id="sf-entry-row-<?php echo (int) $entry->id; ?>">
                             <td><?php echo (int) $entry->id; ?></td>
                             <?php foreach ($fields as $field) : ?>
-                                <td><?php echo simplekitforms_format_field_value($data[$field['name'] ?? ''] ?? '', $field, 50); ?></td>
+                                <td><?php echo simplekitforms_format_field_value($data[$field['name'] ?? ''] ?? '', $field, 50); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- The function already escapes with esc_html() internally. ?></td>
                             <?php endforeach; ?>
                             <td><?php echo esc_html($entry->ip); ?></td>
                             <td><?php echo esc_html($entry->created_at); ?></td>

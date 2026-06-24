@@ -196,6 +196,7 @@ function simplekitmailing_page_lists() {
 // ---------------------------------------------------------------------------
 add_action('admin_init', 'simplekitmailing_handle_get_actions');
 function simplekitmailing_handle_get_actions() {
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin page URL detection, not a state-changing action.
     if (!isset($_GET['page']) || $_GET['page'] !== 'simplekitmailing') {
         return;
     }
@@ -208,6 +209,7 @@ function simplekitmailing_handle_get_actions() {
     $table_removed     = $wpdb->prefix . 'sm_removed';
 
     $nonce = sanitize_text_field(wp_unslash($_REQUEST['simplekitmailing_nonce'] ?? ''));
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Action read before nonce verification at line 213; nonce check follows immediately.
     $action = isset($_GET['action']) ? sanitize_text_field(wp_unslash($_GET['action'])) : '';
 
     if (!$action || !wp_verify_nonce($nonce, 'simplekitmailing_subscriber_action')) {
@@ -260,6 +262,7 @@ function simplekitmailing_handle_get_actions() {
 // Active list filter (via GET)
 // ---------------------------------------------------------------------------
 function simplekitmailing_get_active_list_id() {
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin filter parameter for display only.
     return isset($_GET['list_id']) ? absint($_GET['list_id']) : 0;
 }
 
@@ -282,12 +285,14 @@ function simplekitmailing_page_subscribers() {
     simplekitmailing_handle_subscriber_actions();
 
     // Search
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin search parameter for display only.
     $search = isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s'])) : '';
     $like   = $search ? $wpdb->esc_like($search) : '';
 
 
     // Pagination for subscribers
     $per_page = 25;
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin pagination parameter for display only.
     $sub_page = isset($_GET['subp']) ? max(1, absint($_GET['subp'])) : 1;
     $sub_offset = ($sub_page - 1) * $per_page;
 
@@ -354,6 +359,7 @@ function simplekitmailing_page_subscribers() {
 
     // Pagination for removed
     $rem_per_page = 25;
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin pagination parameter for display only.
     $rem_page = isset($_GET['remp']) ? max(1, absint($_GET['remp'])) : 1;
     $rem_offset = ($rem_page - 1) * $rem_per_page;
 
@@ -420,8 +426,11 @@ function simplekitmailing_page_subscribers() {
             <noscript><input type="submit" class="button" value="<?php esc_attr_e('Filter', 'simplekitmailing'); ?>" /></noscript>
         </form>
 
-        <?php if (isset($_GET['msg'])) :
+        <?php // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only notification after redirect.
+        if (isset($_GET['msg'])) :
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only message type after redirect.
             $msg_type = isset($_GET['type']) ? sanitize_text_field(wp_unslash($_GET['type'])) : 'success';
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only message text after redirect.
             $msg_text = isset($_GET['msg']) ? sanitize_text_field(wp_unslash($_GET['msg'])) : '';
         ?>
             <div class="notice notice-<?php echo esc_attr($msg_type); ?> is-dismissible">
@@ -705,6 +714,7 @@ function simplekitmailing_handle_subscriber_actions() {
             simplekitmailing_redirect(add_query_arg($args, admin_url('admin.php')));
         }
 
+        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- $_FILES['tmp_name'] is an internal PHP path, not user input.
         $tmp = isset($_FILES['csv_file']['tmp_name']) ? $_FILES['csv_file']['tmp_name'] : '';
 
         // Use WP_Filesystem to read the uploaded CSV

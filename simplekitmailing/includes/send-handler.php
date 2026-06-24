@@ -29,8 +29,11 @@ function simplekitmailing_page_sends() {
     <div class="wrap">
         <h1><?php esc_html_e('Messages', 'simplekitmailing'); ?></h1>
 
-        <?php if (isset($_GET['msg'])) :
+        <?php // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only notification after redirect.
+        if (isset($_GET['msg'])) :
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only message type after redirect.
             $msg_type = isset($_GET['type']) ? sanitize_text_field(wp_unslash($_GET['type'])) : 'success';
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only message text after redirect.
             $msg_text = isset($_GET['msg']) ? sanitize_text_field(wp_unslash($_GET['msg'])) : '';
         ?>
             <div class="notice notice-<?php echo esc_attr($msg_type); ?> is-dismissible">
@@ -189,6 +192,7 @@ function simplekitmailing_status_label($status) {
 // Process pause/cancel/resume actions
 // ---------------------------------------------------------------------------
 function simplekitmailing_handle_send_actions() {
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce parameters accessed before wp_verify_nonce() on line 203.
     if (!isset($_GET['simplekitmailing_nonce']) || !isset($_GET['action']) || !isset($_GET['send_id'])) {
         return;
     }
