@@ -23,3 +23,5 @@ Create AR Codes that quickly direct visitors to pages and posts on your website,
 ### Simple Kit Sharing
 
 Manage the most basic way to share pages on your website: adjust the icon, image, and sharing text, both generally and individually for each page. That's all.
+
+Check out detailed information about this plugin at [https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitsharing](https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitsharing)
