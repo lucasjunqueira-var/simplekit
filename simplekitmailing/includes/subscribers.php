@@ -260,9 +260,6 @@ function simplekitmailing_handle_get_actions() {
 // Active list filter (via GET)
 // ---------------------------------------------------------------------------
 function simplekitmailing_get_active_list_id() {
-    if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'simplekitmailing_display')) {
-        // Silent nonce check: allow fallback to default when nonce absent
-    }
     return isset($_GET['list_id']) ? absint($_GET['list_id']) : 0;
 }
 
@@ -272,10 +269,6 @@ function simplekitmailing_get_active_list_id() {
 function simplekitmailing_page_subscribers() {
     if (!current_user_can('manage_options')) {
         wp_die(esc_html__('Access denied.', 'simplekitmailing'));
-    }
-
-    if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'simplekitmailing_display')) {
-        // Silent nonce check: allow fallback to default when nonce absent
     }
 
     global $wpdb;
@@ -643,6 +636,9 @@ function simplekitmailing_page_subscribers() {
 // Process POST actions from the subscribers page
 // ---------------------------------------------------------------------------
 function simplekitmailing_handle_subscriber_actions() {
+    if (!current_user_can('manage_options')) {
+        return;
+    }
     if (empty($_POST)) {
         return;
     }
@@ -709,7 +705,7 @@ function simplekitmailing_handle_subscriber_actions() {
             simplekitmailing_redirect(add_query_arg($args, admin_url('admin.php')));
         }
 
-        $tmp = isset($_FILES['csv_file']['tmp_name']) ? sanitize_text_field(wp_unslash($_FILES['csv_file']['tmp_name'])) : '';
+        $tmp = isset($_FILES['csv_file']['tmp_name']) ? $_FILES['csv_file']['tmp_name'] : '';
 
         // Use WP_Filesystem to read the uploaded CSV
         require_once ABSPATH . 'wp-admin/includes/file.php';

@@ -99,7 +99,7 @@ function simplekitmailing_import_backup($data) {
 // ---------------------------------------------------------------------------
 function simplekitmailing_backup_file_path() {
     $upload_dir = wp_upload_dir();
-    return trailingslashit($upload_dir['basedir']) . 'simplekitmailing-bakcup.json';
+    return trailingslashit($upload_dir['basedir']) . 'simplekitmailing-backup.json';
 }
 
 // ---------------------------------------------------------------------------
@@ -144,7 +144,7 @@ function simplekitmailing_page_backup() {
             $msg  = __('Error uploading the backup file.', 'simplekitmailing');
             $type = 'error';
         } else {
-            $tmp_path = isset($_FILES['backup_file']['tmp_name']) ? sanitize_text_field(wp_unslash($_FILES['backup_file']['tmp_name'])) : '';
+            $tmp_path = isset($_FILES['backup_file']['tmp_name']) ? $_FILES['backup_file']['tmp_name'] : '';
             $contents = file_get_contents($tmp_path);
             $data     = json_decode($contents, true);
 
@@ -254,10 +254,6 @@ function simplekitmailing_donation_notice() {
         return;
     }
 
-    if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'simplekitmailing_display')) {
-        // Silent nonce check: allow fallback to default when nonce absent
-    }
-
     // Only show on the main page (not sub-pages)
     if (!isset($_GET['page']) || $_GET['page'] !== 'simplekitmailing') {
         return;
@@ -298,6 +294,9 @@ function simplekitmailing_donation_notice() {
 add_action('wp_ajax_simplekitmailing_dismiss_donation', 'simplekitmailing_ajax_dismiss_donation');
 function simplekitmailing_ajax_dismiss_donation() {
     check_ajax_referer('simplekitmailing_dismiss_donation');
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error();
+    }
     $user_id = get_current_user_id();
     update_user_meta($user_id, 'simplekitmailing_dismiss_donation', 1);
     wp_send_json_success();
@@ -330,7 +329,7 @@ function simplekitmailing_download_backup_handler() {
     }
 
     header('Content-Type: application/json; charset=utf-8');
-    header('Content-Disposition: attachment; filename="simplekitmailing-bakcup.json"');
+    header('Content-Disposition: attachment; filename="simplekitmailing-backup.json"');
     header('Content-Length: ' . strlen($json));
     header('Pragma: no-cache');
     header('Expires: 0');

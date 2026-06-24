@@ -68,7 +68,10 @@ function simplekitforms_page_settings() {
                     </tr>
                     <tr>
                         <th scope="row"><label for="recaptcha_secret_key">Secret key</label></th>
-                        <td><input type="password" id="recaptcha_secret_key" name="recaptcha_secret_key" value="<?php echo esc_attr($recaptcha_secret); ?>" class="regular-text" /></td>
+                        <td>
+                            <input type="password" id="recaptcha_secret_key" name="recaptcha_secret_key" value="<?php echo esc_attr($recaptcha_secret); ?>" class="regular-text" autocomplete="off" />
+                            <p class="description">Leave empty to keep the current key. Fill in to change it.</p>
+                        </td>
                     </tr>
                 </table>
             </div>

@@ -483,9 +483,6 @@ function simplekitmailing_render_block($attributes) {
     // Frontend rendering of "Simple Kit Mailing Unsubscribe" block
     // ---------------------------------------------------------------------------
     function simplekitmailing_render_unsubscribe_block($attributes) {
-        if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'simplekitmailing_display')) {
-            // Silent nonce check: allow fallback to default when nonce absent
-        }
         $email   = isset($_GET['em']) ? sanitize_email(wp_unslash($_GET['em'])) : '';
         $list_id = isset($_GET['list_id']) ? absint($_GET['list_id']) : 0;
 
@@ -594,9 +591,6 @@ function simplekitmailing_render_block($attributes) {
 // Frontend rendering of "Simple Kit Mailing Confirm" block (double opt-in)
 // ---------------------------------------------------------------------------
 function simplekitmailing_render_confirm_block($attributes) {
-    if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'simplekitmailing_display')) {
-        // Silent nonce check: allow fallback to default when nonce absent
-    }
     $email   = isset($_GET['sm_email']) ? sanitize_email(wp_unslash($_GET['sm_email'])) : '';
     $code    = isset($_GET['sm_code']) ? sanitize_text_field(wp_unslash($_GET['sm_code'])) : '';
     $list_id = isset($_GET['list_id']) ? absint($_GET['list_id']) : 0;

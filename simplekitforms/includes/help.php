@@ -201,6 +201,9 @@ function simplekitforms_donation_notice() {
 add_action('wp_ajax_simplekitforms_dismiss_donation', 'simplekitforms_ajax_dismiss_donation');
 function simplekitforms_ajax_dismiss_donation() {
     check_ajax_referer('simplekitforms_dismiss_donation');
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error();
+    }
     $user_id = get_current_user_id();
     update_user_meta($user_id, 'simplekitforms_dismiss_donation', 1);
     wp_send_json_success();

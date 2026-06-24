@@ -44,10 +44,6 @@ function simplekitqrcode_donation_notice() {
         return;
     }
 
-    if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'simplekitqrcode_display')) {
-        // Silent nonce check: allow fallback to default when nonce absent
-    }
-
     // Only show on the main page (not sub-pages)
     if (!isset($_GET['page']) || $_GET['page'] !== 'simplekitqrcode') {
         return;
@@ -88,6 +84,9 @@ function simplekitqrcode_donation_notice() {
 add_action('wp_ajax_simplekitqrcode_dismiss_donation', 'simplekitqrcode_ajax_dismiss_donation');
 function simplekitqrcode_ajax_dismiss_donation() {
     check_ajax_referer('simplekitqrcode_dismiss_donation');
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error();
+    }
     $user_id = get_current_user_id();
     update_user_meta($user_id, 'simplekitqrcode_dismiss_donation', 1);
     wp_send_json_success();

@@ -52,6 +52,15 @@ function simplekitmailing_get_unsubscribe_page_id($list_id = 0) {
     return (int) simplekitmailing_get_list_setting($list_id, 'unsubscribe_page_id', 'simplekitmailing_unsubscribe_page_id', 0);
 }
 
+function simplekitmailing_get_unsubscribe_text($list_id = 0) {
+    $default = __('If you no longer wish to receive our emails, visit: [LINK]', 'simplekitmailing');
+    return simplekitmailing_get_list_setting($list_id, 'unsubscribe_text', '', $default);
+}
+
+function simplekitmailing_get_batch_size($list_id = 0) {
+    return (int) simplekitmailing_get_list_setting($list_id, 'batch_size', '', 10);
+}
+
 function simplekitmailing_get_email_header_bg_color($list_id = 0) {
     return simplekitmailing_get_list_setting($list_id, 'header_bg_color', 'simplekitmailing_header_bg_color', '#0073aa');
 }
@@ -194,6 +203,8 @@ function simplekitmailing_page_settings() {
                     'submit_text'         => sanitize_text_field(wp_unslash($_POST['submit_text'] ?? '')),
                     'sending_text'        => sanitize_text_field(wp_unslash($_POST['sending_text'] ?? '')),
                     'success_message'     => sanitize_text_field(wp_unslash($_POST['success_message'] ?? '')),
+                    'unsubscribe_text'     => sanitize_text_field(wp_unslash($_POST['unsubscribe_text'] ?? '')),
+                    'batch_size'           => in_array(absint(wp_unslash($_POST['batch_size'] ?? 10)), array(1, 5, 10, 15, 20, 25, 30)) ? absint(wp_unslash($_POST['batch_size'])) : 10,
                     'unsub_title'          => sanitize_text_field(wp_unslash($_POST['unsub_title'] ?? '')),
                     'unsub_message'        => sanitize_text_field(wp_unslash($_POST['unsub_message'] ?? '')),
                     'unsub_error_message'  => sanitize_text_field(wp_unslash($_POST['unsub_error_message'] ?? '')),
@@ -330,6 +341,7 @@ function simplekitmailing_page_settings() {
                                 'name'     => 'redirect_page_id',
                                 'selected' => (int) $v('redirect_page_id', 'simplekitmailing_redirect_page_id', 0),
                                 'show_option_none' => esc_html__('— Select —', 'simplekitmailing'),
+                                'post_status' => array('publish', 'draft'),
                             ));
                             ?>
                             <p class="description"><?php esc_html_e('Page to redirect visitors to after signing up for this list.', 'simplekitmailing'); ?></p>
@@ -348,6 +360,7 @@ function simplekitmailing_page_settings() {
                                 'name'     => 'unsubscribe_page_id',
                                 'selected' => (int) $v('unsubscribe_page_id', 'simplekitmailing_unsubscribe_page_id', 0),
                                 'show_option_none' => esc_html__('— Select —', 'simplekitmailing'),
+                                'post_status' => array('publish', 'draft'),
                             ));
                             ?>
                             <p class="description"><?php esc_html_e('Page containing the "Simple Kit Mailing Unsubscribe" block.', 'simplekitmailing'); ?></p>
@@ -499,6 +512,13 @@ function simplekitmailing_page_settings() {
                         <td><input type="text" id="unsub_message" name="unsub_message" value="<?php echo esc_attr($v('unsub_message', '', __('Your email has been removed from our mailing list.', 'simplekitmailing'))); ?>" class="regular-text" /></td>
                     </tr>
                     <tr>
+                        <th scope="row"><label for="unsubscribe_text"><?php esc_html_e('Unsubscribe text in emails', 'simplekitmailing'); ?></label></th>
+                        <td>
+                            <textarea id="unsubscribe_text" name="unsubscribe_text" rows="3" class="large-text"><?php echo esc_textarea($v('unsubscribe_text', '', __('If you no longer wish to receive our emails, visit: [LINK]', 'simplekitmailing'))); ?></textarea>
+                            <p class="description"><?php esc_html_e('Text added at the end of each sent message. Use [LINK] as a placeholder for the unsubscribe URL. If [LINK] is not included, the URL will be appended at the end.', 'simplekitmailing'); ?></p>
+                        </td>
+                    </tr>
+                    <tr>
                         <th scope="row"><label for="unsub_error_message"><?php esc_html_e('Error message', 'simplekitmailing'); ?></label></th>
                         <td><input type="text" id="unsub_error_message" name="unsub_error_message" value="<?php echo esc_attr($v('unsub_error_message', '', __('The email address was not found in our mailing list.', 'simplekitmailing'))); ?>" class="regular-text" /></td>
                     </tr>
@@ -509,6 +529,26 @@ function simplekitmailing_page_settings() {
                     <tr>
                         <th scope="row"><label for="unsub_instructions"><?php esc_html_e('Instructions', 'simplekitmailing'); ?></label></th>
                         <td><input type="text" id="unsub_instructions" name="unsub_instructions" value="<?php echo esc_attr($v('unsub_instructions', '', __('Use the unsubscribe link sent in the email to remove your registration.', 'simplekitmailing'))); ?>" class="regular-text" /></td>
+                    </tr>
+                </table>
+
+                <h2><?php esc_html_e('Sending settings', 'simplekitmailing'); ?></h2>
+                <p class="description"><?php esc_html_e('Configure how many messages are sent every 10 seconds for this list.', 'simplekitmailing'); ?></p>
+                <table class="form-table" role="presentation">
+                    <tr>
+                        <th scope="row"><label for="batch_size"><?php esc_html_e('Messages per cycle', 'simplekitmailing'); ?></label></th>
+                        <td>
+                            <select id="batch_size" name="batch_size">
+                                <option value="1" <?php selected((int) $v('batch_size', '', 10), 1); ?>>1</option>
+                                <option value="5" <?php selected((int) $v('batch_size', '', 10), 5); ?>>5</option>
+                                <option value="10" <?php selected((int) $v('batch_size', '', 10), 10); ?>>10</option>
+                                <option value="15" <?php selected((int) $v('batch_size', '', 10), 15); ?>>15</option>
+                                <option value="20" <?php selected((int) $v('batch_size', '', 10), 20); ?>>20</option>
+                                <option value="25" <?php selected((int) $v('batch_size', '', 10), 25); ?>>25</option>
+                                <option value="30" <?php selected((int) $v('batch_size', '', 10), 30); ?>>30</option>
+                            </select>
+                            <p class="description"><?php esc_html_e('Number of messages sent every 10 seconds when sending to this list.', 'simplekitmailing'); ?></p>
+                        </td>
                     </tr>
                 </table>
 
@@ -571,6 +611,7 @@ function simplekitmailing_page_settings() {
                                 'name'     => 'confirm_page_id',
                                 'selected' => (int) $v('confirm_page_id', '', 0),
                                 'show_option_none' => esc_html__('— Select —', 'simplekitmailing'),
+                                'post_status' => array('publish', 'draft'),
                             ));
                             ?>
                             <p class="description"><?php esc_html_e('Page containing the "Simple Kit Mailing Confirm" block.', 'simplekitmailing'); ?></p>

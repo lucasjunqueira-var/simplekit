@@ -469,3 +469,31 @@ msgstr ""
 #: assets/block.js:48
 msgid "Título do bloco"
 msgstr ""
+
+#: includes/settings.php:55
+msgid "If you no longer wish to receive our emails, visit: [LINK]"
+msgstr ""
+
+#: includes/settings.php:522
+msgid "Unsubscribe text in emails"
+msgstr ""
+
+#: includes/settings.php:528
+msgid "Text added at the end of each sent message. Use [LINK] as a placeholder for the unsubscribe URL. If [LINK] is not included, the URL will be appended at the end."
+msgstr ""
+
+#: includes/settings.php:531
+msgid "Sending settings"
+msgstr ""
+
+#: includes/settings.php:532
+msgid "Configure how many messages are sent every 10 seconds for this list."
+msgstr ""
+
+#: includes/settings.php:535
+msgid "Messages per cycle"
+msgstr ""
+
+#: includes/settings.php:547
+msgid "Number of messages sent every 10 seconds when sending to this list."
+msgstr ""

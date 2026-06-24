@@ -9,10 +9,6 @@ function simplekitmailing_page_sends() {
         wp_die(esc_html__('Access denied.', 'simplekitmailing'));
     }
 
-    if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'simplekitmailing_display')) {
-        // Silent nonce check: allow fallback to default when nonce absent
-    }
-
     global $wpdb;
     $table_messages = $wpdb->prefix . 'sm_messages';
 
@@ -151,8 +147,8 @@ function simplekitmailing_page_sends() {
                             data.total_sent + ' / ' + data.total_initial + ' sent (' + data.total_pending + ' pending)'
                         );
 
-                        // Next batch in 5 seconds
-                        setTimeout(smProcessBatch, 5000);
+                        // Next batch in 10 seconds
+                        setTimeout(smProcessBatch, 10000);
                     } else {
                         $('#sm-send-progress').hide();
                         $('#sm-progress-bar').css('width', '100%');
@@ -261,7 +257,9 @@ function simplekitmailing_process_sends() {
 
     foreach ($active_sends as $send) {
         $pending = $send->total - $send->sent;
-        $batch   = min(10, $pending);
+        $list_id = $send->list_id ?: 0;
+        $batch_size = simplekitmailing_get_batch_size($list_id);
+        $batch   = min($batch_size, $pending);
 
         // Get the next N contacts from the specific list
         if ($send->list_id) {
@@ -314,13 +312,15 @@ function simplekitmailing_process_sends() {
             $content = $send->content;
             $content .= "\n\n<hr>\n";
             $content .= '<p style="font-size:12px;color:#888;">';
-            /* translators: 1: unsubscribe URL, 2: unsubscribe URL */
-            $unsub_text = __('If you no longer wish to receive our emails, visit: <a href="%1$s">%2$s</a>', 'simplekitmailing');
-            $content .= sprintf(
-                $unsub_text,
-                esc_url($unsubscribe_url),
-                esc_url($unsubscribe_url)
-            );
+
+            $unsub_template = simplekitmailing_get_unsubscribe_text($list_id);
+            $link_html = '<a href="' . esc_url($unsubscribe_url) . '">' . esc_url($unsubscribe_url) . '</a>';
+            if (strpos($unsub_template, '[LINK]') !== false) {
+                $unsub_text = str_replace('[LINK]', $link_html, $unsub_template);
+            } else {
+                $unsub_text = $unsub_template . ' ' . $link_html;
+            }
+            $content .= wp_kses_post($unsub_text);
             $content .= '</p>';
 
             $result = simplekitmailing_send_email($sub->email, $send->subject, $content, $list_id);
@@ -509,6 +509,9 @@ function simplekitmailing_wrap_html_email($subject, $html_content, $list_id = 0)
 add_action('wp_ajax_simplekitmailing_process_batch', 'simplekitmailing_ajax_process_batch');
 function simplekitmailing_ajax_process_batch() {
     check_ajax_referer('simplekitmailing_process_batch');
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error();
+    }
 
     global $wpdb;
     $table_messages = $wpdb->prefix . 'sm_messages';

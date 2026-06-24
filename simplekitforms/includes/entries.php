@@ -23,15 +23,16 @@ function simplekitforms_entries_subpage() {
 add_action('admin_init', 'simplekitforms_handle_csv_export');
 
 function simplekitforms_handle_csv_export() {
-    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- admin page URL parameter, no nonce needed.
     if (!isset($_GET['page']) || sanitize_text_field(wp_unslash($_GET['page'])) !== 'simplekitforms-entries') {
         return;
     }
-    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- admin page URL parameter, no nonce needed.
     if (!isset($_GET['export']) || sanitize_text_field(wp_unslash($_GET['export'])) !== 'csv') {
         return;
     }
     if (!current_user_can('manage_options')) {
+        wp_die('Access denied.');
+    }
+    if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'simplekitforms_csv_export')) {
         wp_die('Access denied.');
     }
 
@@ -356,7 +357,7 @@ function simplekitforms_page_entries() {
         <h1><?php echo esc_html(sprintf('Responses: %s', $form->title)); ?></h1>
         <p>
             <a href="<?php echo esc_url(admin_url('admin.php?page=simplekitforms')); ?>" class="button">Back to forms list</a>
-            <a href="<?php echo esc_url(add_query_arg('export', 'csv')); ?>" class="button button-primary">Export CSV</a>
+            <a href="<?php echo esc_url(wp_nonce_url(add_query_arg('export', 'csv'), 'simplekitforms_csv_export')); ?>" class="button button-primary">Export CSV</a>
         </p>
         <hr class="wp-header-end">
 

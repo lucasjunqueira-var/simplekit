@@ -9,10 +9,6 @@ function simplekitmailing_page_message() {
         wp_die(esc_html__('Access denied.', 'simplekitmailing'));
     }
 
-    if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'simplekitmailing_display')) {
-        // Silent nonce check: allow fallback to default when nonce absent
-    }
-
     global $wpdb;
     $table_messages = $wpdb->prefix . 'sm_messages';
 
@@ -44,6 +40,13 @@ function simplekitmailing_page_message() {
     }
 
     $lists = simplekitmailing_get_lists();
+
+    // Build a map of list_id => editor CSS for dynamic switching
+    $list_styles = array();
+    foreach ($lists as $list) {
+        $list_styles[(int) $list->id] = simplekitmailing_editor_color_style((int) $list->id);
+    }
+    $selected_list_id = !empty($lists) ? (int) $lists[0]->id : 0;
     ?>
     <div class="wrap">
         <h1><?php esc_html_e('Create Message', 'simplekitmailing'); ?></h1>
@@ -69,10 +72,8 @@ function simplekitmailing_page_message() {
                     <th scope="row"><label for="msg_content"><?php esc_html_e('Email content', 'simplekitmailing'); ?></label></th>
                     <td>
                         <?php
-                        // Use colors from the first list as preview reference
-                        $lists = simplekitmailing_get_lists();
-                        $preview_list_id = !empty($lists) ? (int) $lists[0]->id : 0;
-                        $msg_config = simplekitmailing_editor_config($preview_list_id);
+                        // Use colors from the selected list (or first list) as preview reference
+                        $msg_config = simplekitmailing_editor_config($selected_list_id);
                         $msg_config['textarea_name'] = 'msg_content';
                         wp_editor($saved_content, 'msg_content', $msg_config);
                         ?>
@@ -106,6 +107,48 @@ function simplekitmailing_page_message() {
             </table>
         </form>
     </div>
+
+    <script type="text/javascript">
+    jQuery(document).ready(function($) {
+        var listStyles = <?php echo wp_json_encode($list_styles); ?>;
+
+        function smApplyListStyle(listId) {
+            if (!listId || !listStyles[listId]) return;
+
+            var editor = tinymce.get('msg_content');
+            if (!editor) return;
+
+            var doc = editor.getDoc();
+            if (!doc) return;
+
+            var styleEl = doc.getElementById('sm-list-style');
+            if (!styleEl) {
+                styleEl = doc.createElement('style');
+                styleEl.id = 'sm-list-style';
+                doc.head.appendChild(styleEl);
+            }
+            styleEl.innerHTML = listStyles[listId];
+        }
+
+        // Apply style for the initially selected list
+        var initialListId = parseInt($('#msg_list_id').val(), 10) || <?php echo (int) $selected_list_id; ?>;
+        if (initialListId && listStyles[initialListId]) {
+            // Wait a bit for TinyMCE to fully initialize
+            var checkEditor = setInterval(function() {
+                if (tinymce.get('msg_content')) {
+                    clearInterval(checkEditor);
+                    setTimeout(function() { smApplyListStyle(initialListId); }, 300);
+                }
+            }, 200);
+        }
+
+        // Apply style on list change
+        $('#msg_list_id').on('change', function() {
+            var listId = parseInt($(this).val(), 10);
+            smApplyListStyle(listId);
+        });
+    });
+    </script>
     <?php
 }
 
