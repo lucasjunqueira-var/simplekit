@@ -10,6 +10,8 @@ The kit currently has 4 plugins under development with varying functionalities, 
 
 Create simple forms from your dashboard and quickly embed them into your pages using the block editor. Responses are stored in your own dashboard and can be exported whenever you want.
 
+Check out detailed information about this plugin at [https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitforms](https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitforms)
+
 ### Simple Kit Mailing
 
 Create mailing lists, collect addresses from your visitors, and send small amounts of messages from your own dashboard without needing external services beyond your website's SMTP server. The functionalities of this plugin are quite limited, but it works well for smaller lists and small volumes of mailings.
