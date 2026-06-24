@@ -1,23 +1,18 @@
-# Simple Kit
+# Simple Kit Sharing
 
-Simple Kit is a set of tools focused on bringing simple functionality to WordPress installations. Instead of searching for more complex features, the principle is to have quick and easy-to-configure and use solutions, even if it means limiting the use cases somewhat.
+This plugin has a very specific function: to adjust the icon displayed in browser tabs when your pages are shown, as well as to define the text and image used when someone shares a page from your website on a social network or messaging app. The configuration is simple and can be done both globally and per page/post.
 
-## Plugins
+## Highlights
 
-The kit currently has 4 plugins under development with varying functionalities, all found in this repository. Check out the ones currently under development below.
+- Quick sharing information setup.
+- Global and individual page setup.
 
-### Simple Kit Forms
+## How the plugin works
 
-Create simple forms from your dashboard and quickly embed them into your pages using the block editor. Responses are stored in your own dashboard and can be exported whenever you want.
+After activating the plugin, access the "global" page in the SK Sharing menu. Here you can configure the general sharing settings for your website.
 
-### Simple Kit Mailing
+<img width="1920" height="973" alt="share01" src="https://github.com/user-attachments/assets/bff313ba-79f7-48ac-9156-a88dc7d0919f" />
 
-Create mailing lists, collect addresses from your visitors, and send small amounts of messages from your own dashboard without needing external services beyond your website's SMTP server. The functionalities of this plugin are quite limited, but it works well for smaller lists and small volumes of mailings.
+In addition, in your posts and pages, look for the "Simple Kit Sharing" setting. Any values ​​you enter here will override the global settings.
 
-### Simple Kit QRCode
-
-Create AR Codes that quickly direct visitors to pages and posts on your website, and track access statistics.
-
-### Simple Kit Sharing
-
-Manage the most basic way to share pages on your website: adjust the icon, image, and sharing text, both generally and individually for each page. That's all.
+<img width="1920" height="973" alt="share02" src="https://github.com/user-attachments/assets/fb6f7205-2e89-4871-ab1a-6d99c885c283" />
