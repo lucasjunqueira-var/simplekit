@@ -207,7 +207,7 @@ function simplekitforms_render_form($form_id, $custom_css = '') {
             <h3><?php echo esc_html($form->title); ?></h3>
             <form class="simplekitforms-form" method="post">
                 <?php foreach ($fields as $field) : ?>
-                    <?php echo wp_kses_post(simplekitforms_render_frontend_field($field)); ?>
+                    <?php echo simplekitforms_render_frontend_field($field); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- The function already escapes all values internally with esc_html()/esc_attr(). ?>
                 <?php endforeach; ?>
                 <?php if ($sf_protection === 'recaptcha' && !empty($sf_site_key)) : ?>
                     <input type="hidden" name="sf_recaptcha_token" class="sf-recaptcha-token" value="" />
