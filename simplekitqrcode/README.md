@@ -1,23 +1,32 @@
-# Simple Kit
+# Simple Kit QRCodetra
 
-Simple Kit is a set of tools focused on bringing simple functionality to WordPress installations. Instead of searching for more complex features, the principle is to have quick and easy-to-configure and use solutions, even if it means limiting the use cases somewhat.
+This plugin allows for the quick creation of QR codes that link to posts or pages on your website. Furthermore, it tracks the usage of these codes, keeping an updated list of how many times each one has been used.
 
-## Plugins
+## Highlights
 
-The kit currently has 4 plugins under development with varying functionalities, all found in this repository. Check out the ones currently under development below.
+- Simple and quick generation of QR codes.
+- Monitoring code usage statistics.
 
-### Simple Kit Forms
+## How the plugin works
 
-Create simple forms from your dashboard and quickly embed them into your pages using the block editor. Responses are stored in your own dashboard and can be exported whenever you want.
+After activating the plugin, access the "generate QR code" page from the "SK QRCode" menu. Here, you will see a list of posts and pages published on your website. Simply select one and click the "generate QR code" button.
 
-### Simple Kit Mailing
+<img width="1920" height="973" alt="qrcode01" src="https://github.com/user-attachments/assets/cfc7075e-f8bd-4358-9adc-c04deed0b672" />
 
-Create mailing lists, collect addresses from your visitors, and send small amounts of messages from your own dashboard without needing external services beyond your website's SMTP server. The functionalities of this plugin are quite limited, but it works well for smaller lists and small volumes of mailings.
+The code will be generated, and you can download the image for printing.
 
-### Simple Kit QRCode
+<img width="1920" height="973" alt="qrcode02" src="https://github.com/user-attachments/assets/5ce857c1-4130-4bf5-858f-7f58e2e73b8b" />
 
-Create AR Codes that quickly direct visitors to pages and posts on your website, and track access statistics.
+On the statistics page you can see all the generated chords, the number of times they have been scanned, and the last time someone used them, as well as delete the data for any of them.
 
-### Simple Kit Sharing
+<img width="1920" height="973" alt="qrcode03" src="https://github.com/user-attachments/assets/7792c3e1-da8e-4a28-ac38-8719dd774c70" />
 
-Manage the most basic way to share pages on your website: adjust the icon, image, and sharing text, both generally and individually for each page. That's all.
+## Frequently asked questions
+
+**Does QR code generation use any external service or API?**
+
+No, all image generation is done by the plugin itself. For this, it's important that your web server has the PHP GD2 extension enabled (which is common).
+
+**I lost the QR code image for a page, how do I download it again?**
+
+Simply generate the code for the same page again. The usage statistics for this new code will be added to those you already have recorded for it.
