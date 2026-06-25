@@ -1,4 +1,4 @@
-# Simple Kit QRCodetra
+# Simple Kit QRCode
 
 This plugin allows for the quick creation of QR codes that link to posts or pages on your website. Furthermore, it tracks the usage of these codes, keeping an updated list of how many times each one has been used.
 
