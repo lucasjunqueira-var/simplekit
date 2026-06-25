@@ -39,3 +39,13 @@ When reviewing form responses, you'll immediately see the most recent ones in a 
 Additionally, on the "backup" page you can make a backup copy of all your forms and received responses, which can even be used to import them into another WordPress installation.
 
 <img width="1920" height="973" alt="forms07" src="https://github.com/user-attachments/assets/b7921565-d9a3-4757-90c7-016f733dad28" />
+
+## Frequently asked questions
+
+**How many forms can I register? How many responses can I receive for each one?**
+
+There are no limits to the number of forms and responses received.
+
+**How do I adapt the form display to my page layout?**
+
+When adding a form block to your posts or pages, one of the possible settings is the CSS styles used for rendering. You can adjust this CSS individually per block to suit your needs.
