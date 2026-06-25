@@ -20,6 +20,8 @@ Create mailing lists, collect addresses from your visitors, and send small amoun
 
 Create AR Codes that quickly direct visitors to pages and posts on your website, and track access statistics.
 
+Check out detailed information about this plugin at [https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitqrcode](https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitqrcode)
+
 ### Simple Kit Sharing
 
 Manage the most basic way to share pages on your website: adjust the icon, image, and sharing text, both generally and individually for each page. That's all.
