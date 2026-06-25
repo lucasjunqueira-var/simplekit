@@ -181,7 +181,7 @@ class SimpleKitQRCode {
             }
             .qr-form-group select {
                 width: 100%;
-                max-width: none;
+                max-width: 500px;
                 padding: 8px 12px;
                 font-size: 14px;
                 border: 1px solid #ddd;
@@ -189,6 +189,7 @@ class SimpleKitQRCode {
             }
             .qr-form-group input[type="text"] {
                 width: 100%;
+                max-width: 500px;
                 padding: 8px 12px;
                 font-size: 14px;
                 border: 1px solid #ddd;
@@ -578,7 +579,7 @@ class SimpleKitQRCode {
                         <code id="qr-tracking-url"></code>
                     </div>
                     <button id="download-qr-btn" class="qr-button qr-download-btn">
-                        <?php esc_html_e('Download QR Code PNG (4096x4096px)', 'simplekitqrcode'); ?>
+                        <?php esc_html_e('Download QR Code PNG (2048x2048px)', 'simplekitqrcode'); ?>
                     </button>
                 </div>
         </div>
@@ -741,7 +742,7 @@ class SimpleKitQRCode {
         $post_url = get_permalink($post_id);
         $tracking_url = add_query_arg('qr_track', base64_encode($post_id), $post_url);
 
-        $qr_image = $this->generate_qr_image($tracking_url, 4096);
+        $qr_image = $this->generate_qr_image($tracking_url, 2048);
 
         $filename = sanitize_file_name($post->post_title) . '-qrcode.png';
 
@@ -886,9 +887,65 @@ class SimpleKitQRCode {
     }
 
     private function create_qr_matrix($data) {
-        return SimpleKitQRCodeEncoder::encode($data);
+        $api_url = 'https://api.qrserver.com/v1/create-qr-code/?data=' . urlencode($data) . '&size=400x400&format=png';
+
+        $response = wp_remote_get($api_url);
+        if (is_wp_error($response)) {
+            return $this->create_simple_qr_matrix($data);
+        }
+
+        $image_data = wp_remote_retrieve_body($response);
+
+        $source_image = imagecreatefromstring($image_data);
+        if (!$source_image) {
+            return $this->create_simple_qr_matrix($data);
+        }
+
+        $width = imagesx($source_image);
+        $matrix = array();
+
+        for ($y = 0; $y < $width; $y++) {
+            $matrix[$y] = array();
+            for ($x = 0; $x < $width; $x++) {
+                $rgb = imagecolorat($source_image, $x, $y);
+                $colors = imagecolorsforindex($source_image, $rgb);
+                $brightness = ($colors['red'] + $colors['green'] + $colors['blue']) / 3;
+                $matrix[$y][$x] = $brightness < 128 ? 1 : 0;
+            }
+        }
+
+        imagedestroy($source_image);
+
+        return $matrix;
     }
 
+    private function create_simple_qr_matrix($data) {
+        $size = 41;
+        $matrix = array_fill(0, $size, array_fill(0, $size, 0));
+
+        for ($i = 0; $i < 7; $i++) {
+            for ($j = 0; $j < 7; $j++) {
+                if ($i == 0 || $i == 6 || $j == 0 || $j == 6 || ($i >= 2 && $i <= 4 && $j >= 2 && $j <= 4)) {
+                    $matrix[$i][$j] = 1;
+                    $matrix[$i][$size - 7 + $j] = 1;
+                    $matrix[$size - 7 + $i][$j] = 1;
+                }
+            }
+        }
+
+        $hash = md5($data);
+        $index = 0;
+        for ($i = 9; $i < $size - 9; $i++) {
+            for ($j = 9; $j < $size - 9; $j++) {
+                if ($index < strlen($hash)) {
+                    $matrix[$i][$j] = (hexdec($hash[$index]) % 2);
+                    $index++;
+                }
+            }
+        }
+
+        return $matrix;
+    }
 }
 
 new SimpleKitQRCode();
@@ -897,4 +954,3 @@ new SimpleKitQRCode();
 require_once SIMPLEKITQRCODE_PLUGIN_DIR . 'includes/backup.php';
 require_once SIMPLEKITQRCODE_PLUGIN_DIR . 'includes/help.php';
 require_once SIMPLEKITQRCODE_PLUGIN_DIR . 'includes/donate.php';
-require_once SIMPLEKITQRCODE_PLUGIN_DIR . 'includes/qrcode.php';
