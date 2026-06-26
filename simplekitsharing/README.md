@@ -16,3 +16,9 @@ After activating the plugin, access the "global" page in the SK Sharing menu. He
 In addition, in your posts and pages, look for the "Simple Kit Sharing" setting. Any values ​​you enter here will override the global settings.
 
 <img width="1920" height="973" alt="share02" src="https://github.com/user-attachments/assets/fb6f7205-2e89-4871-ab1a-6d99c885c283" />
+
+## Frequently asked questions
+
+**What are the best image formats for icons and sharing?**
+
+Icons work best with 512x512 pixel PNG images, which can contain transparency. The recommended format for sharing images is 1200x630 pixel JPEGs with a quality of around 60%.
