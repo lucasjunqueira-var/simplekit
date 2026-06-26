@@ -16,6 +16,8 @@ Check out detailed information about this plugin at [https://github.com/lucasjun
 
 Create mailing lists, collect addresses from your visitors, and send small amounts of messages from your own dashboard without needing external services beyond your website's SMTP server. The functionalities of this plugin are quite limited, but it works well for smaller lists and small volumes of mailings.
 
+Check out detailed information about this plugin at [https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitmailing](https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitmailing)
+
 ### Simple Kit QRCode
 
 Create AR Codes that quickly direct visitors to pages and posts on your website, and track access statistics.
