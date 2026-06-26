@@ -7,6 +7,7 @@ Stable tag: 1.0.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Donate link: https://www.paypal.com/donate?token=v4gcsUlC7vfpl1Ah1hB22_b3vEKPPsimiFHbrFsqccIAUPdaYtAy_f_UkJWTT7uoeEfRfX2QRUd8sRaY
 
 Generate QR codes for WordPress posts and pages with download and access tracking.
 
@@ -14,11 +15,24 @@ Generate QR codes for WordPress posts and pages with download and access trackin
 
 Simple Kit QRCode generates QR codes for your WordPress posts and pages, making it easy to share links via print materials, posters, business cards, or any offline medium. Each QR code includes a tracking URL that lets you monitor how many times it has been accessed.
 
-== Installation ==
+== Frequently Asked Questions ==
 
-1. Upload the `simplekitqrcode` folder to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Go to SK QRCode to generate your first QR code.
+* Does QR code generation use any external service or API?
+No, all image generation is done by the plugin itself. For this, it's important that your web server has the PHP GD2 extension enabled (which is common).
 
-= 1.0.0 =
-* Initial release
+* I lost the QR code image for a page, how do I download it again?
+Simply generate the code for the same page again. The usage statistics for this new code will be added to those you already have recorded for it.
+
+== Screenshots ==
+
+1. QR Code creation screen.
+2. QR code available.
+3. Usage statistics.
+
+== Upgrade Notice ==
+
+Initial release.
+
+== Changelog ==
+
+Initial release
