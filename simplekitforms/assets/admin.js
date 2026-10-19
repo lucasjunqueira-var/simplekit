@@ -46,6 +46,7 @@
             'checkboxes': strings.checkboxes || 'Caixas de seleção',
             'radio':      strings.radio || 'Botões de opção',
             'select':     strings.select || 'Lista suspensa',
+            'file':       strings.file || 'Arquivo',
         };
         return labels[type] || strings.text || 'Texto';
     }
@@ -76,6 +77,19 @@
         if (type === 'text' || type === 'textarea') {
             html += '<label>' + (strings.fieldPlaceholder || 'Placeholder') + ': ';
             html += '<input type="text" name="sf_fields[' + idx + '][placeholder]" value="" class="regular-text">';
+            html += '</label>';
+        }
+
+        if (type === 'file') {
+            html += '<label style="display:block;margin-top:8px;">' + (strings.fileDescription || 'Description / instructions') + ': ';
+            html += '<textarea name="sf_fields[' + idx + '][description]" rows="2" class="large-text"></textarea>';
+            html += '</label>';
+            html += '<label>' + (strings.fileMaxSize || 'Maximum size (MB)') + ': ';
+            html += '<input type="number" min="0" step="0.1" name="sf_fields[' + idx + '][max_size_mb]" value="" class="small-text">';
+            html += '</label>';
+            html += '<label style="display:block;margin-top:4px;">' + (strings.fileAllowedExt || 'Allowed extensions') + ': ';
+            html += '<input type="text" name="sf_fields[' + idx + '][allowed_ext]" value="" class="regular-text" placeholder="pdf, jpg, png">';
+            html += '<br><span class="description">' + (strings.fileAllowedHint || 'Comma separated list. Leave empty to accept any file type.') + '</span>';
             html += '</label>';
         }
 

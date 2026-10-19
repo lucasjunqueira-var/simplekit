@@ -1,0 +1,826 @@
+# Copyright (C) 2026 Lucas Junqueira
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Simple Kit Registration 1.3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: simplekitregistration\n"
+
+#: includes/admin-menu.php
+msgid "Forms"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Create form"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Evaluators"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Help"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Backup"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Donate"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Remove this field?"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Label"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Placeholder"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Required"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Options"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Add option"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Remove"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "(no label)"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Configure"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Text"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "E-mail"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Password"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "URL"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Number"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Phone"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Textarea"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Checkboxes"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Radio buttons"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Dropdown"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "File"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Description / instructions"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Maximum size (MB)"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Allowed extensions"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Comma separated list. Leave empty to accept any file type."
+msgstr ""
+
+#: includes/block.php includes/frontend.js
+msgid "Sending..."
+msgstr ""
+
+#: includes/block.php includes/frontend.js
+msgid "Error submitting. Please try again."
+msgstr ""
+
+#: includes/block.php includes/frontend.js
+msgid "Connection error. Please try again."
+msgstr ""
+
+#: includes/forms.php
+msgid "Create new form"
+msgstr ""
+
+#: includes/forms.php
+msgid "Form saved successfully!"
+msgstr ""
+
+#: includes/forms.php
+msgid "Form deleted successfully."
+msgstr ""
+
+#: includes/forms.php
+msgid "Form title"
+msgstr ""
+
+#: includes/forms.php
+msgid "Form code"
+msgstr ""
+
+#: includes/forms.php
+msgid "Alphanumeric identifier without spaces or special characters. It is used as the name of the folder that stores the uploaded files."
+msgstr ""
+
+#: includes/forms.php
+msgid "Thank you message"
+msgstr ""
+
+#: includes/forms.php
+msgid "Displayed after the visitor submits the form."
+msgstr ""
+
+#: includes/forms.php
+msgid "Submit button text"
+msgstr ""
+
+#: includes/forms.php
+msgid "Field palette"
+msgstr ""
+
+#: includes/forms.php
+msgid "Click a field to add it to the form. Drag to reorder."
+msgstr ""
+
+#: includes/forms.php
+msgid "Form fields"
+msgstr ""
+
+#: includes/forms.php
+msgid "No fields added. Click the palette buttons above to add fields."
+msgstr ""
+
+#: includes/forms.php
+msgid "Save form"
+msgstr ""
+
+#: includes/forms.php
+msgid "Edit form"
+msgstr ""
+
+#: includes/forms.php
+msgid "The form title is required."
+msgstr ""
+
+#: includes/forms.php
+msgid "The form code is required and must contain letters or digits."
+msgstr ""
+
+#: includes/forms.php
+msgid "Another form already uses this code."
+msgstr ""
+
+#: includes/forms.php
+msgid "The form code cannot be changed because this form already has responses."
+msgstr ""
+
+#: includes/forms.php
+msgid "Unable to save the form."
+msgstr ""
+
+#: includes/forms.php
+msgid "The changes were not stored."
+msgstr ""
+
+#: includes/forms.php
+msgid "No forms found."
+msgstr ""
+
+#: includes/forms.php
+msgid "Title"
+msgstr ""
+
+#: includes/forms.php
+msgid "Created at"
+msgstr ""
+
+#: includes/forms.php
+msgid "Actions"
+msgstr ""
+
+#: includes/forms.php
+msgid "Edit"
+msgstr ""
+
+#: includes/forms.php
+msgid "Responses"
+msgstr ""
+
+#: includes/forms.php
+msgid "Delete"
+msgstr ""
+
+#: includes/forms.php
+msgid "Are you sure you want to delete this form? All responses and uploaded files will also be removed."
+msgstr ""
+
+#: includes/entries.php
+msgid "Response not found."
+msgstr ""
+
+#: includes/entries.php
+msgid "Response deleted successfully."
+msgstr ""
+
+#: includes/entries.php
+msgid "Error deleting response."
+msgstr ""
+
+#: includes/entries.php
+msgid "Invalid response."
+msgstr ""
+
+#: includes/entries.php
+msgid "Invalid form."
+msgstr ""
+
+#: includes/entries.php
+msgid "Invalid parameters."
+msgstr ""
+
+#: includes/entries.php
+msgid "No responses to keep."
+msgstr ""
+
+#: includes/entries.php
+msgid "Back to forms list"
+msgstr ""
+
+#: includes/entries.php
+msgid "Export CSV"
+msgstr ""
+
+#: includes/entries.php
+msgid "No responses received for this form."
+msgstr ""
+
+#: includes/entries.php
+msgid "Details"
+msgstr ""
+
+#: includes/entries.php
+msgid "Bulk actions"
+msgstr ""
+
+#: includes/entries.php
+msgid "Date/Time"
+msgstr ""
+
+#: includes/entries.php
+msgid "Response details"
+msgstr ""
+
+#: includes/entries.php
+msgid "Are you sure you want to delete this response? Uploaded files will also be removed."
+msgstr ""
+
+#: includes/entries.php
+msgid "Are you sure you want to delete ALL responses for this form? Uploaded files will also be removed."
+msgstr ""
+
+#: includes/entries.php
+msgid "This will delete all responses except the most recent ones. Are you sure?"
+msgstr ""
+
+#: includes/entries.php
+msgid "Please select a date."
+msgstr ""
+
+#: includes/entries.php
+msgid "This will delete all responses before the selected date. Are you sure?"
+msgstr ""
+
+#: includes/entries.php
+msgid "Loading..."
+msgstr ""
+
+#: includes/entries.php
+msgid "Error loading details."
+msgstr ""
+
+#: includes/entries.php includes/messages.php
+msgid "Messages"
+msgstr ""
+
+#: includes/messages.php
+msgid "No messages yet."
+msgstr ""
+
+#: includes/messages.php
+msgid "Write a message"
+msgstr ""
+
+#: includes/messages.php
+msgid "Send message"
+msgstr ""
+
+#: includes/messages.php
+msgid "Please write a message before sending."
+msgstr ""
+
+#: includes/messages.php
+msgid "The message could not be saved."
+msgstr ""
+
+#: includes/messages.php
+msgid "Message sent."
+msgstr ""
+
+#: includes/evaluators.php
+msgid "Evaluators are not WordPress users. They log in with the e-mail and password registered here to review the responses of the selected forms on the restricted pages of your site."
+msgstr ""
+
+#: includes/evaluators.php
+msgid "Add evaluator"
+msgstr ""
+
+#: includes/evaluators.php
+msgid "Leave blank to keep the current password."
+msgstr ""
+
+#: includes/evaluators.php
+msgid "Allowed forms"
+msgstr ""
+
+#: includes/evaluators.php
+msgid "Save evaluator"
+msgstr ""
+
+#: includes/evaluators.php
+msgid "Registered evaluators"
+msgstr ""
+
+#: includes/evaluators.php
+msgid "No evaluators registered."
+msgstr ""
+
+#: includes/evaluators.php
+msgid "None"
+msgstr ""
+
+#: includes/evaluators.php
+msgid "A password is required for a new evaluator."
+msgstr ""
+
+#: includes/evaluators.php
+msgid "Please provide a valid e-mail address."
+msgstr ""
+
+#: includes/evaluators.php
+msgid "Another evaluator already uses this e-mail address."
+msgstr ""
+
+#: includes/evaluators.php
+msgid "The evaluator could not be saved."
+msgstr ""
+
+#: includes/evaluators.php
+msgid "Evaluator saved successfully."
+msgstr ""
+
+#: includes/evaluators.php
+msgid "Evaluator deleted successfully."
+msgstr ""
+
+#: includes/evaluators.php
+msgid "Delete this evaluator?"
+msgstr ""
+
+#: includes/submit.php
+msgid "Invalid request. Please reload the page and try again."
+msgstr ""
+
+#: includes/submit.php includes/frontend.php
+msgid "Form not found."
+msgstr ""
+
+#: includes/submit.php
+msgid "Validation failed."
+msgstr ""
+
+#: includes/submit.php
+msgid "Error saving your response. Please try again."
+msgstr ""
+
+#: includes/submit.php
+msgid "Thank you! Your registration has been submitted successfully."
+msgstr ""
+
+#: includes/uploads.php
+msgid "The file for \"%s\" could not be uploaded. Please try again."
+msgstr ""
+
+#: includes/uploads.php
+msgid "The file for \"%1$s\" exceeds the maximum size of %2$s MB."
+msgstr ""
+
+#: includes/uploads.php
+msgid "The file for \"%1$s\" has a type that is not allowed. Allowed extensions: %2$s."
+msgstr ""
+
+#: includes/uploads.php
+msgid "The file for \"%s\" could not be stored on the server."
+msgstr ""
+
+#: includes/frontend.php
+msgid "Evaluator access"
+msgstr ""
+
+#: includes/frontend.php
+msgid "Invalid e-mail or password. Please try again."
+msgstr ""
+
+#: includes/frontend.php
+msgid "Log in"
+msgstr ""
+
+#: includes/frontend.php
+msgid "Available forms"
+msgstr ""
+
+#: includes/frontend.php
+msgid "Logged in as %s"
+msgstr ""
+
+#: includes/frontend.php
+msgid "Log out"
+msgstr ""
+
+#: includes/frontend.php
+msgid "No forms are available for your account."
+msgstr ""
+
+#: includes/frontend.php
+msgid "You are not allowed to view the responses of this form."
+msgstr ""
+
+#: includes/frontend.php
+msgid "No responses received yet."
+msgstr ""
+
+#: includes/frontend.php
+msgid "Page %1$d of %2$d"
+msgstr ""
+
+#: includes/frontend.php
+msgid "You must log in to view this response."
+msgstr ""
+
+#: includes/frontend.php
+msgid "You are not allowed to view this response."
+msgstr ""
+
+#: includes/frontend.php
+msgid "The requested response does not exist."
+msgstr ""
+
+#: includes/frontend.php
+msgid "Close this tab"
+msgstr ""
+
+#: includes/frontend.php
+msgid "Access denied"
+msgstr ""
+
+#: includes/frontend.php
+msgid "Response not found"
+msgstr ""
+
+#: includes/frontend.php
+msgid "Select"
+msgstr ""
+
+#: includes/backup.php
+msgid "Backup file generated successfully."
+msgstr ""
+
+#: includes/backup.php
+msgid "Failed to generate the backup file."
+msgstr ""
+
+#: includes/backup.php
+msgid "Error uploading the backup file."
+msgstr ""
+
+#: includes/backup.php
+msgid "Invalid backup file. The file structure does not match the expected format."
+msgstr ""
+
+#: includes/backup.php
+msgid "Backup imported successfully. All previous data has been replaced."
+msgstr ""
+
+#: includes/backup.php
+msgid "Export backup"
+msgstr ""
+
+#: includes/backup.php
+msgid "Import backup"
+msgstr ""
+
+#: includes/help.php
+msgid "This is a free plugin. If you find its features useful, please consider making a donation of any amount to its creator. To do so, Please access the Donate sub menu."
+msgstr ""
+
+#: includes/help.php
+msgid "This is a free plugin. If you find its features useful, please consider making a donation of any amount to its creator, Lucas Junqueira. To do so, use the form below to donate via PayPal."
+msgstr ""
+
+#: includes/help.php
+msgid "Thank you for your support!"
+msgstr ""
+
+#: includes/frontend.php
+msgid "Form:"
+msgstr ""
+
+#: includes/frontend.php
+msgid "Back to forms"
+msgstr ""
+
+#: includes/frontend.php
+msgid "No responses received yet."
+msgstr ""
+
+#: includes/frontend.php
+msgid "ID"
+msgstr ""
+
+# ---------------------------------------------------------------------------
+# Settings page (evaluator-facing texts)
+# ---------------------------------------------------------------------------
+
+#: includes/settings.php
+msgid "Settings"
+msgstr ""
+
+#: includes/settings.php
+msgid "Customize the texts displayed to the evaluators on the restricted pages of your site (login, form list, responses list, response details and messages) and the texts used in the export spreadsheets. These settings apply globally. Leave a field empty to restore its default text."
+msgstr ""
+
+#: includes/settings.php
+msgid "Export spreadsheets"
+msgstr ""
+
+#: includes/settings.php
+msgid "Responses CSV: ID column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Responses CSV: IP column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Responses CSV: Date/Time column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Form backup CSV: Record column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Form backup CSV: Response ID column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Form backup CSV: IP column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Form backup CSV: response Date/Time column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Form backup CSV: message author column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Form backup CSV: message e-mail column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Form backup CSV: message text column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Form backup CSV: message Date/Time column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Form backup CSV: label of the response rows"
+msgstr ""
+
+#: includes/settings.php
+msgid "Form backup CSV: label of the message rows"
+msgstr ""
+
+#: includes/settings.php
+msgid "Login"
+msgstr ""
+
+#: includes/settings.php
+msgid "Page heading"
+msgstr ""
+
+#: includes/settings.php
+msgid "E-mail field label"
+msgstr ""
+
+#: includes/settings.php
+msgid "Password field label"
+msgstr ""
+
+#: includes/settings.php
+msgid "Login button text"
+msgstr ""
+
+#: includes/settings.php
+msgid "Invalid credentials message"
+msgstr ""
+
+#: includes/settings.php
+msgid "Form list"
+msgstr ""
+
+#: includes/settings.php
+msgid "Logged in as"
+msgstr ""
+
+#: includes/settings.php
+msgid "Log out link"
+msgstr ""
+
+#: includes/settings.php
+msgid "Message when there are no forms"
+msgstr ""
+
+#: includes/settings.php
+msgid "Responses list"
+msgstr ""
+
+#: includes/settings.php
+msgid "Back link"
+msgstr ""
+
+#: includes/settings.php
+msgid "Message when there are no responses"
+msgstr ""
+
+#: includes/settings.php
+msgid "ID column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Date/Time column"
+msgstr ""
+
+#: includes/settings.php
+msgid "Details link"
+msgstr ""
+
+#: includes/settings.php
+msgid "Pagination label"
+msgstr ""
+
+#: includes/settings.php
+msgid "Response details"
+msgstr ""
+
+#: includes/settings.php
+msgid "Page title"
+msgstr ""
+
+#: includes/settings.php
+msgid "Form label"
+msgstr ""
+
+#: includes/settings.php
+msgid "Response heading"
+msgstr ""
+
+#: includes/settings.php
+msgid "Close link"
+msgstr ""
+
+#: includes/settings.php
+msgid "Messages"
+msgstr ""
+
+#: includes/settings.php
+msgid "Section heading"
+msgstr ""
+
+#: includes/settings.php
+msgid "Message when there are no messages"
+msgstr ""
+
+#: includes/settings.php
+msgid "Textarea label"
+msgstr ""
+
+#: includes/settings.php
+msgid "Send button"
+msgstr ""
+
+#: includes/settings.php
+msgid "Empty message error"
+msgstr ""
+
+#: includes/settings.php
+msgid "Use %s for the evaluator e-mail address."
+msgstr ""
+
+#: includes/settings.php
+msgid "Use %s for the form title."
+msgstr ""
+
+#: includes/settings.php
+msgid "Use %d for the response ID."
+msgstr ""
+
+#: includes/settings.php
+msgid "Use %1$d for the current page and %2$d for the total number of pages."
+msgstr ""
+
+# ---------------------------------------------------------------------------
+# Backup page: individual form backup
+# ---------------------------------------------------------------------------
+
+#: includes/backup.php
+msgid "Individual form backup"
+msgstr ""
+
+#: includes/backup.php
+msgid "Export a ZIP file with the selected form only. The ZIP contains a CSV spreadsheet with all the responses and all the messages of the form, plus the complete upload folder with the files of every response. This export cannot be imported back."
+msgstr ""
+
+#: includes/backup.php
+msgid "-- Select form --"
+msgstr ""
+
+#: includes/backup.php
+msgid "Export form backup"
+msgstr ""
+
+#: includes/backup.php
+msgid "Download form backup"
+msgstr ""
+
+#: includes/backup.php
+msgid "Individual backup generated successfully."
+msgstr ""
+
+#: includes/backup.php
+msgid "Failed to generate the backup file. Make sure the ZIP extension is available on this server."
+msgstr ""
+
+#: includes/backup.php
+msgid "Unable to generate the backup file. The ZIP extension may not be available on this server."
+msgstr ""
+
+#: includes/backup.php
+msgid "Generate a ZIP file containing all the plugin data (forms, responses, messages and evaluators) and all uploaded files. The file is saved in the WordPress uploads directory and its download starts automatically."
+msgstr ""

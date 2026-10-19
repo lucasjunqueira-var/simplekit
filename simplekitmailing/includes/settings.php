@@ -113,6 +113,218 @@ function simplekitmailing_get_email_h4_color($list_id = 0) {
 }
 
 /**
+ * Parse a comma, semicolon or space separated list of hex colors.
+ *
+ * @param mixed $value Raw value.
+ * @return string[] Normalized uppercase hex colors including "#".
+ */
+function simplekitmailing_parse_hex_color_list($value) {
+    if (!is_string($value)) {
+        return array();
+    }
+
+    $colors = array();
+    foreach (preg_split('/[\s,;]+/', $value) as $candidate) {
+        $candidate = trim($candidate);
+        if ('' === $candidate) {
+            continue;
+        }
+        if ('#' !== substr($candidate, 0, 1)) {
+            $candidate = '#' . $candidate;
+        }
+        $hex = sanitize_hex_color($candidate);
+        if ($hex) {
+            $colors[] = strtoupper($hex);
+        }
+    }
+
+    return array_values(array_unique($colors));
+}
+
+/**
+ * Sanitize a comma, semicolon or space separated list of hex colors.
+ *
+ * Returns a normalized comma-separated string (e.g. "#E14D43, #1E73BE").
+ *
+ * @param mixed $value Raw value.
+ * @return string
+ */
+function simplekitmailing_sanitize_hex_color_list($value) {
+    return implode(', ', simplekitmailing_parse_hex_color_list($value));
+}
+
+/**
+ * Get the custom palette colors configured for a list.
+ *
+ * @param int $list_id List ID.
+ * @return string[] Hex colors including the leading "#".
+ */
+function simplekitmailing_get_editor_custom_colors($list_id = 0) {
+    $raw = simplekitmailing_get_list_setting($list_id, 'editor_colors', 'simplekitmailing_editor_colors', '');
+
+    return simplekitmailing_parse_hex_color_list($raw);
+}
+
+/**
+ * Get every custom palette color configured across all lists.
+ *
+ * The editor on the "Create Message" page is shared by every list, so the
+ * palette needs to contain the custom colors defined for any of them.
+ *
+ * @return string[] Hex colors including the leading "#".
+ */
+function simplekitmailing_get_all_editor_custom_colors() {
+    static $cache = null;
+
+    if (null !== $cache) {
+        return $cache;
+    }
+
+    global $wpdb;
+
+    $colors      = array();
+    $table_lists = $wpdb->prefix . 'sm_lists';
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Settings are read at render time, no cache possible.
+    $rows = $wpdb->get_col($wpdb->prepare('SELECT settings FROM %i', $table_lists));
+
+    if (is_array($rows)) {
+        foreach ($rows as $raw_settings) {
+            $settings = json_decode((string) $raw_settings, true);
+            if (is_array($settings) && !empty($settings['editor_colors'])) {
+                $colors = array_merge($colors, simplekitmailing_parse_hex_color_list($settings['editor_colors']));
+            }
+        }
+    }
+
+    $global_colors = get_option('simplekitmailing_editor_colors', '');
+    if ($global_colors) {
+        $colors = array_merge($colors, simplekitmailing_parse_hex_color_list($global_colors));
+    }
+
+    $cache = array_values(array_unique($colors));
+
+    return $cache;
+}
+
+/**
+ * Build the TinyMCE text color palette.
+ *
+ * The returned array is a flat list of hex values (without "#") and labels,
+ * as expected by TinyMCE's "textcolor_map" option.
+ *
+ * @param int $list_id List ID.
+ * @return array
+ */
+function simplekitmailing_editor_color_map($list_id = 0) {
+    $palette = array();
+
+    // Custom colors configured on the settings page (custom colors come first
+    // so they are always visible in the color picker).
+    foreach (simplekitmailing_get_all_editor_custom_colors() as $custom_color) {
+        $hex = ltrim($custom_color, '#');
+        if ('' === $hex) {
+            continue;
+        }
+        $palette[$hex] = sprintf(
+            /* translators: %s: custom hex color. */
+            __('Custom %s', 'simplekitmailing'),
+            '#' . $hex
+        );
+    }
+
+    // Email template colors configured for the list.
+    $email_colors = array(
+        array(simplekitmailing_get_email_bg_color($list_id), __('Email background', 'simplekitmailing')),
+        array(simplekitmailing_get_email_text_color($list_id), __('Email text', 'simplekitmailing')),
+        array(simplekitmailing_get_email_link_color($list_id), __('Email link', 'simplekitmailing')),
+        array(simplekitmailing_get_email_h1_color($list_id), __('Email heading H1', 'simplekitmailing')),
+        array(simplekitmailing_get_email_h2_color($list_id), __('Email heading H2', 'simplekitmailing')),
+        array(simplekitmailing_get_email_h3_color($list_id), __('Email heading H3', 'simplekitmailing')),
+        array(simplekitmailing_get_email_h4_color($list_id), __('Email heading H4', 'simplekitmailing')),
+    );
+    foreach ($email_colors as $email_color) {
+        $hex = ltrim(simplekitmailing_sanitize_hex_color_list($email_color[0]), '#');
+        if ('' !== $hex && !isset($palette[$hex])) {
+            $palette[$hex] = $email_color[1];
+        }
+    }
+
+    // Colors defined by the active theme (block editor palette), when available.
+    $theme_support = get_theme_support('editor-color-palette');
+    if (is_array($theme_support) && !empty($theme_support[0]) && is_array($theme_support[0])) {
+        foreach ($theme_support[0] as $theme_color) {
+            if (empty($theme_color['color'])) {
+                continue;
+            }
+            $hex = ltrim(simplekitmailing_sanitize_hex_color_list($theme_color['color']), '#');
+            if ('' === $hex || isset($palette[$hex])) {
+                continue;
+            }
+            $name = !empty($theme_color['name']) ? $theme_color['name'] : '#' . $hex;
+            $palette[$hex] = sprintf(
+                /* translators: %s: color name from the theme palette. */
+                __('Theme: %s', 'simplekitmailing'),
+                $name
+            );
+        }
+    }
+
+    // Default TinyMCE palette (does not override the labels above).
+    $default_palette = array(
+        '000000' => __('Black', 'simplekitmailing'),
+        '993300' => __('Burnt orange', 'simplekitmailing'),
+        '333300' => __('Dark olive', 'simplekitmailing'),
+        '003300' => __('Dark green', 'simplekitmailing'),
+        '003366' => __('Dark azure', 'simplekitmailing'),
+        '000080' => __('Navy blue', 'simplekitmailing'),
+        '333399' => __('Indigo', 'simplekitmailing'),
+        '333333' => __('Very dark gray', 'simplekitmailing'),
+        '800000' => __('Maroon', 'simplekitmailing'),
+        'FF6600' => __('Orange', 'simplekitmailing'),
+        '808000' => __('Olive', 'simplekitmailing'),
+        '008000' => __('Green', 'simplekitmailing'),
+        '008080' => __('Teal', 'simplekitmailing'),
+        '0000FF' => __('Blue', 'simplekitmailing'),
+        '666699' => __('Grayish blue', 'simplekitmailing'),
+        '808080' => __('Gray', 'simplekitmailing'),
+        'FF0000' => __('Red', 'simplekitmailing'),
+        'FF9900' => __('Amber', 'simplekitmailing'),
+        '99CC00' => __('Yellow green', 'simplekitmailing'),
+        '339966' => __('Sea green', 'simplekitmailing'),
+        '33CCCC' => __('Turquoise', 'simplekitmailing'),
+        '3366FF' => __('Royal blue', 'simplekitmailing'),
+        '800080' => __('Purple', 'simplekitmailing'),
+        '999999' => __('Medium gray', 'simplekitmailing'),
+        'FF00FF' => __('Magenta', 'simplekitmailing'),
+        'FFCC00' => __('Gold', 'simplekitmailing'),
+        'FFFF00' => __('Yellow', 'simplekitmailing'),
+        '00FF00' => __('Lime', 'simplekitmailing'),
+        '00FFFF' => __('Aqua', 'simplekitmailing'),
+        'FFFFFF' => __('White', 'simplekitmailing'),
+    );
+    foreach ($default_palette as $hex => $label) {
+        if (!isset($palette[$hex])) {
+            $palette[$hex] = $label;
+        }
+    }
+
+    $map = array();
+    foreach ($palette as $hex => $label) {
+        $map[] = $hex;
+        $map[] = $label;
+    }
+
+    /**
+     * Filter the TinyMCE text color palette used by the plugin editors.
+     *
+     * @param array $map     Flat list of hex values and labels.
+     * @param int   $list_id List ID.
+     */
+    return apply_filters('simplekitmailing_editor_color_map', $map, $list_id);
+}
+
+/**
  * Generate editor content_style reflecting the current color settings.
  */
 function simplekitmailing_editor_color_style($list_id) {
@@ -135,13 +347,18 @@ function simplekitmailing_editor_color_style($list_id) {
  * Build tinymce config array with color-aware content_style.
  */
 function simplekitmailing_editor_config($list_id) {
+    $color_map = simplekitmailing_editor_color_map($list_id);
+
     return array(
         'textarea_name' => '', // must be overridden per editor
         'teeny'         => false,
         'media_buttons' => true,
         'textarea_rows' => 15,
         'tinymce'       => array(
-            'content_style' => simplekitmailing_editor_color_style($list_id),
+            'content_style'  => simplekitmailing_editor_color_style($list_id),
+            'textcolor_map'  => wp_json_encode($color_map),
+            // Make sure every palette color is visible (8 colors per row).
+            'textcolor_rows' => max(5, (int) ceil((count($color_map) / 2) / 8)),
         ),
     );
 }
@@ -195,6 +412,7 @@ function simplekitmailing_page_settings() {
                     'email_h2_color'      => sanitize_hex_color(wp_unslash($_POST['email_h2_color'] ?? '#222222')),
                     'email_h3_color'      => sanitize_hex_color(wp_unslash($_POST['email_h3_color'] ?? '#333333')),
                     'email_h4_color'      => sanitize_hex_color(wp_unslash($_POST['email_h4_color'] ?? '#444444')),
+                    'editor_colors'       => simplekitmailing_sanitize_hex_color_list(wp_unslash($_POST['editor_colors'] ?? '')),
                     'block_title'         => sanitize_text_field(wp_unslash($_POST['block_title'] ?? '')),
                     'email_placeholder'   => sanitize_text_field(wp_unslash($_POST['email_placeholder'] ?? '')),
                     'name_placeholder'    => sanitize_text_field(wp_unslash($_POST['name_placeholder'] ?? '')),
@@ -427,6 +645,13 @@ function simplekitmailing_page_settings() {
                                 <tr>
                                     <td class="sm-color-label"><label for="email_h4_color"><?php esc_html_e('Heading H4:', 'simplekitmailing'); ?></label></td>
                                     <td><input type="text" id="email_h4_color" name="email_h4_color" value="<?php echo esc_attr($v('email_h4_color', '', '#444444')); ?>" class="simplekitmailing-color-picker" data-default-color="#444444" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="sm-color-label"><label for="editor_colors"><?php esc_html_e('Editor palette:', 'simplekitmailing'); ?></label></td>
+                                    <td>
+                                        <input type="text" id="editor_colors" name="editor_colors" value="<?php echo esc_attr($v('editor_colors', 'simplekitmailing_editor_colors', '')); ?>" class="regular-text" placeholder="#e14d43, #1e73be" />
+                                        <p class="description"><?php esc_html_e('Optional. Comma-separated hex colors (e.g. #e14d43, #1e73be) that will be pre-defined in the text color palette of the message editor.', 'simplekitmailing'); ?></p>
+                                    </td>
                                 </tr>
                             </table>
                         </td>

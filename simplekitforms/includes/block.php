@@ -194,6 +194,15 @@ function simplekitforms_render_form($form_id, $custom_css = '') {
     // Use custom CSS if provided, otherwise fall back to the default
     $css = !empty($custom_css) ? wp_strip_all_tags($custom_css) : simplekitforms_get_default_css();
 
+    // A form with file fields always uses multipart/form-data.
+    $has_files = false;
+    foreach ($fields as $field) {
+        if (($field['type'] ?? '') === 'file') {
+            $has_files = true;
+            break;
+        }
+    }
+
     ob_start();
 
     $sf_protection = simplekitforms_get_protection();
@@ -205,7 +214,7 @@ function simplekitforms_render_form($form_id, $custom_css = '') {
         </style>
         <div class="sf-form-wrapper">
             <h3><?php echo esc_html($form->title); ?></h3>
-            <form class="simplekitforms-form" method="post">
+            <form class="simplekitforms-form" method="post" <?php echo $has_files ? 'enctype="multipart/form-data"' : ''; ?>>
                 <?php foreach ($fields as $field) : ?>
                     <?php echo simplekitforms_render_frontend_field($field); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- The function already escapes all values internally with esc_html()/esc_attr(). ?>
                 <?php endforeach; ?>
@@ -343,6 +352,23 @@ function simplekitforms_render_frontend_field($field) {
                 $html .= '<input type="radio" name="' . esc_attr($name) . '" value="' . esc_attr($opt) . '" ' . ($required ? 'required' : '') . '>';
                 $html .= ' ' . esc_html($opt);
                 $html .= '</label>';
+            }
+            break;
+
+        case 'file':
+            $allowed = simplekitforms_allowed_extensions($field['allowed_ext'] ?? '');
+            $accept  = '';
+            if (!empty($allowed)) {
+                $accept_values = [];
+                foreach ($allowed as $extension) {
+                    $accept_values[] = '.' . $extension;
+                }
+                $accept = ' accept="' . esc_attr(implode(',', $accept_values)) . '"';
+            }
+            $html .= '<label for="sf-' . esc_attr($name) . '">' . esc_html($label) . $required_mark . '</label>';
+            $html .= '<input type="file" id="sf-' . esc_attr($name) . '" name="' . esc_attr($name) . '"' . $accept . ' ' . ($required ? 'required' : '') . '>';
+            if (!empty($field['description'])) {
+                $html .= '<p class="sf-field-description">' . esc_html($field['description']) . '</p>';
             }
             break;
 

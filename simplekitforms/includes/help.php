@@ -21,7 +21,7 @@ function simplekitforms_page_help() {
             <h3 style="color:#1d2327;">How to use</h3>
             <p>
                 <strong>Creating a form</strong><br />
-                Go to <em>SK Forms &rarr; Create form</em>, give your form a title, and start adding fields from the palette. You can add text fields, email, textarea, checkboxes, radio buttons, and dropdowns. Drag to reorder fields as needed.
+                Go to <em>SK Forms &rarr; Create form</em>, give your form a title, and start adding fields from the palette. You can add text fields, email, textarea, checkboxes, radio buttons, dropdowns and file uploads (each file field can define instructions, a maximum size in MB and an optional list of allowed extensions). Drag to reorder fields as needed.
             </p>
             <p>
                 <strong>Displaying a form</strong><br />

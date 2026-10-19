@@ -1,0 +1,90 @@
+/* Simple Kit Registration - Admin styles */
+
+.sf-palette {
+    margin: 10px 0 20px;
+}
+
+.sf-palette .button {
+    margin: 0 6px 6px 0;
+}
+
+.sf-fields-container {
+    margin-top: 10px;
+}
+
+.sf-field-row {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.sf-field-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+}
+
+.sf-field-header .sf-drag-handle {
+    cursor: move;
+    color: #8c8f94;
+}
+
+.sf-field-type-label {
+    min-width: 110px;
+}
+
+.sf-field-label-preview {
+    flex: 1;
+    color: #50575e;
+    font-style: italic;
+}
+
+.sf-field-config {
+    border-top: 1px solid #f0f0f1;
+    padding: 12px;
+    background: #f9f9f9;
+}
+
+.sf-field-config label {
+    display: inline-block;
+    margin: 0 14px 8px 0;
+    vertical-align: top;
+}
+
+.sf-field-config .description {
+    display: block;
+    font-size: 12px;
+    color: #646970;
+}
+
+.sf-options-group {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #dcdcde;
+}
+
+.sf-option-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.sf-option-row .sf-option-drag-handle {
+    cursor: move;
+    color: #8c8f94;
+}
+
+.sf-field-row.ui-sortable-placeholder,
+.sf-option-placeholder {
+    border: 1px dashed #72aee6;
+    background: #f0f6fc;
+    visibility: visible !important;
+    height: 48px;
+}
+
+#sf-no-fields {
+    margin-top: 6px;
+}

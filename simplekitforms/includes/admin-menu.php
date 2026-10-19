@@ -118,6 +118,11 @@ function simplekitforms_admin_assets($hook) {
             'checkboxes'       => 'Checkboxes',
             'radio'            => 'Radio buttons',
             'select'           => 'Dropdown',
+            'file'             => 'File',
+            'fileDescription'  => 'Description / instructions',
+            'fileMaxSize'      => 'Maximum size (MB)',
+            'fileAllowedExt'   => 'Allowed extensions',
+            'fileAllowedHint'  => 'Comma separated list. Leave empty to accept any file type.',
         ],
     ]);
 }

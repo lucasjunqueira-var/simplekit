@@ -5,7 +5,7 @@
  * Description: Manage social sharing meta tags (Open Graph, Twitter Cards) for pages and posts.
  * Version:     1.0.0
  * Requires at least: 6.8
- * Tested up to: 7.0
+ * Tested up to: 7.1
  * Requires PHP: 7.4
  * Author:      Lucas Junqueira
  * License:     GPLv2 or later

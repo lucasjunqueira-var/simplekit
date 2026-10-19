@@ -5,7 +5,7 @@
  * Description: Generate QR codes for posts and pages with access tracking.
  * Version:     1.0.0
  * Requires at least: 6.8
- * Tested up to: 7.0
+ * Tested up to: 7.1
  * Requires PHP: 7.4
  * Author:      Lucas Junqueira
  * License:     GPLv2 or later

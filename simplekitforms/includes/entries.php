@@ -81,7 +81,13 @@ function simplekitforms_handle_csv_export() {
         $data = json_decode($entry->data_json, true) ?: [];
         $row = [$entry->id];
         foreach ($fields as $field) {
-            $row[] = simplekitforms_format_field_value($data[$field['name'] ?? ''] ?? '', $field);
+            $field_name = $field['name'] ?? '';
+            $value      = $data[$field_name] ?? '';
+            if (simplekitforms_is_file_value($value)) {
+                $row[] = str_replace('&', '&', simplekitforms_file_download_url($entry->id, $field_name));
+            } else {
+                $row[] = simplekitforms_format_field_value($value, $field);
+            }
         }
         $row[] = $entry->ip;
         $row[] = $entry->created_at;
@@ -136,7 +142,9 @@ function simplekitforms_ajax_get_entry() {
         $value = $data[$field['name'] ?? ''] ?? '';
         $html .= '<tr>';
         $html .= '<th style="text-align:left;padding:8px;width:30%;vertical-align:top;">' . esc_html($label) . '</th>';
-        if (is_array($value)) {
+        if (simplekitforms_is_file_value($value)) {
+            $formatted = simplekitforms_file_value_html($value, $entry->id, $field['name'] ?? '');
+        } elseif (is_array($value)) {
             $formatted = implode('<br>', array_map('esc_html', $value));
         } else {
             $formatted = esc_html((string) $value);
@@ -165,6 +173,26 @@ function simplekitforms_ajax_get_entry() {
 }
 
 // ---------------------------------------------------------------------------
+// Delete a response and its uploaded files
+// ---------------------------------------------------------------------------
+function simplekitforms_delete_entry($entry_id) {
+    global $wpdb;
+    $entry_id = (int) $entry_id;
+    $table    = simplekitforms_get_entries_table();
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
+    $entry = $wpdb->get_row($wpdb->prepare('SELECT * FROM %i WHERE id = %d', $table, $entry_id));
+    if (!$entry) {
+        return false;
+    }
+
+    simplekitforms_delete_entry_files($entry->form_id, $entry_id);
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+    return (bool) $wpdb->delete($table, ['id' => $entry_id], ['%d']);
+}
+
+// ---------------------------------------------------------------------------
 // AJAX: excluir uma resposta individual
 // ---------------------------------------------------------------------------
 add_action('wp_ajax_simplekitforms_delete_entry', 'simplekitforms_ajax_delete_entry');
@@ -180,10 +208,7 @@ function simplekitforms_ajax_delete_entry() {
         wp_send_json_error(['message' => 'Invalid response.']);
     }
 
-    global $wpdb;
-    $table = simplekitforms_get_entries_table();
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-    $deleted = $wpdb->delete($table, ['id' => $entry_id], ['%d']);
+    $deleted = simplekitforms_delete_entry($entry_id);
 
     if ($deleted) {
         wp_send_json_success(['message' => 'Response deleted successfully.']);
@@ -210,6 +235,10 @@ function simplekitforms_ajax_delete_all_entries() {
 
     global $wpdb;
     $table = simplekitforms_get_entries_table();
+
+    // Remove the uploaded files of every response of this form.
+    simplekitforms_delete_form_files($form_id);
+
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     $deleted = $wpdb->delete($table, ['form_id' => $form_id], ['%d']);
 
@@ -249,8 +278,19 @@ function simplekitforms_ajax_keep_recent_entries() {
         wp_send_json_error(['message' => 'No entries to keep.']);
     }
 
-    // Delete all entries NOT in the keep list
+    // Remove the uploaded files of every response that will be deleted.
     $ids_placeholder = implode(',', array_fill(0, count($keep_ids), '%d'));
+    // phpcs:disable WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber
+    $delete_ids = $wpdb->get_col($wpdb->prepare(
+        "SELECT id FROM %i WHERE form_id = %d AND id NOT IN ($ids_placeholder)",
+        array_merge([$table, $form_id], $keep_ids)
+    ));
+    // phpcs:enable
+    foreach ($delete_ids as $delete_id) {
+        simplekitforms_delete_entry_files($form_id, (int) $delete_id);
+    }
+
+    // Delete all entries NOT in the keep list
     // phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber
     $deleted = $wpdb->query($wpdb->prepare(
         "DELETE FROM %i WHERE form_id = %d AND id NOT IN ($ids_placeholder)",
@@ -280,6 +320,19 @@ function simplekitforms_ajax_delete_entries_before_date() {
 
     global $wpdb;
     $table = simplekitforms_get_entries_table();
+
+    // Remove the uploaded files of the responses that will be deleted.
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
+    $delete_ids = $wpdb->get_col($wpdb->prepare(
+        'SELECT id FROM %i WHERE form_id = %d AND created_at < %s',
+        $table,
+        $form_id,
+        $date . ' 00:00:00'
+    ));
+    foreach ($delete_ids as $delete_id) {
+        simplekitforms_delete_entry_files($form_id, (int) $delete_id);
+    }
+
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     $deleted = $wpdb->query($wpdb->prepare(
         "DELETE FROM %i WHERE form_id = %d AND created_at < %s",
@@ -383,7 +436,7 @@ function simplekitforms_page_entries() {
                         <tr id="sf-entry-row-<?php echo (int) $entry->id; ?>">
                             <td><?php echo (int) $entry->id; ?></td>
                             <?php foreach ($fields as $field) : ?>
-                                <td><?php echo simplekitforms_format_field_value($data[$field['name'] ?? ''] ?? '', $field, 50); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- The function already escapes with esc_html() internally. ?></td>
+                                <td><?php echo simplekitforms_format_field_value($data[$field['name'] ?? ''] ?? '', $field, 50, $entry->id); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- The function already escapes with esc_html() internally. ?></td>
                             <?php endforeach; ?>
                             <td><?php echo esc_html($entry->ip); ?></td>
                             <td><?php echo esc_html($entry->created_at); ?></td>
@@ -614,7 +667,13 @@ function simplekitforms_page_entries() {
 // ---------------------------------------------------------------------------
 // Formatar valor do campo para exibição
 // ---------------------------------------------------------------------------
-function simplekitforms_format_field_value($value, $field, $truncate = 0) {
+function simplekitforms_format_field_value($value, $field, $truncate = 0, $entry_id = 0) {
+    // File values render as a download link and must never be truncated,
+    // otherwise the HTML markup could be broken mid-tag.
+    if (simplekitforms_is_file_value($value)) {
+        return simplekitforms_file_value_html($value, $entry_id, $field['name'] ?? '');
+    }
+
     if (is_array($value)) {
         $formatted = implode(', ', array_map('esc_html', $value));
     } else {
