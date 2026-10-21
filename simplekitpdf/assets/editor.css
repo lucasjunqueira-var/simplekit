@@ -1,0 +1,44 @@
+/**
+ * Simple Kit PDF - block editor styles.
+ */
+
+.simplekitpdf-block-editor .simplekitpdf-media-control {
+    margin-top: 8px;
+}
+
+.simplekitpdf-block-editor .simplekitpdf-file-name {
+    margin: 8px 0 0;
+    font-size: 12px;
+    color: #50575e;
+    word-break: break-word;
+}
+
+.simplekitpdf-block-editor .simplekitpdf-editor-preview-name {
+    font-size: 12px;
+    color: #50575e;
+    word-break: break-all;
+}
+
+.simplekitpdf-block-editor .simplekitpdf-editor-preview-meta {
+    font-size: 12px;
+    color: #3c434a;
+}
+
+.simplekitpdf-block-editor .simplekitpdf-editor-preview-note {
+    font-size: 11px;
+    font-style: italic;
+    color: #787c82;
+}
+
+.simplekitpdf-block-editor .simplekitpdf-placeholder-hint {
+    margin: 0;
+    font-size: 12px;
+    color: #50575e;
+}
+
+.simplekitpdf-block-editor .simplekitpdf-height-note {
+    margin: 8px 0 12px;
+    font-size: 12px;
+    font-style: italic;
+    color: #646970;
+}

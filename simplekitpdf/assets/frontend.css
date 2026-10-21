@@ -1,0 +1,239 @@
+/**
+ * Simple Kit PDF - frontend styles.
+ */
+
+/*
+ * No frame is drawn around the document on purpose: no border, no rounded
+ * corners and no backdrop color, so the pages sit directly on the page
+ * background. Themes can override these rules to restore a frame.
+ */
+.simplekitpdf-embed {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: transparent;
+}
+
+.simplekitpdf-toolbar {
+    flex: 0 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 8px;
+    background: #ffffff;
+    border-bottom: 1px solid #dcdcde;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #2c3338;
+    box-sizing: border-box;
+}
+
+.simplekitpdf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 26px;
+    padding: 0 8px;
+    margin: 0;
+    border: 1px solid #c3c4c7;
+    border-radius: 3px;
+    background: #f6f7f7;
+    color: #2c3338;
+    font-size: 13px;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.simplekitpdf-btn:hover {
+    background: #f0f0f1;
+    border-color: #8c8f94;
+    color: #1d2327;
+}
+
+.simplekitpdf-btn:focus-visible {
+    outline: 2px solid #2271b1;
+    outline-offset: 1px;
+}
+
+.simplekitpdf-btn:disabled {
+    cursor: default;
+    opacity: 0.45;
+}
+
+.simplekitpdf-page {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.simplekitpdf-page-input {
+    width: 52px;
+    height: 26px;
+    padding: 0 4px;
+    border: 1px solid #c3c4c7;
+    border-radius: 3px;
+    background: #ffffff;
+    color: #2c3338;
+    font-size: 13px;
+    line-height: 1;
+    text-align: center;
+    box-sizing: border-box;
+    -moz-appearance: textfield;
+}
+
+.simplekitpdf-page-input::-webkit-outer-spin-button,
+.simplekitpdf-page-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.simplekitpdf-page-count,
+.simplekitpdf-zoom-value {
+    white-space: nowrap;
+    color: #50575e;
+}
+
+.simplekitpdf-zoom-value {
+    min-width: 42px;
+    text-align: center;
+}
+
+.simplekitpdf-spacer {
+    flex: 1 1 auto;
+}
+
+.simplekitpdf-download {
+    background: #2271b1;
+    border-color: #2271b1;
+    color: #ffffff;
+}
+
+.simplekitpdf-download:hover {
+    background: #135e96;
+    border-color: #135e96;
+    color: #ffffff;
+}
+
+/*
+ * The pdf.js PDFViewer component requires its scroll container to be
+ * absolutely positioned, so it lives inside a relative viewport wrapper.
+ */
+.simplekitpdf-viewport {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.simplekitpdf-scroll {
+    position: absolute;
+    inset: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    background: transparent;
+}
+
+.simplekitpdf-scroll:focus-visible {
+    outline: 2px solid #2271b1;
+    outline-offset: -2px;
+}
+
+.simplekitpdf-viewer {
+    position: relative;
+    width: 100%;
+}
+
+.simplekitpdf-scroll .pdfViewer {
+    padding: 8px 0 12px;
+}
+
+/*
+ * pdf.js draws a 9px transparent border around each page (--page-border) and
+ * paints the page background inside it with background-clip: content-box.
+ * Both are neutralized here so no visible edge remains.
+ */
+.simplekitpdf-scroll .pdfViewer .page {
+    margin: 0 auto 10px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.simplekitpdf-status {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    color: #2c3338;
+    background: rgba(255, 255, 255, 0.94);
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.simplekitpdf-status[hidden] {
+    display: none;
+}
+
+.simplekitpdf-noscript {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    color: #2c3338;
+    background: rgba(255, 255, 255, 0.94);
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.simplekitpdf-noscript a {
+    color: #2271b1;
+    text-decoration: underline;
+}
+
+.simplekitpdf-embed-notice {
+    padding: 12px 16px;
+    border: 1px solid #dba617;
+    border-left: 4px solid #dba617;
+    border-radius: 4px;
+    background: #fcf9e8;
+    color: #1d2327;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    .simplekitpdf-toolbar {
+        gap: 3px;
+        padding: 5px 6px;
+        font-size: 12px;
+    }
+
+    .simplekitpdf-btn {
+        min-width: 26px;
+        height: 24px;
+        padding: 0 6px;
+        font-size: 12px;
+    }
+
+    .simplekitpdf-page-input {
+        width: 44px;
+        height: 24px;
+        font-size: 12px;
+    }
+
+    .simplekitpdf-zoom-value {
+        min-width: 34px;
+    }
+}

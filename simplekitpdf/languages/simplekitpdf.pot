@@ -1,0 +1,458 @@
+# Copyright (C) 2026 Lucas Junqueira
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Simple Kit PDF 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/lucasjunqueira-var/simplekit\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-21T17:47:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: manual\n"
+"X-Domain: simplekitpdf\n"
+
+#: includes/admin-menu.php
+#: includes/block.php
+#: assets/block.js
+msgid "Simple Kit PDF"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "SK PDF"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Help"
+msgstr ""
+
+#: includes/admin-menu.php
+#: includes/donate.php
+msgid "Donate"
+msgstr ""
+
+#: includes/help.php
+#: includes/donate.php
+msgid "Access denied."
+msgstr ""
+
+#: includes/help.php
+msgid "Help & Documentation"
+msgstr ""
+
+#: includes/help.php
+msgid "The Simple Kit PDF Plugin"
+msgstr ""
+
+#: includes/help.php
+msgid "This plugin embeds PDF files in posts and pages using pdf.js, the open source PDF viewer maintained by Mozilla. The document is rendered directly in the visitor browser, so no external service is contacted and the file is never uploaded anywhere else."
+msgstr ""
+
+#: includes/help.php
+msgid "Highlights"
+msgstr ""
+
+#: includes/help.php
+msgid "PDF files from the Media Library or from any URL hosted on this site."
+msgstr ""
+
+#: includes/help.php
+msgid "Optional toolbar with page navigation, zoom and fit-to-width controls."
+msgstr ""
+
+#: includes/help.php
+msgid "Optional download button, controlled per block."
+msgstr ""
+
+#: includes/help.php
+msgid "The library only loads on pages that actually contain a PDF block, and only when the block approaches the viewport."
+msgstr ""
+
+#: includes/help.php
+msgid "How the plugin works"
+msgstr ""
+
+#: includes/help.php
+msgid "Edit a post or page and add the block \"Simple Kit PDF\"."
+msgstr ""
+
+#: includes/help.php
+msgid "Choose a PDF from the Media Library, or switch the source to \"Manual URL\" and type a URL for a PDF hosted on this site."
+msgstr ""
+
+#: includes/help.php
+msgid "Adjust the block settings in the sidebar and publish."
+msgstr ""
+
+#: includes/help.php
+msgid "On the frontend the PDF is displayed with pdf.js, occupying the full width of the block."
+msgstr ""
+
+#: includes/help.php
+msgid "Block settings"
+msgstr ""
+
+#: includes/help.php
+msgid "Setting"
+msgstr ""
+
+#: includes/help.php
+msgid "Default"
+msgstr ""
+
+#: includes/help.php
+msgid "Description"
+msgstr ""
+
+#: includes/help.php
+#: assets/block.js
+msgid "Source"
+msgstr ""
+
+#: includes/help.php
+#: assets/block.js
+msgid "Media Library"
+msgstr ""
+
+#: includes/help.php
+msgid "Media Library files keep working when the file is replaced. The manual URL option accepts absolute URLs or paths relative to this site."
+msgstr ""
+
+#: includes/help.php
+#: assets/block.js
+msgid "Height mode"
+msgstr ""
+
+#: includes/help.php
+#: assets/block.js
+msgid "Fixed height"
+msgstr ""
+
+#: includes/help.php
+#: assets/block.js
+msgid "First page"
+msgstr ""
+
+#: includes/help.php
+#: assets/block.js
+msgid "Full document"
+msgstr ""
+
+#: includes/help.php
+msgid "Fixed height keeps the block at the chosen pixel height. First page fits exactly one page. Full document fits every page of the document, including the spacing between them."
+msgstr ""
+
+#: includes/help.php
+#: assets/block.js
+msgid "Fixed height (px)"
+msgstr ""
+
+#: includes/help.php
+msgid "Used by the fixed height mode, between 100 and 2000 pixels. The width always follows the block width."
+msgstr ""
+
+#: includes/help.php
+msgid "The first page and full document modes are measured in the browser after the PDF is loaded, so they follow the current zoom level. The fixed height value is used only while the document is loading, and a long document can make the block very tall."
+msgstr ""
+
+#: includes/help.php
+#: assets/block.js
+msgid "Show toolbar"
+msgstr ""
+
+#: includes/help.php
+msgid "Disabled"
+msgstr ""
+
+#: includes/help.php
+msgid "Shows the controls above the document: previous/next page, page number, zoom, fit width and, optionally, download."
+msgstr ""
+
+#: includes/help.php
+#: assets/block.js
+msgid "Allow download"
+msgstr ""
+
+#: includes/help.php
+msgid "Only available when the toolbar is visible. Adds a download button to the toolbar."
+msgstr ""
+
+#: includes/help.php
+msgid "Same domain requirement"
+msgstr ""
+
+#: includes/help.php
+msgid "Only PDF files hosted on this site can be embedded. URLs pointing to other domains are refused both by the block editor and by the renderer, which prevents the block from being used to frame third-party content."
+msgstr ""
+
+#: includes/help.php
+msgid "About the download control"
+msgstr ""
+
+#: includes/help.php
+msgid "Disabling the download button removes the control and the no-JavaScript fallback link, but it is a display policy, not an access restriction. Any visitor can still read the file URL from the page source, exactly as with an image displayed on the page. If the document must be protected, use a membership or protected-files plugin."
+msgstr ""
+
+#: includes/help.php
+msgid "Troubleshooting"
+msgstr ""
+
+#: includes/help.php
+msgid "The block keeps showing \"Loading PDF...\"."
+msgstr ""
+
+#: includes/help.php
+msgid "The viewer is loaded as a JavaScript module and uses a module worker. Some security plugins and strict Content-Security-Policy rules block module workers. Check the browser console for errors and allow the plugin files (assets/pdfjs/build/pdf.worker.mjs) to be loaded as a script."
+msgstr ""
+
+#: includes/help.php
+msgid "Some characters are missing or replaced in a PDF."
+msgstr ""
+
+#: includes/help.php
+msgid "The plugin ships a reduced pdf.js build without the optional CJK character maps (cmaps) and standard font fallbacks. PDFs that depend on those make the browser substitute glyphs. Embedding the fonts in the PDF avoids the problem."
+msgstr ""
+
+#: includes/help.php
+msgid "Very large files feel slow."
+msgstr ""
+
+#: includes/help.php
+msgid "pdf.js downloads the file in the browser. Prefer optimized PDFs (for example, with compressed images) and avoid files with hundreds of pages on landing pages."
+msgstr ""
+
+#: includes/help.php
+msgid "Library credits"
+msgstr ""
+
+#: includes/help.php
+#. translators: %s: pdf.js version.
+msgid "This plugin bundles pdf.js version %s, developed by Mozilla and contributors."
+msgstr ""
+
+#: includes/help.php
+msgid "Project:"
+msgstr ""
+
+#: includes/help.php
+msgid "License:"
+msgstr ""
+
+#: includes/help.php
+msgid "Appearance"
+msgstr ""
+
+#: includes/help.php
+msgid "The block draws no frame around the document: there is no border, no rounded corners and no backdrop color, so the pages sit directly on the page background. Only the toolbar, when enabled, has a separator line."
+msgstr ""
+
+#: includes/help.php
+msgid "The appearance can be changed from the theme stylesheet or from a custom CSS plugin:"
+msgstr ""
+
+#: includes/donate.php
+msgid "This is a free plugin. If you find its features useful, please consider making a donation of any amount to its creator, Lucas Junqueira. To do so, use the form below to donate via PayPal."
+msgstr ""
+
+#: includes/donate.php
+msgid "Donate with PayPal button"
+msgstr ""
+
+#: includes/donate.php
+msgid "Thank you for your support!"
+msgstr ""
+
+#: includes/donate.php
+msgid "This is a free plugin. If you find its features useful, please consider making a donation of any amount to its creator. To do so, Please access the Donate sub menu."
+msgstr ""
+
+#: includes/block.php
+#: assets/block.js
+msgid "Embeds a PDF file rendered with pdf.js."
+msgstr ""
+
+#: includes/block.php
+msgid "PDF controls"
+msgstr ""
+
+#: includes/block.php
+msgid "Previous page"
+msgstr ""
+
+#: includes/block.php
+msgid "Page number"
+msgstr ""
+
+#: includes/block.php
+msgid "Next page"
+msgstr ""
+
+#: includes/block.php
+msgid "Zoom out"
+msgstr ""
+
+#: includes/block.php
+msgid "Zoom in"
+msgstr ""
+
+#: includes/block.php
+msgid "Fit width"
+msgstr ""
+
+#: includes/block.php
+msgid "Download PDF"
+msgstr ""
+
+#: includes/block.php
+msgid "Download"
+msgstr ""
+
+#: includes/block.php
+#: includes/frontend-assets.php
+msgid "Loading PDF..."
+msgstr ""
+
+#: includes/block.php
+msgid "JavaScript is required to display this PDF."
+msgstr ""
+
+#: includes/block.php
+msgid "Select a PDF file in the block settings."
+msgstr ""
+
+#: includes/block.php
+msgid "This PDF URL is not allowed. The file must be hosted on this site."
+msgstr ""
+
+#: includes/frontend-assets.php
+msgid "The PDF viewer could not be loaded."
+msgstr ""
+
+#: includes/frontend-assets.php
+msgid "The PDF file could not be loaded."
+msgstr ""
+
+#: assets/block.js
+msgid "Enter a valid URL."
+msgstr ""
+
+#: assets/block.js
+msgid "Only http and https URLs are allowed."
+msgstr ""
+
+#: assets/block.js
+#. translators: %s: site host name.
+msgid "The PDF must be hosted on this site (%s)."
+msgstr ""
+
+#: assets/block.js
+msgid "Replace PDF"
+msgstr ""
+
+#: assets/block.js
+msgid "Select PDF"
+msgstr ""
+
+#: assets/block.js
+msgid "No PDF file selected yet. Files must be uploaded to the Media Library as PDF."
+msgstr ""
+
+#: assets/block.js
+#. translators: %s: height in pixels.
+msgid "Height: %s px"
+msgstr ""
+
+#: assets/block.js
+msgid "Height: first page"
+msgstr ""
+
+#: assets/block.js
+msgid "Height: full document"
+msgstr ""
+
+#: assets/block.js
+msgid "The height is measured in the browser after the PDF loads, following the current zoom level. The fixed height value is used only while the document is loading."
+msgstr ""
+
+#: assets/block.js
+msgid "Toolbar: visible"
+msgstr ""
+
+#: assets/block.js
+msgid "Toolbar: hidden"
+msgstr ""
+
+#: assets/block.js
+msgid "Download: allowed"
+msgstr ""
+
+#: assets/block.js
+msgid "Download: blocked"
+msgstr ""
+
+#: assets/block.js
+msgid "pdf"
+msgstr ""
+
+#: assets/block.js
+msgid "document"
+msgstr ""
+
+#: assets/block.js
+msgid "embed"
+msgstr ""
+
+#: assets/block.js
+msgid "PDF source"
+msgstr ""
+
+#: assets/block.js
+msgid "Manual URL"
+msgstr ""
+
+#: assets/block.js
+msgid "PDF URL"
+msgstr ""
+
+#: assets/block.js
+msgid "Use a PDF hosted on this site. Relative paths are resolved against the site URL."
+msgstr ""
+
+#: assets/block.js
+msgid "Remove PDF"
+msgstr ""
+
+#: assets/block.js
+msgid "Display"
+msgstr ""
+
+#: assets/block.js
+#. translators: 1: minimum height, 2: maximum height.
+msgid "Between %1$s and %2$s pixels. The width always follows the block width."
+msgstr ""
+
+#: assets/block.js
+msgid "Page navigation, zoom controls and the download option are shown above the document."
+msgstr ""
+
+#: assets/block.js
+msgid "The document is displayed without controls."
+msgstr ""
+
+#: assets/block.js
+msgid "Shows a download button in the toolbar. This is a display policy only: the file URL itself stays public."
+msgstr ""
+
+#: assets/block.js
+msgid "Select a PDF from the Media Library or enter a URL in the block settings."
+msgstr ""
+
+#: assets/block.js
+msgid "Enter the PDF URL in the block settings sidebar."
+msgstr ""
+
+#: assets/block.js
+msgid "The PDF is rendered with pdf.js on the frontend."
+msgstr ""

@@ -1,0 +1,29 @@
+/* Simple Kit Downloads - default button styles */
+
+.simplekitdownloads-block {
+    margin: 16px 0;
+}
+
+.simplekitdownloads-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #0073aa;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 1.2;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.simplekitdownloads-button:hover,
+.simplekitdownloads-button:focus {
+    background: #005a87;
+    color: #fff;
+}
+
+.simplekitdownloads-button:focus {
+    outline: 2px solid #005a87;
+    outline-offset: 2px;
+}

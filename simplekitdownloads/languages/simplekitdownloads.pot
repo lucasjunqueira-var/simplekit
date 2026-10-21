@@ -1,0 +1,453 @@
+# Copyright (C) 2026 Lucas Junqueira
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Simple Kit Downloads 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/lucasjunqueira-var/simplekit\n"
+"POT-Creation-Date: 2026-10-21 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Simple Kit Downloads POT generator\n"
+"X-Domain: simplekitdownloads\n"
+msgid "(unnamed)"
+msgstr ""
+
+msgid "Access denied."
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Added"
+msgstr ""
+
+msgid "Add New"
+msgstr ""
+
+msgid "Add new download"
+msgstr ""
+
+msgid "Add the \"Simple Kit Download\" block to a page or post, select the download and the version, and optionally override the button text and CSS. Version \"Current (latest)\" always resolves to the newest version when the button is clicked, even on cached pages."
+msgstr ""
+
+msgid "Add version"
+msgstr ""
+
+msgid "A download is counted when the delivery starts. The overview lists every download with its total, oldest and newest download. Clicking a download shows the same information per version, from the newest to the oldest version."
+msgstr ""
+
+msgid "A download is identified by a name and can contain any number of versions."
+msgstr ""
+
+msgid "Back to Files"
+msgstr ""
+
+msgid "Back to Statistics"
+msgstr ""
+
+msgid "Backup"
+msgstr ""
+
+msgid "Backup file generated successfully."
+msgstr ""
+
+msgid "Backup imported successfully."
+msgstr ""
+
+msgid "Button appearance"
+msgstr ""
+
+msgid "Button texts"
+msgstr ""
+
+msgid "Button text with version"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+msgid "Could not create the backup file in the uploads folder."
+msgstr ""
+
+msgid "Create download"
+msgstr ""
+
+msgid "Current (latest)"
+msgstr ""
+
+msgid "Current data: %1$d downloads, %2$d versions and %3$d statistics records."
+msgstr ""
+
+msgid "Current file: %s. Select a new file to replace it."
+msgstr ""
+
+msgid "Default button text"
+msgstr ""
+
+msgid "Default button text and the text pattern used when a version is displayed."
+msgstr ""
+
+msgid "Default classes: .simplekitdownloads-button (link) and .simplekitdownloads-block (wrapper)."
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Deleted"
+msgstr ""
+
+msgid "Deleted downloads"
+msgstr ""
+
+msgid "Delete this download? The statistics will be kept."
+msgstr ""
+
+msgid "Delete this version? The statistics will be kept."
+msgstr ""
+
+msgid "Donate"
+msgstr ""
+
+msgid "Donate with PayPal button"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Download backup file"
+msgstr ""
+
+msgid "Download created. Now add a version to it."
+msgstr ""
+
+msgid "Download deleted. Its statistics were kept."
+msgstr ""
+
+msgid "Download not found."
+msgstr ""
+
+msgid "Downloads"
+msgstr ""
+
+msgid "Downloads registered"
+msgstr ""
+
+msgid "Download updated."
+msgstr ""
+
+msgid "Download v%version%"
+msgstr ""
+
+msgid "e.g. 25.1"
+msgstr ""
+
+msgid "e.g. Product catalog"
+msgstr ""
+
+msgid "Each version can be an uploaded file or a URL on this site. URLs are served from their original location and are not copied to the plugin folder."
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Edit download"
+msgstr ""
+
+msgid "Edit version %s"
+msgstr ""
+
+msgid "Error uploading the backup file."
+msgstr ""
+
+msgid "Export"
+msgstr ""
+
+msgid "Export CSV"
+msgstr ""
+
+msgid "Export full log (CSV)"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "File missing"
+msgstr ""
+
+msgid "File not found."
+msgstr ""
+
+msgid "Files"
+msgstr ""
+
+msgid "Generate backup file"
+msgstr ""
+
+msgid "Global CSS for the download buttons. Leave it empty to use the built-in style."
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Help & Documentation"
+msgstr ""
+
+msgid "Import"
+msgstr ""
+
+msgid "Import backup"
+msgstr ""
+
+msgid "Importing a backup replaces all current downloads, versions and statistics. This action cannot be undone."
+msgstr ""
+
+msgid "Last download"
+msgstr ""
+
+msgid "latest: %s"
+msgstr ""
+
+msgid "Leave the field below empty to use the built-in styles. The rules are applied globally to every download button."
+msgstr ""
+
+msgid "Maximum upload size allowed by the server: %s."
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Newest download"
+msgstr ""
+
+msgid "No downloads found for this search."
+msgstr ""
+
+msgid "No downloads recorded for this download."
+msgstr ""
+
+msgid "No downloads registered yet."
+msgstr ""
+
+msgid "No downloads yet. Use \"Add New\" to create the first one."
+msgstr ""
+
+msgid "No new file was selected. The current file was kept."
+msgstr ""
+
+msgid "Numeric version, optionally with dots: 25, 25.1 or 25.0.1. The highest version is used by \"current\"."
+msgstr ""
+
+msgid "Oldest download"
+msgstr ""
+
+msgid "Optional shortcode attributes: text=\"Download now\" and css=\".simplekitdownloads-button{...}\"."
+msgstr ""
+
+msgid "Option to record the visitor IP address with each download."
+msgstr ""
+
+msgid "Please enter a name for the download."
+msgstr ""
+
+msgid "Please enter a URL."
+msgstr ""
+
+msgid "Please enter a version."
+msgstr ""
+
+msgid "Please select a file to upload."
+msgstr ""
+
+msgid "Record the visitor IP address on each download"
+msgstr ""
+
+msgid "Renaming a download also updates the name shown in the statistics."
+msgstr ""
+
+msgid "Replacing the file of a version discards the previous binary. Deleting a version or an entire download keeps its statistics."
+msgstr ""
+
+msgid "Save changes"
+msgstr ""
+
+msgid "Save version"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search downloads"
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Showing a download button"
+msgstr ""
+
+msgid "Simple Kit Downloads"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "SK Downloads"
+msgstr ""
+
+msgid "Source"
+msgstr ""
+
+msgid "Statistics"
+msgstr ""
+
+msgid "Statistics: %s"
+msgstr ""
+
+msgid "Thank you for your support!"
+msgstr ""
+
+msgid "The backup file is a JSON document containing the settings, downloads, versions and statistics. Uploaded binaries are not included; versions registered by URL keep working because only the URL is stored."
+msgstr ""
+
+msgid "The backup file was not found."
+msgstr ""
+
+msgid "The backup includes the settings, downloads, versions and statistics. Uploaded files are not included; only their metadata is exported."
+msgstr ""
+
+msgid "The CSV export always matches the view on screen. A full log export with one line per download record is also available. Records of deleted downloads and versions remain in the statistics."
+msgstr ""
+
+msgid "The download could not be created."
+msgstr ""
+
+msgid "The file could not be moved to the plugin uploads folder."
+msgstr ""
+
+msgid "The file could not be moved to the uploads folder."
+msgstr ""
+
+msgid "The file could not be uploaded. Please try again."
+msgstr ""
+
+msgid "The file is downloaded from its original location. Only URLs on this site domain, or paths starting with /, are accepted."
+msgstr ""
+
+msgid "The file is larger than the maximum upload size allowed by this server."
+msgstr ""
+
+msgid "The IP address is stored with the download record and can be exported in the full log CSV. Download records are never deleted automatically."
+msgstr ""
+
+msgid "The requested download was not found."
+msgstr ""
+
+msgid "The same result can be achieved with the shortcode:"
+msgstr ""
+
+msgid "These records were kept after the download was removed."
+msgstr ""
+
+msgid "The Simple Kit Downloads plugin"
+msgstr ""
+
+msgid "The URL is not valid."
+msgstr ""
+
+msgid "The URL is too long."
+msgstr ""
+
+msgid "The URL must point to a file on this site (same domain)."
+msgstr ""
+
+msgid "The URL must start with http:// or https://, or be a path starting with /."
+msgstr ""
+
+msgid "The version could not be created. It may already exist."
+msgstr ""
+
+msgid "The version is too long."
+msgstr ""
+
+msgid "The version must be numeric, for example 25, 25.1 or 25.0.1."
+msgstr ""
+
+msgid "This download has no versions yet. Add the first version above."
+msgstr ""
+
+msgid "This download was deleted. Its statistics are kept below."
+msgstr ""
+
+msgid "This file is not a valid Simple Kit Downloads backup."
+msgstr ""
+
+msgid "This file type is not allowed."
+msgstr ""
+
+msgid "This is a free plugin. If you find its features useful, please consider making a donation of any amount to its creator, Lucas Junqueira. To do so, use the form below to donate via PayPal."
+msgstr ""
+
+msgid "This is a free plugin. If you find its features useful, please consider making a donation of any amount to its creator. To do so, access the Donate sub menu."
+msgstr ""
+
+msgid "This plugin creates download buttons for files hosted on your site and records how many times each file and version was downloaded. Downloads can be served from a file uploaded through the plugin or from a URL on the same domain."
+msgstr ""
+
+msgid "This version already exists for this download."
+msgstr ""
+
+msgid "Total downloads"
+msgstr ""
+
+msgid "Upload"
+msgstr ""
+
+msgid "Upload a file"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid "URL on this site"
+msgstr ""
+
+msgid "Use %version% where the version number should appear. Use the default text field when an empty version is requested."
+msgstr ""
+
+msgid "Version"
+msgstr ""
+
+msgid "Version added."
+msgstr ""
+
+msgid "Version deleted. Its statistics were kept."
+msgstr ""
+
+msgid "Version not found."
+msgstr ""
+
+msgid "Versions"
+msgstr ""
+
+msgid "Versions are numeric and may contain dots, such as 25, 25.1 or 25.0.1. The highest version is used as the current version."
+msgstr ""
+
+msgid "Versions registered"
+msgstr ""
+
+msgid "Versions with downloads"
+msgstr ""
+
+msgid "Version updated."
+msgstr ""
+
+msgid "Visitor IP"
+msgstr ""
+

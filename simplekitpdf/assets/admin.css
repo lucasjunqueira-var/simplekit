@@ -1,0 +1,45 @@
+/**
+ * Simple Kit PDF - admin styles.
+ */
+
+.simplekitpdf-wrap .simplekitpdf-help-card {
+    margin-top: 20px;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #dcdcde;
+    border-radius: 8px;
+    line-height: 1.8;
+}
+
+.simplekitpdf-wrap .simplekitpdf-help-card h2 {
+    margin-top: 0;
+    color: #1d2327;
+}
+
+.simplekitpdf-wrap .simplekitpdf-help-card h3 {
+    margin-top: 28px;
+    color: #1d2327;
+}
+
+.simplekitpdf-wrap .simplekitpdf-help-card ul,
+.simplekitpdf-wrap .simplekitpdf-help-card ol {
+    margin-left: 20px;
+}
+
+.simplekitpdf-wrap .simplekitpdf-table {
+    max-width: 900px;
+    margin-top: 10px;
+}
+
+.simplekitpdf-wrap .simplekitpdf-table th {
+    font-weight: 600;
+}
+
+.simplekitpdf-wrap .simplekitpdf-table td {
+    vertical-align: top;
+}
+
+.simplekitpdf-wrap .simplekitpdf-donate-form {
+    max-width: 400px;
+    margin-top: 30px;
+}

@@ -1,0 +1,68 @@
+/* Simple Kit Downloads - admin styles */
+
+.skd-card {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    max-width: 960px;
+}
+
+.skd-card h2 {
+    margin-top: 0;
+}
+
+.skd-version-form .form-table th {
+    width: 180px;
+}
+
+.skd-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.skd-card-stat {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 6px;
+    padding: 16px 20px;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.skd-stat-value {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.skd-stat-label {
+    color: #646970;
+    font-size: 13px;
+}
+
+.skd-missing {
+    color: #b32d2e;
+    font-size: 12px;
+}
+
+.wrap .search-form {
+    margin: 12px 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.wrap .search-form input[type="search"] {
+    min-width: 240px;
+}
+
+/* The delete buttons use the standard WordPress link-delete styling. */
+.button-link-delete {
+    color: #b32d2e;
+}
