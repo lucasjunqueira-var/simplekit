@@ -431,9 +431,13 @@ function simplekitmailing_send_email($to, $subject, $content, $list_id = 0) {
 // Helper: wrap content in full HTML with responsive template
 // ---------------------------------------------------------------------------
 function simplekitmailing_wrap_html_email($subject, $html_content, $list_id = 0) {
+    // Check whether the list includes the header and footer in sent messages
+    $include_header = simplekitmailing_should_include_email_header($list_id);
+    $include_footer = simplekitmailing_should_include_email_footer($list_id);
+
     // Read template settings (per list, with global fallback)
-    $header_html = simplekitmailing_get_email_header_html($list_id);
-    $footer_html = simplekitmailing_get_email_footer_html($list_id);
+    $header_html = $include_header ? simplekitmailing_get_email_header_html($list_id) : '';
+    $footer_html = $include_footer ? simplekitmailing_get_email_footer_html($list_id) : '';
 
     // Read color settings
     $email_bg_color   = simplekitmailing_get_email_bg_color($list_id);
@@ -488,15 +492,19 @@ function simplekitmailing_wrap_html_email($subject, $html_content, $list_id = 0)
     $html .= '</head>';
     $html .= '<body style="margin:0;padding:0;background-color:' . $out_bg . ';font-family:Arial,Helvetica,sans-serif;">';
     $html .= '<div id="email_content" style="padding:25px;font-size:16px;line-height:1.2;color:' . esc_attr($email_text_color) . ';">';
-    $html .= '<div id="email_header" style="margin-bottom:25px;">';
-    $html .= nl2br($header_html);
-    $html .= '</div>';
+    if ($include_header) {
+        $html .= '<div id="email_header" style="margin-bottom:25px;">';
+        $html .= nl2br($header_html);
+        $html .= '</div>';
+    }
     $html .= '<div id="email_body" style="margin-bottom:25px;">';
     $html .= nl2br($html_content);
     $html .= '</div>';
-    $html .= '<div id="email_footer">';
-    $html .= nl2br($footer_html);
-    $html .= '</div>';
+    if ($include_footer) {
+        $html .= '<div id="email_footer">';
+        $html .= nl2br($footer_html);
+        $html .= '</div>';
+    }
     $html .= '</div>';
     $html .= '</body>';
     $html .= '</html>';

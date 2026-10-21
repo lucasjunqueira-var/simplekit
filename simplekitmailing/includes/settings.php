@@ -84,6 +84,24 @@ function simplekitmailing_get_email_footer_html($list_id = 0) {
     return simplekitmailing_get_list_setting($list_id, 'footer_html', 'simplekitmailing_footer_html', $default_footer);
 }
 
+/**
+ * Whether the configured header must be included in sent messages.
+ *
+ * Defaults to true so previously configured lists keep their current output.
+ */
+function simplekitmailing_should_include_email_header($list_id = 0) {
+    return (bool) simplekitmailing_get_list_setting($list_id, 'include_header', 'simplekitmailing_include_header', true);
+}
+
+/**
+ * Whether the configured footer must be included in sent messages.
+ *
+ * Defaults to true so previously configured lists keep their current output.
+ */
+function simplekitmailing_should_include_email_footer($list_id = 0) {
+    return (bool) simplekitmailing_get_list_setting($list_id, 'include_footer', 'simplekitmailing_include_footer', true);
+}
+
 function simplekitmailing_get_email_bg_color($list_id = 0) {
     return simplekitmailing_get_list_setting($list_id, 'email_bg_color', '', '#ffffff');
 }
@@ -405,6 +423,8 @@ function simplekitmailing_page_settings() {
                     'collect_ip'          => isset($_POST['collect_ip']) ? '1' : '0',
                     'header_html'         => wp_kses_post(wp_unslash($_POST['header_html'] ?? '')),
                     'footer_html'         => wp_kses_post(wp_unslash($_POST['footer_html'] ?? '')),
+                    'include_header'      => isset($_POST['include_header']) ? '1' : '0',
+                    'include_footer'      => isset($_POST['include_footer']) ? '1' : '0',
                     'email_bg_color'      => sanitize_hex_color(wp_unslash($_POST['email_bg_color'] ?? '#ffffff')),
                     'email_text_color'    => sanitize_hex_color(wp_unslash($_POST['email_text_color'] ?? '#333333')),
                     'email_link_color'    => sanitize_hex_color(wp_unslash($_POST['email_link_color'] ?? '#0073aa')),
@@ -654,6 +674,23 @@ function simplekitmailing_page_settings() {
                                     </td>
                                 </tr>
                             </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php esc_html_e('Include in messages', 'simplekitmailing'); ?></th>
+                        <td>
+                            <fieldset>
+                                <label for="include_header">
+                                    <input type="checkbox" id="include_header" name="include_header" value="1" <?php checked((bool) $v('include_header', 'simplekitmailing_include_header', true)); ?> />
+                                    <?php esc_html_e('Include the header in sent messages', 'simplekitmailing'); ?>
+                                </label>
+                                <br />
+                                <label for="include_footer">
+                                    <input type="checkbox" id="include_footer" name="include_footer" value="1" <?php checked((bool) $v('include_footer', 'simplekitmailing_include_footer', true)); ?> />
+                                    <?php esc_html_e('Include the footer in sent messages', 'simplekitmailing'); ?>
+                                </label>
+                            </fieldset>
+                            <p class="description"><?php esc_html_e('Uncheck to send only the message body, without the header and/or footer defined below.', 'simplekitmailing'); ?></p>
                         </td>
                     </tr>
                     <tr>

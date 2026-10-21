@@ -567,6 +567,25 @@ function simplekitmailing_page_subscribers() {
             </script>
         </form>
 
+        <!-- Add individual subscriber -->
+        <h3 style="margin-top:20px;"><?php esc_html_e('Add individual email', 'simplekitmailing'); ?></h3>
+        <form method="post" action="">
+            <?php wp_nonce_field('simplekitmailing_add_subscriber', 'simplekitmailing_nonce'); ?>
+            <input type="hidden" name="action" value="add_subscriber" />
+            <?php if ($list_id) : ?>
+                <input type="hidden" name="list_id" value="<?php echo (int) $list_id; ?>" />
+            <?php else : ?>
+                <label for="add-subscriber-list"><?php esc_html_e('List:', 'simplekitmailing'); ?></label>
+                <select id="add-subscriber-list" name="list_id" required>
+                    <?php foreach ($lists as $l) : ?>
+                        <option value="<?php echo (int) $l->id; ?>"><?php echo esc_html($l->name); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            <?php endif; ?>
+            <input type="email" name="subscriber_email" class="regular-text" placeholder="<?php esc_attr_e('Enter email', 'simplekitmailing'); ?>" required />
+            <input type="submit" class="button" value="<?php esc_attr_e('Add email', 'simplekitmailing'); ?>" />
+        </form>
+
         <hr />
 
         <!-- Removed emails list -->
@@ -660,6 +679,7 @@ function simplekitmailing_handle_subscriber_actions() {
     $nonce = sanitize_text_field(wp_unslash($_POST['simplekitmailing_nonce'] ?? ''));
     if (!wp_verify_nonce($nonce, 'simplekitmailing_subscriber_action') &&
         !wp_verify_nonce($nonce, 'simplekitmailing_import_csv') &&
+        !wp_verify_nonce($nonce, 'simplekitmailing_add_subscriber') &&
         !wp_verify_nonce($nonce, 'simplekitmailing_add_removed')) {
         return;
     }
@@ -778,6 +798,67 @@ function simplekitmailing_handle_subscriber_actions() {
         $import_text = __('Import completed: %1$d registered, %2$d skipped (were in the removed list).', 'simplekitmailing');
         $msg = sprintf($import_text, $imported, $skipped);
         $args = ['page' => 'simplekitmailing', 'msg' => $msg, 'type' => 'success'];
+        if ($list_id) $args['list_id'] = $list_id;
+        simplekitmailing_redirect(add_query_arg($args, admin_url('admin.php')));
+    }
+
+    // Add an individual email to the selected list (via POST)
+    if ($action === 'add_subscriber') {
+        $add_list_id = isset($_POST['list_id']) ? absint($_POST['list_id']) : 0;
+        if (!$add_list_id) {
+            $lists = simplekitmailing_get_lists();
+            $add_list_id = !empty($lists) ? (int) $lists[0]->id : 0;
+        }
+
+        $email = sanitize_email(wp_unslash($_POST['subscriber_email'] ?? ''));
+
+        if (!$add_list_id || !is_email($email)) {
+            $args = ['page' => 'simplekitmailing', 'msg' => __('Please enter a valid email address.', 'simplekitmailing'), 'type' => 'error'];
+            if ($list_id) $args['list_id'] = $list_id;
+            simplekitmailing_redirect(add_query_arg($args, admin_url('admin.php')));
+        }
+
+        // Do not re-add addresses that were removed from this list.
+        // data is being adjusted at processing time directly from the plugin's table at the database, no caching is possible
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
+        $removed_exists = (int) $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM %i WHERE list_id = %d AND email = %s",
+            $table_removed, $add_list_id, $email
+        ));
+        if ($removed_exists > 0) {
+            $args = ['page' => 'simplekitmailing', 'msg' => __('This email is in the removed list. Reactivate it in the removed emails section.', 'simplekitmailing'), 'type' => 'error'];
+            if ($list_id) $args['list_id'] = $list_id;
+            simplekitmailing_redirect(add_query_arg($args, admin_url('admin.php')));
+        }
+
+        // Avoid overwriting an existing subscriber.
+        // data is being adjusted at processing time directly from the plugin's table at the database, no caching is possible
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
+        $already_exists = (int) $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM %i WHERE list_id = %d AND email = %s",
+            $table_subscribers, $add_list_id, $email
+        ));
+        if ($already_exists > 0) {
+            $args = ['page' => 'simplekitmailing', 'msg' => __('This email is already subscribed to the selected list.', 'simplekitmailing'), 'type' => 'error'];
+            if ($list_id) $args['list_id'] = $list_id;
+            simplekitmailing_redirect(add_query_arg($args, admin_url('admin.php')));
+        }
+
+        // data is being adjusted at processing time directly from the plugin's table at the database, no caching is possible
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
+        $inserted = $wpdb->insert($table_subscribers, [
+            'list_id' => $add_list_id,
+            'email'   => $email,
+            'name'    => '',
+            'phone'   => '',
+            'ip'      => '',
+        ]);
+
+        if ($inserted === false) {
+            $args = ['page' => 'simplekitmailing', 'msg' => __('Could not add the email. Please try again.', 'simplekitmailing'), 'type' => 'error'];
+        } else {
+            $args = ['page' => 'simplekitmailing', 'msg' => __('Email added successfully.', 'simplekitmailing'), 'type' => 'success'];
+        }
         if ($list_id) $args['list_id'] = $list_id;
         simplekitmailing_redirect(add_query_arg($args, admin_url('admin.php')));
     }
