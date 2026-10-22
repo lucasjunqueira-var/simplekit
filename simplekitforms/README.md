@@ -34,7 +34,7 @@ After activating the plugin, first access the "settings" page in the SK Forms me
 
 You can also choose to receive your form responses via email. To do this, in the form settings, fill in the delivery details and the mailbox to which you want to send the messages (which will also be recorded in your WordPress site's dashboard).
 
-[IMAGE HERE]
+<img width="1920" height="913" alt="forms1" src="https://github.com/user-attachments/assets/b37c1e93-33fd-406e-b73b-eee36b4c0716" />
 
 Next, go to the "create form" page. Here, you must give your form a title, specify the thank-you message after it is completed, and enter the text for the submit button.
 
