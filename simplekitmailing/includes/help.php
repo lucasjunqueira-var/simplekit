@@ -13,213 +13,49 @@ function simplekitmailing_page_help() {
         <h1><?php esc_html_e('Help & Documentation', 'simplekitmailing'); ?></h1>
 
         <div style="margin-top:20px;"><div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:30px;line-height:1.8;">
-            <h2 style="margin-top:0;color:#1d2327;"><?php esc_html_e('The Simple Kit Mailing Plugin', 'simplekitmailing'); ?></h2>
-            <p><?php esc_html_e('Simple Kit Mailing is a streamlined plugin designed for collecting email addresses and sending messages directly from your WordPress installation. Its purpose is to serve small contact lists and occasional mailings without relying on external email marketing services.', 'simplekitmailing'); ?></p>
-            <p><?php esc_html_e('Unlike dedicated email platforms (Mailchimp, SendGrid, Amazon SES, etc.), Simple Kit Mailing operates entirely within your own WordPress environment. This makes it ideal for website owners who need a straightforward, self-hosted solution for contacting their users — such as sending newsletters to a few dozen subscribers, notifying members about updates, or managing opt-in lists for small communities.', 'simplekitmailing'); ?></p>
-            <p><?php esc_html_e('The plugin manages its own database tables for subscribers, mailing lists, messages, and double opt-in confirmations. All data stays on your server, giving you full control and privacy.', 'simplekitmailing'); ?></p>
+            <h2 style="margin-top:0;color:#1d2327;"><?php esc_html_e('Simple Kit Mailing', 'simplekitmailing'); ?></h2>
+            <p><?php esc_html_e('This plugin was created to simplify the management of small contact lists, from collecting email addresses to sending messages. It is designed for very small lists (only a few dozen) with infrequent mailings. The entire process takes place on your own website, using your domain\'s SMTP service, without the need for other external services.', 'simplekitmailing'); ?></p>
 
-            <h3 style="color:#1d2327;"><?php esc_html_e('Limitations', 'simplekitmailing'); ?></h3>
-            <p><?php esc_html_e('Before using Simple Kit Mailing, please be aware of the following constraints:', 'simplekitmailing'); ?></p>
+            <h3 style="color:#1d2327;"><?php esc_html_e('Highlights', 'simplekitmailing'); ?></h3>
+            <ul>
+                <li><?php esc_html_e('Manage mailing lists directly from your dashboard without using external services.', 'simplekitmailing'); ?></li>
+                <li><?php esc_html_e('Capture contacts from multiple lists.', 'simplekitmailing'); ?></li>
+                <li><?php esc_html_e('Simplified message sending.', 'simplekitmailing'); ?></li>
+            </ul>
+
+            <h3 style="color:#1d2327;"><?php esc_html_e('How the plugin works', 'simplekitmailing'); ?></h3>
+            <p><?php esc_html_e('Once the plugin is activated, go to the "mailing lists" page in the SK Mailing menu. Here you will see some pre-created lists that you can delete or edit. Adjust the lists to your liking, setting their names and descriptions.', 'simplekitmailing'); ?></p>
+            <p><?php esc_html_e('Next, go to "settings" to adjust the configuration for each list individually. The first adjustment to be made is to specify the sending method. The plugin depends on your SMTP server to send messages, so you will need to specify its name, password, SMTP server/port, and encryption method. Each list can have a different sending configuration.', 'simplekitmailing'); ?></p>
+            <p><?php esc_html_e('The next adjustment to be made is to indicate the page where subscribers to your lists will be directed after registering their addresses (a thank-you page, for example). In addition, also indicate a page that will manage unsubscription – a link to it will be incorporated into all sent messages so that subscribers can cancel their subscription. Also indicate what information will be collected in addition to the email address.', 'simplekitmailing'); ?></p>
+            <p><?php esc_html_e('Now, adjust the appearance and common information of the messages sent to the list, such as colors, header, and footer.', 'simplekitmailing'); ?></p>
+            <p><?php esc_html_e('The text displayed in the blocks created by the plugin on your pages, such as the registration form, removal form, and confirmation form, is the next adjustment to be made.', 'simplekitmailing'); ?></p>
+            <p><?php esc_html_e('The final settings are very important! First, indicate how many messages will be sent every 10 seconds at the time of sending. Some SMTP services may limit your sending capacity, so it\'s important to adjust accordingly. Next, we have the protection of the address registration form. It is recommended to choose reCaptcha and register your configuration keys here (which you can get for free on the service\'s website). Finally, you can activate "double opt-in" during registration, which is recommended. With this setting active, when registering an address, the visitor will receive a message asking them to confirm the subscription - the email will only be added if they click on the address received in this confirmation message, which leads to the page indicated in this configuration.', 'simplekitmailing'); ?></p>
+            <p><?php esc_html_e('With the list configured, it\'s time to adjust the website pages. The first is the registration page. Add a "Simple Kit Mailing Collect" block and adjust some of its options: first, the title to be displayed (remember that all other displayed texts are adjusted in the list configuration). Also indicate which of your lists it is related to. Finally, you can adjust the visual properties of this block in "custom CSS".', 'simplekitmailing'); ?></p>
+            <p><?php esc_html_e('The page redirected after registration doesn\'t need any special block – it\'s just a regular page with your post-registration message, which could be a thank you and/or instructions about double opt-in. The unsubscribe page, however, needs to include the "Simple Kit Mailing Unsubscribe" block, with similar settings to the previous one.', 'simplekitmailing'); ?></p>
+            <p><?php esc_html_e('The same applies to the "Simple Kit Mailing Confirm" block, which should be placed on the double opt-in link page.', 'simplekitmailing'); ?></p>
+            <p><?php esc_html_e('With the pages prepared, back in the plugin menu, you will find the list of subscribers on the "subscribers" page. From here you can even export the registered contacts as a spreadsheet.', 'simplekitmailing'); ?></p>
+            <p><?php esc_html_e('In the "create message" menu, you can write your messages. Here, define the list to which the message will be sent and create your message. It is recommended that you always send test messages to confirm that everything is correct. Once the process is finished, click on "send to all list subscribers".', 'simplekitmailing'); ?></p>
+            <p><?php esc_html_e('You will be taken to the "messages" menu, which contains the sending process. It is necessary to keep this page open and active for all messages to be sent at the rate you set in the list settings. You can pause or even cancel the sending of remaining messages at any time.', 'simplekitmailing'); ?></p>
+            <p><?php esc_html_e('If you need to back up your list settings and registered emails, access the "backup" menu. Here, in addition to exporting the settings as a JSON file, you can re-import it, which is useful for transferring your mailings from one server to another, for example.', 'simplekitmailing'); ?></p>
+
+            <h3 style="color:#1d2327;"><?php esc_html_e('Frequently asked questions', 'simplekitmailing'); ?></h3>
             <p>
-                <strong><?php esc_html_e('Dependency on your own email service', 'simplekitmailing'); ?></strong>
-                <br />
-                <?php esc_html_e('Simple Kit Mailing does not include a built-in email delivery service. You must configure an SMTP account linked to your own domain (such as the one provided by your hosting company or a transactional email service). Without proper SMTP configuration, emails may not be delivered or may be flagged as spam.', 'simplekitmailing'); ?>    
+                <strong><?php esc_html_e('How is the sending done?', 'simplekitmailing'); ?></strong><br />
+                <?php esc_html_e('You configure, individually for each list, the SMTP service associated with the sender\'s address, as you would with a traditional email program. The plugin will use this service to send the messages.', 'simplekitmailing'); ?>
             </p>
             <p>
-                <strong><?php esc_html_e('Slow sending — the send page must remain open throughout the process', 'simplekitmailing'); ?></strong>
-                <br />
-                <?php esc_html_e('Dispatching messages is performed gradually via WordPress cron and AJAX calls while the "Messages" admin page is open. The sending process is intentionally paced to avoid overloading your server. This means:', 'simplekitmailing'); ?>
-                <br />
-                <?php esc_html_e('1. Sending a message to a large list can take a considerable amount of time;', 'simplekitmailing'); ?>
-                <br />
-                <?php esc_html_e('2. The admin page must stay open in your browser during the entire sending process; closing it will pause the dispatch.', 'simplekitmailing'); ?>
-                <br />
-                <?php esc_html_e('3. This approach is suitable for small volumes only.', 'simplekitmailing'); ?>
+                <strong><?php esc_html_e('Are there limits per send?', 'simplekitmailing'); ?></strong><br />
+                <?php esc_html_e('This plugin was created with small lists and few sends in mind. The biggest limitation is the restrictions that are normally imposed by SMTP services. Adjust your list settings accordingly.', 'simplekitmailing'); ?>
+            </p>
+            <p>
+                <strong><?php esc_html_e('Can I include images in the messages?', 'simplekitmailing'); ?></strong><br />
+                <?php esc_html_e('Yes! They will be embedded in the text, but remember that, firstly, many message receiving services hide images until the reader confirms their viewing and, secondly, that including many images in a message increases the chances of it going to a spam folder.', 'simplekitmailing'); ?>
+            </p>
+            <p>
+                <strong><?php esc_html_e('My messages are going to recipients\' spam folders. What\'s happening?', 'simplekitmailing'); ?></strong><br />
+                <?php esc_html_e('Several factors can influence this, such as the number of images embedded in the messages or a high frequency of sends. One way to alleviate this problem is to correctly configure the SPF/DKIM/DMARC settings for your website\'s domain. Check with your hosting service provider for the best way to do this in your case.', 'simplekitmailing'); ?>
             </p>
         </div></div>
-
-        <div style="margin-top:20px;"><div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:30px;line-height:1.8;">
-            <h2 style="margin-top:0;color:#1d2327;"><?php esc_html_e('Style', 'simplekitmailing'); ?></h2>
-            <p><?php esc_html_e('To adjust the appearance of the blocks created by the Simple Kit Mailing plugin in your posts and pages, use the following CSS styles as a reference.', 'simplekitmailing'); ?></p>
-            <textarea id="simplekitmailing-cssreference" style="width:100%; height:250px;" readonly>/* ===================================================
-   Simple Kit Mailing — Default Block Styles
-   Use these styles as a starting point to customize
-   the appearance of plugin blocks in your theme.
-   =================================================== */
-
-/* -------------------------------------------------
-   Collect Block  .simplekitmailing-collect-block
-   ------------------------------------------------- */
-.simplekitmailing-collect-block {
-    max-width: 400px;
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #f9f9f9;
-}
-
-.simplekitmailing-collect-block h3 {
-    margin-top: 0;
-}
-
-.simplekitmailing-collect-block .sm-field {
-    margin-bottom: 12px;
-}
-
-.simplekitmailing-collect-block .sm-field input[type="email"],
-.simplekitmailing-collect-block .sm-field input[type="text"],
-.simplekitmailing-collect-block .sm-field input[type="tel"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.simplekitmailing-collect-block .sm-field label {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.simplekitmailing-collect-block .sm-field label input[type="checkbox"] {
-    margin-top: 2px;
-}
-
-.simplekitmailing-collect-block .sm-submit {
-    background: #0073aa;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.simplekitmailing-collect-block .sm-submit:hover {
-    background: #005a87;
-}
-
-.simplekitmailing-collect-block .sm-submit:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.simplekitmailing-collect-block .sm-message {
-    margin-top: 10px;
-    padding: 8px 12px;
-    border-radius: 4px;
-    display: none;
-}
-
-.simplekitmailing-collect-block .sm-message.error {
-    display: block;
-    background: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
-.simplekitmailing-collect-block .sm-message.success {
-    display: block;
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.simplekitmailing-collect-block .g-recaptcha {
-    margin-bottom: 12px;
-}
-
-/* -------------------------------------------------
-   Unsubscribe Block  .simplekitmailing-unsubscribe-block
-   ------------------------------------------------- */
-.simplekitmailing-unsubscribe-block {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 30px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #f9f9f9;
-    text-align: center;
-}
-
-.simplekitmailing-unsubscribe-block h2 {
-    margin-top: 0;
-    color: #333;
-}
-
-.simplekitmailing-unsubscribe-block .sm-unsubscribed {
-    color: #155724;
-    background: #d4edda;
-    border: 1px solid #c3e6cb;
-    padding: 15px;
-    border-radius: 4px;
-    margin-top: 20px;
-}
-
-.simplekitmailing-unsubscribe-block .sm-no-email {
-    color: #856404;
-    background: #fff3cd;
-    border: 1px solid #ffeeba;
-    padding: 15px;
-    border-radius: 4px;
-    margin-top: 20px;
-}
-
-/* -------------------------------------------------
-   Confirm Block  .simplekitmailing-confirm-block
-   ------------------------------------------------- */
-.simplekitmailing-confirm-block {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 30px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #f9f9f9;
-    text-align: center;
-}
-
-.simplekitmailing-confirm-block h2 {
-    margin-top: 0;
-    color: #333;
-}
-
-.simplekitmailing-confirm-block .sm-confirm-success {
-    color: #155724;
-    background: #d4edda;
-    border: 1px solid #c3e6cb;
-    padding: 15px;
-    border-radius: 4px;
-    margin-top: 20px;
-}
-
-.simplekitmailing-confirm-block .sm-confirm-error {
-    color: #721c24;
-    background: #f8d7da;
-    border: 1px solid #f5c6cb;
-    padding: 15px;
-    border-radius: 4px;
-    margin-top: 20px;
-}</textarea>
-        </div></div>
-
-
-        <div style="margin-top:20px;">
-            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:30px;line-height:1.8;">
-                <h2 style="margin-top:0;color:#1d2327;"><?php esc_html_e('Domain Authentication for Email Deliverability', 'simplekitmailing'); ?></h2>
-                <p><?php esc_html_e('When sending marketing emails, one of the biggest challenges is ensuring that your messages actually reach the recipient\'s inbox instead of being flagged as spam. Internet Service Providers (ISPs) and email platforms rely heavily on authentication protocols to verify that the sender is legitimate. Configuring SPF, DKIM, and DMARC is essential to build trust, protect your brand, and improve deliverability rates.', 'simplekitmailing'); ?></p>
-                <h3 style="color:#1d2327;"><?php esc_html_e('SPF (Sender Policy Framework)', 'simplekitmailing'); ?></h3>
-                <p><?php esc_html_e('Defines which mail servers are authorized to send emails on behalf of your domain.', 'simplekitmailing'); ?></p>
-                <h3 style="color:#1d2327;"><?php esc_html_e('DKIM (DomainKeys Identified Mail)', 'simplekitmailing'); ?></h3>
-                <p><?php esc_html_e('Adds a digital signature to your emails, proving that the content hasn\'t been altered in transit.', 'simplekitmailing'); ?></p>
-                <h3 style="color:#1d2327;"><?php esc_html_e('DMARC (Domain-based Message Authentication, Reporting, and Conformance)', 'simplekitmailing'); ?></h3>
-                <p><?php esc_html_e('Aligns SPF and DKIM results and provides instructions to ISPs on how to handle unauthenticated emails. It also generates reports so you can monitor suspicious activity.', 'simplekitmailing'); ?></p>
-                <p style="margin-bottom:0;"><?php esc_html_e('Without these records, your emails are more likely to be rejected, marked as spam, or even exploited by attackers through spoofing.', 'simplekitmailing'); ?></p>
-            </div>
-        </div>
     </div>
     <?php
 }

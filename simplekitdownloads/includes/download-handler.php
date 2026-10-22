@@ -13,6 +13,7 @@ add_action('admin_post_nopriv_simplekitdownloads_file', 'simplekitdownloads_hand
 add_action('admin_post_simplekitdownloads_file', 'simplekitdownloads_handle_file_request');
 
 function simplekitdownloads_handle_file_request() {
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- public download link.
     $download_id = isset($_GET['d']) ? absint($_GET['d']) : 0;
     // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- public download link.
     $requested = isset($_GET['v']) ? sanitize_text_field(wp_unslash($_GET['v'])) : 'current';
@@ -44,7 +45,7 @@ function simplekitdownloads_handle_file_request() {
 
         nocache_headers();
         header('X-Robots-Tag: noindex, nofollow', true);
-        wp_redirect($url, 302);
+        wp_safe_redirect($url, 302);
         exit;
     }
 

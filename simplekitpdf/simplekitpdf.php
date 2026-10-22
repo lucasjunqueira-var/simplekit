@@ -3,7 +3,7 @@
  * Plugin Name: Simple Kit PDF
  * Plugin URI:  https://github.com/lucasjunqueira-var/simplekit
  * Description: Embed PDF files in posts and pages using pdf.js, with an optional toolbar and download control.
- * Version:     1.0.0
+ * Version:     1.4.0
  * Requires at least: 6.8
  * Tested up to: 7.1
  * Requires PHP: 7.4
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('SIMPLEKITPDF_VERSION', '1.0.0');
+define('SIMPLEKITPDF_VERSION', '1.4.0');
 define('SIMPLEKITPDF_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SIMPLEKITPDF_PLUGIN_URL', plugin_dir_url(__FILE__));
 

@@ -3,10 +3,11 @@ Contributors: chokito76
 Tags: forms, contact form, form builder
 Requires at least: 6.8
 Tested up to: 7.1
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Donate link: https://www.paypal.com/donate?token=v4gcsUlC7vfpl1Ah1hB22_b3vEKPPsimiFHbrFsqccIAUPdaYtAy_f_UkJWTT7uoeEfRfX2QRUd8sRaY
 
 Create forms and manage responses directly from WordPress.
 
@@ -17,6 +18,9 @@ Simple Kit Forms is a streamlined plugin for creating forms and managing respons
 Forms can include text, e-mail, textarea, checkboxes, radio buttons, dropdown and **file upload** fields. A file field can define instructions, a maximum size in MB and an optional list of allowed extensions. Uploaded files are stored in the WordPress uploads directory (`uploads/simplekitforms/<form-id>/<response-id>/`) and are downloaded from the dashboard through a permission-checked link that opens in a new tab.
 
 == Changelog ==
+
+= 1.4.0 =
+* Simple Kit plugins normalization
 
 = 1.3.0 =
 * Added the "File" field type to the form builder: a form can now contain one or more file upload fields, each with instructions, a maximum size (MB) and an optional list of allowed extensions.

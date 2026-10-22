@@ -3,7 +3,7 @@ Contributors: chokito76
 Tags: sharing, social sharing, open graph, twitter cards, meta tags
 Requires at least: 6.8
 Tested up to: 7.1
-Stable tag: 1.0.0
+Stable tag: 1.4.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -39,6 +39,9 @@ Icons work best with 512x512 pixel PNG images, which can contain transparency. T
 Initial release.
 
 == Changelog ==
+
+= 1.4.0 =
+* Simple Kit plugins normalization
 
 = 1.0.0 =
 * Initial release

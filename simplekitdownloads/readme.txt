@@ -3,10 +3,11 @@ Contributors: lucasjunqueira
 Tags: downloads, download manager, statistics, files, gutenberg
 Requires at least: 6.8
 Tested up to: 7.1
+Stable tag: 1.4.0
 Requires PHP: 7.4
-Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Donate link: https://www.paypal.com/donate?token=v4gcsUlC7vfpl1Ah1hB22_b3vEKPPsimiFHbrFsqccIAUPdaYtAy_f_UkJWTT7uoeEfRfX2QRUd8sRaY
 
 Create download buttons for files hosted on your site and track download statistics per version.
 
@@ -29,13 +30,6 @@ Features:
 * Statistics records are preserved when a download or version is deleted.
 * Setup page with button texts, global CSS and an option to record the visitor IP address.
 * JSON backup including settings, downloads, versions and statistics.
-
-== Installation ==
-
-1. Upload the `simplekitdownloads` folder to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the "Plugins" menu in WordPress.
-3. Open "SK Downloads" in the dashboard to create your first download and version.
-4. Add the "Simple Kit Download" block to a page or post, or use the shortcode.
 
 == Frequently Asked Questions ==
 
@@ -60,6 +54,9 @@ No. Only URLs on the same domain of the site are accepted, in order to avoid ope
 Server executable file types such as PHP, CGI and shell scripts are blocked. All other files are accepted, limited by the maximum upload size configured on the server.
 
 == Changelog ==
+
+= 1.4.0 =
+* Simple Kit plugins normalization
 
 = 1.0.0 =
 * Initial release.

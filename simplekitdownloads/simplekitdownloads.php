@@ -3,7 +3,7 @@
  * Plugin Name: Simple Kit Downloads
  * Plugin URI:  https://github.com/lucasjunqueira-var/simplekit
  * Description: Create download buttons for files and track download statistics.
- * Version:     1.0.0
+ * Version:     1.4.0
  * Requires at least: 6.8
  * Tested up to: 7.1
  * Requires PHP: 7.4
@@ -16,7 +16,7 @@
 
 defined('ABSPATH') or exit;
 
-define('SIMPLEKITDOWNLOADS_VERSION', '1.0.0');
+define('SIMPLEKITDOWNLOADS_VERSION', '1.4.0');
 define('SIMPLEKITDOWNLOADS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SIMPLEKITDOWNLOADS_PLUGIN_URL', plugin_dir_url(__FILE__));
 

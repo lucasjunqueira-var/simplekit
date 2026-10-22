@@ -13,105 +13,53 @@ function simplekitforms_page_help() {
         <h1>Help & Documentation</h1>
 
         <div style="margin-top:20px;"><div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:30px;line-height:1.8;">
-            <h2 style="margin-top:0;color:#1d2327;">The Simple Kit Forms Plugin</h2>
-            <p>Simple Kit Forms is a streamlined plugin for creating simple forms and managing responses directly from your WordPress installation. Its purpose is to serve small contact forms, surveys, and data collection needs without relying on external form services.</p>
-            <p>Unlike dedicated form platforms (Google Forms, Typeform, etc.), Simple Kit Forms operates entirely within your own WordPress environment. This makes it ideal for website owners who need a straightforward, self-hosted solution for collecting data from their users.</p>
-            <p>The plugin manages its own database tables for forms and entries. All data stays on your server, giving you full control and privacy.</p>
+            <h2 style="margin-top:0;color:#1d2327;">Simple Kit Forms</h2>
+            <p>This plugin allows for the quick creation of forms that can be added to pages and posts using the block editor. All responses are recorded in its own database and can be exported at any time.</p>
 
-            <h3 style="color:#1d2327;">How to use</h3>
+            <h3 style="color:#1d2327;">Highlights</h3>
+            <ul>
+                <li>Simple form creation.</li>
+                <li>Quick embedding into pages and posts.</li>
+                <li>Review and manage responses directly on the dashboard.</li>
+                <li>Export responses as spreadsheets.</li>
+                <li>Spam protection using reCaptch or Akismet.</li>
+            </ul>
+
+            <h3 style="color:#1d2327;">Available fields</h3>
+            <p>The forms created can contain various types of information:</p>
+            <ul>
+                <li>Text</li>
+                <li>E-mail</li>
+                <li>Password</li>
+                <li>URL</li>
+                <li>Number</li>
+                <li>Phone number</li>
+                <li>Tetx area</li>
+                <li>Checkboxes</li>
+                <li>Radio buttons</li>
+                <li>Dropdown selectors</li>
+                <li>File uploads</li>
+            </ul>
+
+            <h3 style="color:#1d2327;">How the plugin works</h3>
+            <p>After activating the plugin, first access the "settings" page in the SK Forms menu of your dashboard. The first adjustment to make is to define the spam protection for your forms. The recommended method is reCaptcha. To do this, you need to provide the keys supplied by the service, which can be created for free on the service's website at <a href="https://www.google.com/recaptcha/" target="_blank" rel="noopener noreferrer">https://www.google.com/recaptcha/</a>. Another form of spam protection is the use of Akismet. You can also proceed without protection, but this is not recommended. Next, define whether or not you want to log the IP address of the visitor who responds to your forms.</p>
+            <p>You can also choose to receive your form responses via email. To do this, in the form settings, fill in the delivery details and the mailbox to which you want to send the messages (which will also be recorded in your WordPress site's dashboard).</p>
+            <p>Next, go to the "create form" page. Here, you must give your form a title, specify the thank-you message after it is completed, and enter the text for the submit button.</p>
+            <p>After that, in "field palette", add as many fields as you want to your form and click "create form".</p>
+            <p>Your form will be available along with the others you create on the "forms" page of the menu. From this list, you can edit, check the responses received, or even remove the form.</p>
+            <p>When editing a page or post where you want to include the form, simply add a "Simple Form Kit" block and, in that block's settings, specify which of your forms should appear. You can also adjust the form's rendering using the custom CSS field.</p>
+            <p>When reviewing form responses, you'll immediately see the most recent ones in a list, allowing you to directly check details about each one. You can also remove them individually or in groups, and even export them all as a CSV spreadsheet.</p>
+            <p>Additionally, on the "backup" page you can make a backup copy of all your forms and received responses, which can even be used to import them into another WordPress installation.</p>
+
+            <h3 style="color:#1d2327;">Frequently asked questions</h3>
             <p>
-                <strong>Creating a form</strong><br />
-                Go to <em>SK Forms &rarr; Create form</em>, give your form a title, and start adding fields from the palette. You can add text fields, email, textarea, checkboxes, radio buttons, dropdowns and file uploads (each file field can define instructions, a maximum size in MB and an optional list of allowed extensions). Drag to reorder fields as needed.
+                <strong>How many forms can I register? How many responses can I receive for each one?</strong><br />
+                There are no limits to the number of forms and responses received.
             </p>
             <p>
-                <strong>Displaying a form</strong><br />
-                Use the <code>[simplekitforms id="X"]</code> shortcode in any post or page, replacing X with the form ID. Alternatively, use the Gutenberg block "Simple Kit Form" to select and display a form visually.
+                <strong>How do I adapt the form display to my page layout?</strong><br />
+                When adding a form block to your posts or pages, one of the possible settings is the CSS styles used for rendering. You can adjust this CSS individually per block to suit your needs.
             </p>
-            <p>
-                <strong>Viewing responses</strong><br />
-                Go to <em>SK Forms &rarr; Forms</em> and click the number under "Responses" for any form. You can view individual entries in detail or export all responses as a CSV file.
-            </p>
-        </div></div>
-
-        <div style="margin-top:20px;"><div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:30px;line-height:1.8;">
-            <h2 style="margin-top:0;color:#1d2327;">Style</h2>
-            <p>To adjust the appearance of the forms displayed on your site, use the following CSS styles as a reference.</p>
-            <textarea id="simplekitforms-cssreference" style="width:100%;height:250px;" readonly>/* ===================================================
-   Simple Kit Forms &mdash; Default Frontend Styles
-   Use these styles as a starting point to customize
-   the appearance of forms in your theme.
-   =================================================== */
-
-.simplekitforms-form-block {
-    max-width: 600px;
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #f9f9f9;
-}
-
-.simplekitforms-form-block h3 {
-    margin-top: 0;
-}
-
-.simplekitforms-form-block .sf-field {
-    margin-bottom: 16px;
-}
-
-.simplekitforms-form-block .sf-field label {
-    display: block;
-    margin-bottom: 4px;
-    font-weight: 600;
-}
-
-.simplekitforms-form-block .sf-field input[type="text"],
-.simplekitforms-form-block .sf-field input[type="email"],
-.simplekitforms-form-block .sf-field input[type="password"],
-.simplekitforms-form-block .sf-field input[type="url"],
-.simplekitforms-form-block .sf-field input[type="number"],
-.simplekitforms-form-block .sf-field input[type="tel"],
-.simplekitforms-form-block .sf-field textarea,
-.simplekitforms-form-block .sf-field select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
-.simplekitforms-form-block .sf-submit {
-    background: #0073aa;
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.simplekitforms-form-block .sf-submit:hover {
-    background: #005a87;
-}
-
-.simplekitforms-form-block .sf-message {
-    margin-top: 12px;
-    padding: 10px 14px;
-    border-radius: 4px;
-}
-
-.simplekitforms-form-block .sf-message.error {
-    background: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
-.simplekitforms-form-block .sf-message.success {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}</textarea>
         </div></div>
     </div>
     <?php

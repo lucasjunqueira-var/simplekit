@@ -23,20 +23,23 @@ function simplekitdownloads_get_settings_export() {
 }
 
 /**
- * Write the backup JSON directly to a file, streaming table rows in chunks so
- * a large statistics log does not exhaust memory.
+ * Write the backup JSON to a file through the WordPress filesystem API.
+ *
+ * Table rows are still fetched in chunks so a large statistics log does not
+ * exhaust database memory.
  *
  * @return string|WP_Error Backup file path.
  */
 function simplekitdownloads_write_backup_file() {
-    global $wpdb;
+    global $wpdb, $wp_filesystem;
 
     $path = simplekitdownloads_backup_file_path();
 
-    // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
-    $handle = fopen($path, 'w');
-    if (!$handle) {
-        return new WP_Error('skd_backup_write', __('Could not create the backup file in the uploads folder.', 'simplekitdownloads'));
+    if (!function_exists('WP_Filesystem')) {
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+    }
+    if (!$wp_filesystem && !WP_Filesystem()) {
+        return new WP_Error('skd_backup_write', __('Could not initialize the WordPress filesystem.', 'simplekitdownloads'));
     }
 
     $tables = [
@@ -45,25 +48,25 @@ function simplekitdownloads_write_backup_file() {
         'log'       => simplekitdownloads_table('log'),
     ];
 
-    fwrite($handle, '{"version":' . wp_json_encode(SIMPLEKITDOWNLOADS_VERSION));
-    fwrite($handle, ',"exported_at":' . wp_json_encode(current_time('mysql')));
-    fwrite($handle, ',"namespace":"simplekitdownloads"');
-    fwrite($handle, ',"settings":' . wp_json_encode(simplekitdownloads_get_settings_export(), JSON_UNESCAPED_UNICODE));
+    $json  = '{"version":' . wp_json_encode(SIMPLEKITDOWNLOADS_VERSION);
+    $json .= ',"exported_at":' . wp_json_encode(current_time('mysql'));
+    $json .= ',"namespace":"simplekitdownloads"';
+    $json .= ',"settings":' . wp_json_encode(simplekitdownloads_get_settings_export(), JSON_UNESCAPED_UNICODE);
+    $json .= ',"tables":{';
 
     $first_table = true;
-    fwrite($handle, ',"tables":{');
 
     foreach ($tables as $key => $table) {
         if (!$first_table) {
-            fwrite($handle, ',');
+            $json .= ',';
         }
         $first_table = false;
 
-        fwrite($handle, wp_json_encode($key) . ':[');
+        $json .= wp_json_encode($key) . ':[';
 
-        $limit      = 500;
-        $offset     = 0;
-        $first_row  = true;
+        $limit     = 500;
+        $offset    = 0;
+        $first_row = true;
 
         do {
             // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
@@ -76,9 +79,9 @@ function simplekitdownloads_write_backup_file() {
 
             foreach ((array) $rows as $row) {
                 if (!$first_row) {
-                    fwrite($handle, ',');
+                    $json .= ',';
                 }
-                fwrite($handle, wp_json_encode($row, JSON_UNESCAPED_UNICODE));
+                $json .= wp_json_encode($row, JSON_UNESCAPED_UNICODE);
                 $first_row = false;
             }
 
@@ -86,12 +89,14 @@ function simplekitdownloads_write_backup_file() {
             $offset += $limit;
         } while ($count === $limit);
 
-        fwrite($handle, ']');
+        $json .= ']';
     }
 
-    fwrite($handle, '}}');
-    // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
-    fclose($handle);
+    $json .= '}}';
+
+    if (!$wp_filesystem->put_contents($path, $json, FS_CHMOD_FILE)) {
+        return new WP_Error('skd_backup_write', __('Could not create the backup file in the uploads folder.', 'simplekitdownloads'));
+    }
 
     return $path;
 }
@@ -306,7 +311,10 @@ function simplekitdownloads_page_backup() {
     ) {
         check_admin_referer('simplekitdownloads_backup_import');
 
-        if (!isset($_FILES['backup_file']['error']) || (int) $_FILES['backup_file']['error'] !== UPLOAD_ERR_OK) {
+        if (!isset($_FILES['backup_file']['error'])
+            || !isset($_FILES['backup_file']['tmp_name'])
+            || (int) $_FILES['backup_file']['error'] !== UPLOAD_ERR_OK
+        ) {
             $message = __('Error uploading the backup file.', 'simplekitdownloads');
             $type    = 'error';
         } else {
@@ -327,9 +335,11 @@ function simplekitdownloads_page_backup() {
     }
 
     $backup_exists = is_file(simplekitdownloads_backup_file_path());
-    $downloads     = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM %i", simplekitdownloads_table('downloads')));
-    $versions      = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM %i", simplekitdownloads_table('versions')));
-    $log_rows      = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM %i", simplekitdownloads_table('log')));
+    // phpcs:disable WordPress.DB.DirectDatabaseQuery.NoCaching -- read-only counters of the backup screen.
+    $downloads = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM %i", simplekitdownloads_table('downloads')));
+    $versions  = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM %i", simplekitdownloads_table('versions')));
+    $log_rows  = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM %i", simplekitdownloads_table('log')));
+    // phpcs:enable WordPress.DB.DirectDatabaseQuery.NoCaching
     ?>
     <div class="wrap">
         <h1><?php esc_html_e('Backup', 'simplekitdownloads'); ?></h1>

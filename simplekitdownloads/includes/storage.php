@@ -93,6 +93,24 @@ function simplekitdownloads_delete_dir($dir) {
 }
 
 /**
+ * Return the WordPress filesystem instance used by the storage helpers.
+ *
+ * @return WP_Filesystem_Base|false
+ */
+function simplekitdownloads_filesystem() {
+    global $wp_filesystem;
+
+    if (!function_exists('WP_Filesystem')) {
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+    }
+    if (!$wp_filesystem && !WP_Filesystem()) {
+        return false;
+    }
+
+    return $wp_filesystem;
+}
+
+/**
  * Extensions that must never be accepted as a downloadable file.
  */
 function simplekitdownloads_blocked_extensions() {
@@ -222,7 +240,8 @@ function simplekitdownloads_handle_upload($file, $download_id, $version_id) {
             $counter++;
         }
 
-        if (@rename($absolute, $target)) {
+        $filesystem = simplekitdownloads_filesystem();
+        if ($filesystem && $filesystem->move($absolute, $target, true)) {
             $absolute = $target;
         }
     }
@@ -353,11 +372,14 @@ function simplekitdownloads_repair_version_file($version) {
         }
 
         if (realpath($target) !== $source_real) {
-            if (!@rename($source, $target) && !@copy($source, $target)) {
+            $filesystem = simplekitdownloads_filesystem();
+            $moved      = $filesystem ? $filesystem->move($source, $target, true) : false;
+
+            if (!$moved && !@copy($source, $target)) {
                 return false;
             }
             if (is_file($source) && realpath($source) !== realpath($target)) {
-                @unlink($source);
+                wp_delete_file($source);
             }
         }
 

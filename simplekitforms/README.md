@@ -10,11 +10,31 @@ This plugin allows for the quick creation of forms that can be added to pages an
 - Export responses as spreadsheets.
 - Spam protection using reCaptch or Akismet.
 
+## Available fields
+
+The forms created can contain various types of information:
+
+- Text
+- E-mail
+- Password
+- URL
+- Number
+- Phone number
+- Tetx area
+- Checkboxes
+- Radio buttons
+- Dropdown selectors
+- File uploads
+
 ## How the plugin works
 
 After activating the plugin, first access the "settings" page in the SK Forms menu of your dashboard. The first adjustment to make is to define the spam protection for your forms. The recommended method is reCaptcha. To do this, you need to provide the keys supplied by the service, which can be created for free on the service's website at [https://www.google.com/recaptcha/](https://www.google.com/recaptcha/). Another form of spam protection is the use of Akismet. You can also proceed without protection, but this is not recommended. Next, define whether or not you want to log the IP address of the visitor who responds to your forms.
 
 <img width="1920" height="973" alt="forms01" src="https://github.com/user-attachments/assets/b86d10ce-5e95-4fde-8e23-8149c52f0098" />
+
+You can also choose to receive your form responses via email. To do this, in the form settings, fill in the delivery details and the mailbox to which you want to send the messages (which will also be recorded in your WordPress site's dashboard).
+
+[IMAGE HERE]
 
 Next, go to the "create form" page. Here, you must give your form a title, specify the thank-you message after it is completed, and enter the text for the submit button.
 

@@ -3,7 +3,7 @@ Contributors: chokito76
 Tags: pdf, pdf.js, embed, document viewer, gutenberg
 Requires at least: 6.8
 Tested up to: 7.1
-Stable tag: 1.0.0
+Stable tag: 1.4.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -67,6 +67,9 @@ to be loaded, especially assets/pdfjs/build/pdf.worker.mjs.
 3. Add the "Simple Kit PDF" block to a post or page.
 
 == Changelog ==
+
+= 1.4.0 =
+* Simple Kit plugins normalization
 
 = 1.0.0 =
 * Initial release.

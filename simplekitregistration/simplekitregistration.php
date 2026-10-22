@@ -3,7 +3,7 @@
  * Plugin Name: Simple Kit Registration
  * Plugin URI:  https://github.com/lucasjunqueira-var/simplekit
  * Description: Collect registration data (including file uploads) through forms and let selected evaluators review the submissions on restricted pages of your site.
- * Version:     1.3.2
+ * Version:     1.4.0
  * Requires at least: 6.8
  * Tested up to: 7.1
  * Requires PHP: 7.4
@@ -16,7 +16,7 @@
 
 defined('ABSPATH') or exit;
 
-define('SIMPLEKITREGISTRATION_VERSION', '1.3.2');
+define('SIMPLEKITREGISTRATION_VERSION', '1.4.0');
 define('SIMPLEKITREGISTRATION_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SIMPLEKITREGISTRATION_PLUGIN_URL', plugin_dir_url(__FILE__));
 

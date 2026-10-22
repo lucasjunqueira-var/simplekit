@@ -3,7 +3,7 @@
  * Plugin Name: Simple Kit Forms
  * Plugin URI:  https://github.com/lucasjunqueira-var/simplekit
  * Description: Create forms and manage responses directly from your dashboard.
- * Version:     1.3.0
+ * Version:     1.4.0
  * Requires at least: 6.8
  * Tested up to: 7.1
  * Requires PHP: 7.4
@@ -16,7 +16,7 @@
 
 defined('ABSPATH') or exit;
 
-define('SIMPLEKITFORMS_VERSION', '1.3.0');
+define('SIMPLEKITFORMS_VERSION', '1.4.0');
 define('SIMPLEKITFORMS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SIMPLEKITFORMS_PLUGIN_URL', plugin_dir_url(__FILE__));
 

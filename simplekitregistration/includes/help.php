@@ -13,64 +13,40 @@ function simplekitregistration_page_help() {
         <h1><?php esc_html_e('Help & Documentation', 'simplekitregistration'); ?></h1>
 
         <div style="margin-top:20px;background:#fff;border:1px solid #ddd;border-radius:8px;padding:30px;line-height:1.8;">
-            <h2 style="margin-top:0;color:#1d2327;"><?php esc_html_e('The Simple Kit Registration Plugin', 'simplekitregistration'); ?></h2>
-            <p><?php esc_html_e('Simple Kit Registration collects registration data through forms that may include file uploads and lets selected evaluators review the received responses on restricted pages of your site, without accessing the WordPress dashboard.', 'simplekitregistration'); ?></p>
-            <p><?php esc_html_e('All data and uploaded files stay on your own server.', 'simplekitregistration'); ?></p>
+            <h2 style="margin-top:0;color:#1d2327;"><?php esc_html_e('Simple Kit Registrarion', 'simplekitregistration'); ?></h2>
+            <p><?php esc_html_e('This plugin aims to provide a simplified way to register applications on your website. With it, you can create forms that can be filled with information about the applications and also receive files, such as PDFs. The plugin also provides a tool to forward applications to independent reviewers, who do not need access to your website\'s editing panel.', 'simplekitregistration'); ?></p>
 
-            <h3 style="color:#1d2327;"><?php esc_html_e('How to use', 'simplekitregistration'); ?></h3>
-            <p>
-                <strong><?php esc_html_e('Creating a form', 'simplekitregistration'); ?></strong><br>
-                <?php esc_html_e('Go to SK Registration &rarr; Create form, give your form a title and a form code, then add fields from the palette. Besides text, textarea, checkboxes, radio buttons and dropdowns, you can add one or more File fields.', 'simplekitregistration'); ?>
-            </p>
-            <p>
-                <strong><?php esc_html_e('The form code', 'simplekitregistration'); ?></strong><br>
-                <?php esc_html_e('The form code is an alphanumeric identifier without spaces or special characters. It is used as the name of the folder that stores the uploaded files, and cannot be changed after the form receives its first response.', 'simplekitregistration'); ?>
-            </p>
-            <p>
-                <strong><?php esc_html_e('File fields', 'simplekitregistration'); ?></strong><br>
-                <?php esc_html_e('Each file field can define instructions, a maximum size in MB and a list of allowed extensions. Leave the extensions empty to accept any file type. During a submission, files larger than the configured limit or with a disallowed extension are rejected.', 'simplekitregistration'); ?>
-            </p>
-            <p>
-                <strong><?php esc_html_e('Displaying a form', 'simplekitregistration'); ?></strong><br>
-                <?php
-                /* translators: %s: shortcode example. */
-                echo esc_html(sprintf(__('Use the block "Simple Kit Registration Form" in the editor, or the shortcode %s in any post or page.', 'simplekitregistration'), '[simplekitregistration code="my-form"]'));
-                ?>
-            </p>
-            <p>
-                <strong><?php esc_html_e('Viewing responses in the dashboard', 'simplekitregistration'); ?></strong><br>
-                <?php esc_html_e('Go to SK Registration &rarr; Forms and click the number under "Responses". You can open a response in detail, download its files and export the responses as CSV.', 'simplekitregistration'); ?>
-            </p>
-            <p>
-                <strong><?php esc_html_e('Messages', 'simplekitregistration'); ?></strong><br>
-                <?php esc_html_e('In the response details, both in the dashboard and on the restricted page, anyone allowed to view the response can add comment messages. Each message records the author (WordPress user name/e-mail or the evaluator e-mail) and the date/time, and is shown below the response in the order it was received. Messages are permanent: they cannot be edited or deleted.', 'simplekitregistration'); ?>
-            </p>
-            <p>
-                <strong><?php esc_html_e('Settings', 'simplekitregistration'); ?></strong><br>
-                <?php esc_html_e('Go to SK Registration &rarr; Settings to customize every text displayed to the evaluators on the restricted pages (login, form list, responses list, response details and messages) and every text written to the export spreadsheets (the column headers of the responses CSV and the column headers and row labels of the form backup CSV). The configuration is global (it applies to all forms). Leave a field empty to restore its default text.', 'simplekitregistration'); ?>
-            </p>
-            <p>
-                <strong><?php esc_html_e('Evaluators', 'simplekitregistration'); ?></strong><br>
-                <?php esc_html_e('Go to SK Registration &rarr; Evaluators to register the e-mail and password of each evaluator and select which forms each one may review. Passwords are stored encrypted (hashed) in the plugin table.', 'simplekitregistration'); ?>
-            </p>
-            <p>
-                <strong><?php esc_html_e('Restricted pages', 'simplekitregistration'); ?></strong><br>
-                <?php esc_html_e('Add the block "Simple Kit Registration Access" to any page. Visitors see a login form; after a successful login a cookie is set for one week and the block lists the forms that the evaluator may access. Clicking a form shows its responses and clicking a response opens the full content in a new tab.', 'simplekitregistration'); ?>
-            </p>
-            <p>
-                <strong><?php esc_html_e('Backup', 'simplekitregistration'); ?></strong><br>
-                <?php esc_html_e('The Backup page generates a ZIP file with all the plugin data and uploaded files, and can also import a previously generated backup. The same ZIP is generated automatically when the plugin is deactivated and restored when it is activated again.', 'simplekitregistration'); ?>
-            </p>
-            <p>
-                <strong><?php esc_html_e('Individual form backup', 'simplekitregistration'); ?></strong><br>
-                <?php esc_html_e('The Backup page also exports a single form as a ZIP file containing one CSV spreadsheet with all the responses and all the messages of that form (ready to open in Excel) plus the complete upload folder with the files of every response. This individual export is export only: it cannot be imported back.', 'simplekitregistration'); ?>
-            </p>
+            <h3 style="color:#1d2327;"><?php esc_html_e('Highlights', 'simplekitregistration'); ?></h3>
+            <ul>
+                <li><?php esc_html_e('Create forms to receive applications.', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('Customize with various types of information, including file uploads.', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('Allow evaluation of responses even by selected individuals outside your team, with password access.', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('Maintain as many simultaneous applications as needed.', 'simplekitregistration'); ?></li>
+            </ul>
 
-            <h3 style="color:#1d2327;"><?php esc_html_e('Upload folder', 'simplekitregistration'); ?></h3>
-            <p>
-                <?php esc_html_e('Uploaded files are stored under the WordPress uploads directory, following the layout below:', 'simplekitregistration'); ?><br>
-                <code>uploads/simplekitregistration/<form-code>/<response-id>/<file></code>
-            </p>
+            <h3 style="color:#1d2327;"><?php esc_html_e('Available fields', 'simplekitregistration'); ?></h3>
+            <p><?php esc_html_e('The forms created can contain various types of information:', 'simplekitregistration'); ?></p>
+            <ul>
+                <li><?php esc_html_e('Text', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('E-mail', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('Password', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('URL', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('Number', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('Phone number', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('Tetx area', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('Checkboxes', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('Radio buttons', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('Dropdown selectors', 'simplekitregistration'); ?></li>
+                <li><?php esc_html_e('File uploads', 'simplekitregistration'); ?></li>
+            </ul>
+
+            <h3 style="color:#1d2327;"><?php esc_html_e('How the plugin works', 'simplekitregistration'); ?></h3>
+            <p><?php esc_html_e('Start by configuring the interface text displayed for both applications and external reviewers.', 'simplekitregistration'); ?></p>
+            <p><?php esc_html_e('Next, create your registration form. You can maintain as many forms as you want simultaneously.', 'simplekitregistration'); ?></p>
+            <p><?php esc_html_e('Create your page or post and include your signup form using the corresponding block.', 'simplekitregistration'); ?></p>
+            <p><?php esc_html_e('Register reviewers, indicating which forms they will have access to and what their access passwords will be.', 'simplekitregistration'); ?></p>
+            <p><?php esc_html_e('Create your access page or post for reviewers and include the corresponding block. When they access it, they will be asked for the email and password you created so they can access the entries. Reviewers can leave as many comments as they want on each entry for a more detailed evaluation. You can, through the WordPress dashboard, track entries, reviewer comments, and even leave your own impressions, all recorded with date and time for validation.', 'simplekitregistration'); ?></p>
+            <p><?php esc_html_e('And you can even export all your forms or just a selected one to keep a backup copy of all registrations with their information and files.', 'simplekitregistration'); ?></p>
         </div>
     </div>
     <?php

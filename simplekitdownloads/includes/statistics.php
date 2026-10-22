@@ -104,6 +104,7 @@ function simplekitdownloads_render_statistics_overview() {
         $log_table
     ));
 
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- read-only counter of the statistics screen.
     $versions_total = (int) $wpdb->get_var($wpdb->prepare(
         "SELECT COUNT(*) FROM %i",
         simplekitdownloads_table('versions')
@@ -494,26 +495,37 @@ function simplekitdownloads_export_full_log($output, $download_id = 0, $download
 
     fputcsv($output, ['ID', 'Download', 'Version', 'IP', 'Date/Time'], ';', '"', '');
 
-    $where  = '';
-    $params = [];
-    if ($download_id > 0) {
-        $where    = 'WHERE download_id = %d';
-        $params[] = $download_id;
-    } elseif ($download_name !== '') {
-        $where    = 'WHERE download_name = %s';
-        $params[] = $download_name;
-    }
-
     $limit  = 1000;
     $offset = 0;
 
     do {
-        $args = array_merge([$log_table], $params, [$limit, $offset]);
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
-        $rows = $wpdb->get_results($wpdb->prepare(
-            "SELECT id, download_name, version_label, ip, created_at FROM %i $where ORDER BY id ASC LIMIT %d OFFSET %d",
-            $args
-        ));
+        if ($download_id > 0) {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT id, download_name, version_label, ip, created_at FROM %i WHERE download_id = %d ORDER BY id ASC LIMIT %d OFFSET %d",
+                $log_table,
+                $download_id,
+                $limit,
+                $offset
+            ));
+        } elseif ($download_name !== '') {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT id, download_name, version_label, ip, created_at FROM %i WHERE download_name = %s ORDER BY id ASC LIMIT %d OFFSET %d",
+                $log_table,
+                $download_name,
+                $limit,
+                $offset
+            ));
+        } else {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.DirectQuery
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT id, download_name, version_label, ip, created_at FROM %i ORDER BY id ASC LIMIT %d OFFSET %d",
+                $log_table,
+                $limit,
+                $offset
+            ));
+        }
 
         foreach ((array) $rows as $row) {
             fputcsv($output, [

@@ -3,7 +3,7 @@
  * Plugin Name: Simple Kit Mailing
  * Plugin URI:  https://github.com/lucasjunqueira-var/simplekit
  * Description: Manage contact registration and send messages to a limited numbers of recipients.
- * Version:     1.0.0
+ * Version:     1.4.0
  * Requires at least: 6.8
  * Tested up to: 7.1
  * Requires PHP: 7.4
@@ -16,7 +16,7 @@
 
 defined('ABSPATH') or exit;
 
-define('SIMPLEKITMAILING_VERSION', '2.0.0');
+define('SIMPLEKITMAILING_VERSION', '1.4.0');
 define('SIMPLEKITMAILING_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SIMPLEKITMAILING_PLUGIN_URL', plugin_dir_url(__FILE__));
 

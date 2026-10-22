@@ -3,10 +3,11 @@ Contributors: lucasjunqueira
 Tags: forms, registration, upload, evaluators, submissions
 Requires at least: 6.8
 Tested up to: 7.1
+Stable tag: 1.4.0
 Requires PHP: 7.4
-Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Donate link: https://www.paypal.com/donate?token=v4gcsUlC7vfpl1Ah1hB22_b3vEKPPsimiFHbrFsqccIAUPdaYtAy_f_UkJWTT7uoeEfRfX2QRUd8sRaY
 
 Collect registration data (including file uploads) through forms and let selected evaluators review the submissions on restricted pages of your site.
 

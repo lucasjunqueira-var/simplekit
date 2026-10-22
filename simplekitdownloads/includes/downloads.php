@@ -200,11 +200,13 @@ function simplekitdownloads_redirect($url, $message = '', $type = 'success') {
 }
 
 function simplekitdownloads_admin_notice() {
+    // phpcs:disable WordPress.Security.NonceVerification.Recommended -- read-only notice flags added by simplekitdownloads_redirect().
     if (!isset($_GET['skd_message'])) {
         return;
     }
     $message = sanitize_text_field(wp_unslash($_GET['skd_message']));
     $type    = isset($_GET['skd_type']) ? sanitize_text_field(wp_unslash($_GET['skd_type'])) : 'success';
+    // phpcs:enable WordPress.Security.NonceVerification.Recommended
     $class   = ($type === 'error') ? 'notice-error' : 'notice-success';
 
     echo '<div class="notice ' . esc_attr($class) . ' is-dismissible"><p>' . esc_html($message) . '</p></div>';
@@ -235,6 +237,7 @@ function simplekitdownloads_handle_save_download() {
             simplekitdownloads_redirect(simplekitdownloads_admin_url(), __('Download not found.', 'simplekitdownloads'), 'error');
         }
 
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- write query on a plugin table without an object cache layer.
         $wpdb->update(
             $table,
             [
@@ -288,8 +291,10 @@ function simplekitdownloads_handle_delete_download() {
     }
 
     // Remove version rows and their files; log rows keep the snapshot name.
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- delete query on a plugin table without an object cache layer.
     $wpdb->delete(simplekitdownloads_table('versions'), ['download_id' => $download_id]);
     simplekitdownloads_delete_download_files($download_id);
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- delete query on a plugin table without an object cache layer.
     $wpdb->delete(simplekitdownloads_table('downloads'), ['id' => $download_id]);
 
     simplekitdownloads_redirect(simplekitdownloads_admin_url(), __('Download deleted. Its statistics were kept.', 'simplekitdownloads'));
@@ -316,7 +321,7 @@ function simplekitdownloads_handle_add_version() {
         simplekitdownloads_redirect(simplekitdownloads_admin_url(), __('Download not found.', 'simplekitdownloads'), 'error');
     }
 
-    $label = simplekitdownloads_validate_version_label(isset($_POST['version']) ? wp_unslash($_POST['version']) : '');
+    $label = simplekitdownloads_validate_version_label(isset($_POST['version']) ? sanitize_text_field(wp_unslash($_POST['version'])) : '');
     if (is_wp_error($label)) {
         simplekitdownloads_redirect($edit_url, $label->get_error_message(), 'error');
     }
@@ -341,13 +346,15 @@ function simplekitdownloads_handle_add_version() {
     $version_id = (int) $wpdb->insert_id;
 
     if ($source === 'url') {
-        $url = simplekitdownloads_validate_internal_url(isset($_POST['url']) ? wp_unslash($_POST['url']) : '');
+        $url = simplekitdownloads_validate_internal_url(isset($_POST['url']) ? esc_url_raw(wp_unslash($_POST['url'])) : '');
         if (is_wp_error($url)) {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- delete query on a plugin table without an object cache layer.
             $wpdb->delete($versions_table, ['id' => $version_id]);
             simplekitdownloads_redirect($edit_url, $url->get_error_message(), 'error');
         }
 
         $path = wp_parse_url($url, PHP_URL_PATH);
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- write query on a plugin table without an object cache layer.
         $wpdb->update($versions_table, [
             'file_url'  => $url,
             'file_name' => $path ? basename($path) : '',
@@ -358,6 +365,7 @@ function simplekitdownloads_handle_add_version() {
     }
 
     if (empty($_FILES['file']) || empty($_FILES['file']['name'])) {
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- delete query on a plugin table without an object cache layer.
         $wpdb->delete($versions_table, ['id' => $version_id]);
         simplekitdownloads_redirect($edit_url, __('Please select a file to upload.', 'simplekitdownloads'), 'error');
     }
@@ -365,11 +373,13 @@ function simplekitdownloads_handle_add_version() {
     // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- file array handled by wp_handle_upload.
     $uploaded = simplekitdownloads_handle_upload($_FILES['file'], $download_id, $version_id);
     if (is_wp_error($uploaded)) {
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- delete query on a plugin table without an object cache layer.
         $wpdb->delete($versions_table, ['id' => $version_id]);
         simplekitdownloads_delete_version_files($download_id, $version_id);
         simplekitdownloads_redirect($edit_url, $uploaded->get_error_message(), 'error');
     }
 
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- write query on a plugin table without an object cache layer.
     $wpdb->update($versions_table, [
         'file_path' => $uploaded['file_path'],
         'file_name' => $uploaded['file_name'],
@@ -406,12 +416,13 @@ function simplekitdownloads_handle_update_version() {
     $old_source  = (string) $version->source;
 
     if ($source === 'url') {
-        $url = simplekitdownloads_validate_internal_url(isset($_POST['url']) ? wp_unslash($_POST['url']) : '');
+        $url = simplekitdownloads_validate_internal_url(isset($_POST['url']) ? esc_url_raw(wp_unslash($_POST['url'])) : '');
         if (is_wp_error($url)) {
             simplekitdownloads_redirect($edit_url, $url->get_error_message(), 'error');
         }
 
         $path = wp_parse_url($url, PHP_URL_PATH);
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- write query on a plugin table without an object cache layer.
         $wpdb->update($versions_table, [
             'source'    => 'url',
             'file_url'  => $url,
@@ -431,6 +442,7 @@ function simplekitdownloads_handle_update_version() {
 
     if (!$has_new_file) {
         if ($old_source === 'upload') {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- write query on a plugin table without an object cache layer.
             $wpdb->update($versions_table, ['source' => 'upload'], ['id' => $version_id]);
             simplekitdownloads_redirect($edit_url, __('No new file was selected. The current file was kept.', 'simplekitdownloads'));
         }
@@ -443,6 +455,7 @@ function simplekitdownloads_handle_update_version() {
         simplekitdownloads_redirect($edit_url, $uploaded->get_error_message(), 'error');
     }
 
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- write query on a plugin table without an object cache layer.
     $wpdb->update($versions_table, [
         'source'    => 'upload',
         'file_path' => $uploaded['file_path'],
@@ -482,6 +495,7 @@ function simplekitdownloads_handle_delete_version() {
 
     $download_id = (int) $version->download_id;
 
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- delete query on a plugin table without an object cache layer.
     $wpdb->delete($versions_table, ['id' => $version_id]);
     simplekitdownloads_delete_version_files($download_id, $version_id);
 
@@ -499,8 +513,10 @@ function simplekitdownloads_page_files() {
         wp_die(esc_html__('Access denied.', 'simplekitdownloads'));
     }
 
+    // phpcs:disable WordPress.Security.NonceVerification.Recommended -- read-only screen routing.
     $action = isset($_GET['action']) ? sanitize_text_field(wp_unslash($_GET['action'])) : '';
     $id     = isset($_GET['id']) ? absint($_GET['id']) : 0;
+    // phpcs:enable WordPress.Security.NonceVerification.Recommended
 
     simplekitdownloads_admin_notice();
 
@@ -636,6 +652,7 @@ function simplekitdownloads_render_download_editor($download_id) {
         return;
     }
 
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only version selection.
     $version_id      = isset($_GET['version']) ? absint($_GET['version']) : 0;
     $editing_version = $version_id > 0 ? simplekitdownloads_get_version($version_id) : null;
     if ($editing_version && (int) $editing_version->download_id !== (int) $download_id) {
