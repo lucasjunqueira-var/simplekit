@@ -23,59 +23,24 @@ function simplekitredirect_page_help() {
         <div class="simplekitredirect-card">
             <h2><?php esc_html_e('Simple Kit Redirect', 'simplekitredirect'); ?></h2>
             <p>
-                <?php esc_html_e('This plugin adds a redirect field to posts and pages. Fill in a new address and every visit to that content is sent there. Leave the field empty and the content is displayed normally.', 'simplekitredirect'); ?>
+                <?php esc_html_e('Send posts and pages to a new address, configured individually in the WordPress editor.', 'simplekitredirect'); ?>
             </p>
 
-            <h3><?php esc_html_e('How to use', 'simplekitredirect'); ?></h3>
-            <ol>
-                <li><?php esc_html_e('Open the post or page in the editor.', 'simplekitredirect'); ?></li>
-                <li><?php esc_html_e('Find the "Simple Kit Redirect" box in the sidebar.', 'simplekitredirect'); ?></li>
-                <li><?php esc_html_e('Type the destination address and choose the redirect type.', 'simplekitredirect'); ?></li>
-                <li><?php esc_html_e('Save or update the content.', 'simplekitredirect'); ?></li>
-            </ol>
-
-            <h3><?php esc_html_e('Accepted addresses', 'simplekitredirect'); ?></h3>
+            <h3><?php esc_html_e('Highlights', 'simplekitredirect'); ?></h3>
             <ul>
-                <li><?php esc_html_e('Absolute addresses, including other domains: https://example.com/new-page', 'simplekitredirect'); ?></li>
-                <li><?php esc_html_e('Paths starting with a slash, resolved against this site address: /new-page', 'simplekitredirect'); ?></li>
-                <li><?php esc_html_e('Protocol-relative addresses: //example.com/new-page', 'simplekitredirect'); ?></li>
-                <li><?php esc_html_e('Anything else (javascript:, data:, mailto:, ftp:) is rejected.', 'simplekitredirect'); ?></li>
+                <li><?php esc_html_e('Easily redirect access to a page or post to any URL you choose.', 'simplekitredirect'); ?></li>
             </ul>
 
-            <h3><?php esc_html_e('Redirect types', 'simplekitredirect'); ?></h3>
-            <ul>
-                <li><?php esc_html_e('302 - Temporary: the default. Browsers do not keep it for long, so the destination can be changed later.', 'simplekitredirect'); ?></li>
-                <li><?php esc_html_e('301 - Permanent: browsers and search engines may cache it for a long time. Visitors may keep going to the old destination even after the field is cleared.', 'simplekitredirect'); ?></li>
-            </ul>
-
-            <h3><?php esc_html_e('Who still sees the original content', 'simplekitredirect'); ?></h3>
+            <h3><?php esc_html_e('How the plugin works', 'simplekitredirect'); ?></h3>
             <p>
-                <?php esc_html_e('Previews, REST requests, feeds, robots.txt, sitemaps and 404 requests are never redirected. Password-protected content also keeps showing its password form.', 'simplekitredirect'); ?>
+                <?php esc_html_e('After activating the plugin, your posts and pages will have a new setting that allows you to specify a redirect URL. Leave it blank (the default) to display the page or post itself.', 'simplekitredirect'); ?>
             </p>
+
+            <h3><?php esc_html_e('Frequently asked questions', 'simplekitredirect'); ?></h3>
             <p>
-                <?php esc_html_e('Logged-in editors are redirected like any visitor. To open the original content, add ?simplekitredirect=0 to the address. This only works for users who can edit the content.', 'simplekitredirect'); ?>
+                <strong><?php esc_html_e('What happens to parameters sent in the URL of the original page?', 'simplekitredirect'); ?></strong><br />
+                <?php esc_html_e('If the redirect URL you specify contains its own parameters, those will be used. If the specified redirect URL does not include any "GET" parameters, those that were passed to the original address will be forwarded to it.', 'simplekitredirect'); ?>
             </p>
-
-            <h3><?php esc_html_e('Query strings', 'simplekitredirect'); ?></h3>
-            <p>
-                <?php esc_html_e('When the destination has no query string, the query string of the original request is appended by default. Use the simplekitredirect_preserve_query filter to disable this behavior.', 'simplekitredirect'); ?>
-            </p>
-
-            <h3><?php esc_html_e('Developer filters', 'simplekitredirect'); ?></h3>
-            <ul>
-                <li><code>simplekitredirect_post_types</code> - <?php esc_html_e('changes which post types can be redirected. Default: post and page.', 'simplekitredirect'); ?></li>
-                <li><code>simplekitredirect_should_redirect</code> - <?php esc_html_e('decides at request time whether the redirect should happen.', 'simplekitredirect'); ?></li>
-                <li><code>simplekitredirect_preserve_query</code> - <?php esc_html_e('enables or disables query string preservation.', 'simplekitredirect'); ?></li>
-                <li><code>simplekitredirect_target_url</code> - <?php esc_html_e('changes the final destination before it is validated and sent.', 'simplekitredirect'); ?></li>
-            </ul>
-
-            <h3><?php esc_html_e('Troubleshooting', 'simplekitredirect'); ?></h3>
-            <ul>
-                <li><?php esc_html_e('Nothing happens: confirm the field was saved, the target is a full http(s) address or a path starting with a slash, and the destination is not the same address as the content.', 'simplekitredirect'); ?></li>
-                <li><?php esc_html_e('Headers already sent: another plugin or the theme printed output before WordPress could send the redirect. Test with other plugins disabled.', 'simplekitredirect'); ?></li>
-                <li><?php esc_html_e('A 301 keeps redirecting after removal: the browser cached it. Clear the browser cache or test in a private window, and prefer 302 while testing.', 'simplekitredirect'); ?></li>
-                <li><?php esc_html_e('Page cache: purge the cache after changing a redirect.', 'simplekitredirect'); ?></li>
-            </ul>
         </div>
     </div>
     <?php

@@ -15,50 +15,61 @@ function simplekitaccessibility_page_help() {
         <div class="skacc-card">
             <h2><?php esc_html_e('Simple Kit Accessibility', 'simplekitaccessibility'); ?></h2>
             <p>
-                <?php esc_html_e('Add reading tools to your site: text size, line spacing, letter spacing and high contrast. Visitors control everything from a small floating panel.', 'simplekitaccessibility'); ?>
+                <?php esc_html_e('Include accessibility tools for the text on your website.', 'simplekitaccessibility'); ?>
             </p>
 
             <h3><?php esc_html_e('Highlights', 'simplekitaccessibility'); ?></h3>
             <ul>
-                <li><?php esc_html_e('Four independent adjustments, each with increase, decrease and reset actions.', 'simplekitaccessibility'); ?></li>
-                <li><?php esc_html_e('Floating button in eight positions, with configurable size, shape, colors, image and texts.', 'simplekitaccessibility'); ?></li>
-                <li><?php esc_html_e('A public JavaScript API so any element of the page can drive the adjustments.', 'simplekitaccessibility'); ?></li>
-                <li><?php esc_html_e('The button can be hidden on individual posts, pages or any public custom post type.', 'simplekitaccessibility'); ?></li>
+                <li><?php esc_html_e('Four adjustments with increase, decrease and reset: text size, line spacing and letter spacing, plus a high contrast toggle.', 'simplekitaccessibility'); ?></li>
+                <li><?php esc_html_e('Optional floating button in eight positions, with configurable size, shape, colors, optional image and optional text.', 'simplekitaccessibility'); ?></li>
+                <li><?php esc_html_e('Works with themes that declare sizes in pixels, not only with themes based on rem or em.', 'simplekitaccessibility'); ?></li>
+                <li><?php esc_html_e('Implements JavaScript methods so that your theme can use the accessibility features, even if the floating button is not enabled.', 'simplekitaccessibility'); ?></li>
             </ul>
 
             <h3><?php esc_html_e('How the plugin works', 'simplekitaccessibility'); ?></h3>
             <p>
-                <?php esc_html_e('Configure the floating button and the panel on the Setup page. The adjustments are applied by adding classes to the html element, so no page reload is needed.', 'simplekitaccessibility'); ?>
+                <?php esc_html_e('After activating the plugin, open the settings page in the SK Accessibility menu and choose whether and where the button should appear.', 'simplekitaccessibility'); ?>
             </p>
             <p>
-                <?php esc_html_e('By default the settings of each visitor are not saved: every new page starts from the original state. Change "Remember choices" on the Setup page to keep the choices in the browser.', 'simplekitaccessibility'); ?>
+                <?php esc_html_e('Adjust the button: optional text, accessible name, optional image, size, shape, background color, text color and hover color. When neither an image nor a text is provided, the plugin uses the universal access icon.', 'simplekitaccessibility'); ?>
             </p>
             <p>
-                <?php esc_html_e('The text size can be applied by CSS selectors (default) or by measuring each text element in the browser. The measured method preserves the sizes defined by themes that use pixels and by page builders, at the cost of a little more processing when the page changes.', 'simplekitaccessibility'); ?>
+                <?php esc_html_e('Configure the panel: background, text and border colors, font size, width and corner radius. You can also replace the texts shown in the panel, from its title to the labels of each action.', 'simplekitaccessibility'); ?>
             </p>
             <p>
-                <?php esc_html_e('Positions anchored to a side use the edge distances. Positions centered on an axis use the center shift to move the button away from the center of that axis; negative values move it up or to the left.', 'simplekitaccessibility'); ?>
-            </p>
-            <p>
-                <?php esc_html_e('To hide the button on a specific content, uncheck the option in the Simple Kit Accessibility box of the editor sidebar.', 'simplekitaccessibility'); ?>
+                <?php esc_html_e('Even if you use the floating button by default on your site, it is possible to prevent it from being displayed on an individual page or post basis.', 'simplekitaccessibility'); ?>
             </p>
 
             <h3><?php esc_html_e('Custom triggers', 'simplekitaccessibility'); ?></h3>
             <p>
-                <?php esc_html_e('Add the data-skacc-action attribute to any element, or use the shortcode, to create your own controls:', 'simplekitaccessibility'); ?>
+                <?php esc_html_e('Any element of the page can drive the adjustments through the data-skacc-action attribute:', 'simplekitaccessibility'); ?>
             </p>
             <p><code><button data-skacc-action="font-up">A+</button></code></p>
-            <p><code>[simplekitaccessibility action="contrast" label="High contrast"]</code></p>
+            <p><code><button data-skacc-action="contrast">High contrast</button></code></p>
+            <p>
+                <?php esc_html_e('The same result is available as a shortcode:', 'simplekitaccessibility'); ?>
+            </p>
+            <p><code>[simplekitaccessibility action="font-up" label="A+"]</code></p>
             <p>
                 <?php esc_html_e('Available actions: font-up, font-down, font-reset, line-up, line-down, line-reset, letter-up, letter-down, letter-reset, contrast, reset-all and panel.', 'simplekitaccessibility'); ?>
             </p>
 
-            <h3><?php esc_html_e('JavaScript API', 'simplekitaccessibility'); ?></h3>
-            <p><code>window.simplekitaccessibility.increaseFont()</code></p>
-            <p><code>window.simplekitaccessibility.setContrast(true)</code></p>
-            <p><code>window.simplekitaccessibility.getState()</code></p>
+            <h3><?php esc_html_e('Frequently asked questions', 'simplekitaccessibility'); ?></h3>
             <p>
-                <?php esc_html_e('The API is available on every page where the plugin is enabled, even when the floating button is hidden.', 'simplekitaccessibility'); ?>
+                <strong><?php esc_html_e('Does the plugin change the theme files?', 'simplekitaccessibility'); ?></strong><br />
+                <?php esc_html_e('No. The adjustments are applied by classes on the html element and, in the measured method, by inline font sizes that are restored when the visitor returns to the original state.', 'simplekitaccessibility'); ?>
+            </p>
+            <p>
+                <strong><?php esc_html_e('Are the visitor choices sent to the server?', 'simplekitaccessibility'); ?></strong><br />
+                <?php esc_html_e('No. When the "Remember choices" option is enabled, the state is stored only in the browser, using local or session storage.', 'simplekitaccessibility'); ?>
+            </p>
+            <p>
+                <strong><?php esc_html_e('Why does the text size not change on some themes?', 'simplekitaccessibility'); ?></strong><br />
+                <?php esc_html_e('The default method multiplies the size inherited from the parent element. Themes that declare sizes in pixels keep working, but the original size of each element is not preserved. On those sites, switch the text size method to "Measured per element". A few very specific cases may still need rules in the Custom CSS field.', 'simplekitaccessibility'); ?>
+            </p>
+            <p>
+                <strong><?php esc_html_e('Can I use the plugin with a page builder?', 'simplekitaccessibility'); ?></strong><br />
+                <?php esc_html_e('Yes. The measured method was designed for pages with inline sizes, which is the usual output of builders such as Elementor and Divi. The text containers used by the adjustments can also be extended with the simplekitaccessibility_text_selectors filter.', 'simplekitaccessibility'); ?>
             </p>
         </div>
     </div>
