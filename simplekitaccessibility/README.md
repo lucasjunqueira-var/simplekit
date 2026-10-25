@@ -1,43 +1,29 @@
 # Simple Kit Accessibility
 
-Add reading tools to the pages and posts of your website: text size, line spacing, letter spacing and high contrast, controlled from a small floating panel.
+Include accessibility tools for the text on your website.
 
 ## Highlights
 
 - Four adjustments with increase, decrease and reset: text size, line spacing and letter spacing, plus a high contrast toggle.
-- Floating button in eight positions, with configurable size, shape, colors, optional image and optional text.
+- Optional floating button in eight positions, with configurable size, shape, colors, optional image and optional text.
 - Works with themes that declare sizes in pixels, not only with themes based on rem or em.
-- Optional per browser memory, and a per content switch to hide the button.
+- Implements JavaScript methods so that your theme can use the accessibility features, even if the floating button is not enabled.
 
 ## How the plugin works
 
-After activating the plugin, open the Setup page in the SK Accessibility menu and choose where the button appears.
+After activating the plugin, open the settings page in the SK Accessibility menu and choose whether and where the button should appear.
 
-[]
+<img width="1920" height="973" alt="acc1" src="https://github.com/user-attachments/assets/53084592-15de-4e58-9228-1943ce52c49b" />
 
 Adjust the button: optional text, accessible name, optional image, size, shape, background color, text color and hover color. When neither an image nor a text is provided, the plugin uses the universal access icon.
 
-[]
+<img width="1920" height="973" alt="acc2" src="https://github.com/user-attachments/assets/38a6a4b4-a6c2-4991-81d0-8d69e17bae26" />
 
-Configure the panel: background, text and border colors, font size, width and corner radius.
+Configure the panel: background, text and border colors, font size, width and corner radius. You can also replace the texts shown in the panel, from its title to the labels of each action. 
 
-[]
+Even if you use the floating button by default on your site, it is possible to prevent it from being displayed on an individual page or post basis.
 
-Replace the texts shown in the panel, from its title to the labels of each action.
-
-[]
-
-Fine tune the position. Positions anchored to a side use the edge distances; positions centered on an axis use the center shift, where negative values move the button up or to the left.
-
-[]
-
-Visitors click the button to open the panel and adjust the page. By default nothing is saved between pages; the Setup page can remember the choices in the browser or only during the visit.
-
-[]
-
-To hide the button on a specific page, post or custom post type, uncheck the option in the "Simple Kit Accessibility" box of the editor.
-
-[]
+<img width="1920" height="973" alt="acc3" src="https://github.com/user-attachments/assets/fabfc7cf-f56a-451a-b02e-df92deeae927" />
 
 ## Custom triggers
 
@@ -55,10 +41,6 @@ The same result is available as a shortcode:
 ```
 
 Available actions: `font-up`, `font-down`, `font-reset`, `line-up`, `line-down`, `line-reset`, `letter-up`, `letter-down`, `letter-reset`, `contrast`, `reset-all` and `panel`.
-
-## Text size methods
-
-The default method applies a multiplier to a curated list of text containers. The measured method reads the size of every text element in the browser and applies the factor over the original size, which keeps the typographic hierarchy of themes that use pixels and of pages built with page builders. The method is selected on the Setup page.
 
 ## Frequently asked questions
 
