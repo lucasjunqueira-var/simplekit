@@ -1,0 +1,336 @@
+/* Simple Kit Accessibility - frontend styles */
+
+/* -------------------------------------------------------------------------
+   Floating button
+   ------------------------------------------------------------------------- */
+.skacc-widget {
+    position: fixed;
+    z-index: 2147483000;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.3;
+    color: var(--skacc-panel-fg, #1d2327);
+}
+
+.skacc-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-sizing: border-box;
+    min-width: var(--skacc-btn-size, 48px);
+    min-height: var(--skacc-btn-size, 48px);
+    padding: 0 10px;
+    border: 0;
+    border-radius: var(--skacc-btn-radius, 50%);
+    background: var(--skacc-btn-bg, #1d2327);
+    color: var(--skacc-btn-fg, #ffffff);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+}
+
+.skacc-toggle:hover,
+.skacc-toggle:focus {
+    background: var(--skacc-btn-hover, #135e96);
+}
+
+.skacc-toggle:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px #000000, 0 0 0 6px #ffffff;
+}
+
+.skacc-toggle-icon {
+    display: block;
+    width: calc(var(--skacc-btn-size, 48px) * 0.55);
+    height: auto;
+    max-width: 100%;
+}
+
+.skacc-toggle-text {
+    white-space: nowrap;
+}
+
+/* -------------------------------------------------------------------------
+   Panel
+   ------------------------------------------------------------------------- */
+.skacc-panel {
+    position: absolute;
+    box-sizing: border-box;
+    width: var(--skacc-panel-width, 280px);
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    padding: 12px;
+    background: var(--skacc-panel-bg, #ffffff);
+    color: var(--skacc-panel-fg, #1d2327);
+    border: 2px solid var(--skacc-panel-border, #1d2327);
+    border-radius: var(--skacc-panel-radius, 8px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+    font-size: var(--skacc-panel-font-size, 15px);
+    line-height: 1.4;
+    text-align: left;
+}
+
+.skacc-panel[hidden] {
+    display: none;
+}
+
+.skacc-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.skacc-title {
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.skacc-close {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid currentColor;
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.skacc-row {
+    margin: 0 0 10px;
+}
+
+.skacc-row-label {
+    margin: 0 0 4px;
+    font-weight: 600;
+}
+
+.skacc-row-controls {
+    display: flex;
+    gap: 4px;
+}
+
+.skacc-action {
+    flex: 0 0 auto;
+    min-width: 36px;
+    min-height: 36px;
+    padding: 4px 8px;
+    border: 1px solid currentColor;
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: 1.1;
+    cursor: pointer;
+}
+
+.skacc-action:hover {
+    background: rgba(127, 127, 127, 0.22);
+}
+
+.skacc-action.skacc-value {
+    flex: 1 1 auto;
+    min-width: 70px;
+}
+
+.skacc-action.skacc-wide {
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+.skacc-panel-footer {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid currentColor;
+}
+
+.skacc-action:focus-visible,
+.skacc-close:focus-visible,
+.skacc-toggle:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------------
+   Positions
+   ------------------------------------------------------------------------- */
+.skacc-pos-top-left {
+    top: calc(var(--skacc-offset-y, 20px) + env(safe-area-inset-top, 0px));
+    left: calc(var(--skacc-offset-x, 20px) + env(safe-area-inset-left, 0px));
+    align-items: flex-start;
+}
+
+.skacc-pos-top-center {
+    top: calc(var(--skacc-offset-y, 20px) + env(safe-area-inset-top, 0px));
+    left: calc(50% + var(--skacc-shift-x, 0px));
+    transform: translateX(-50%);
+    align-items: center;
+}
+
+.skacc-pos-top-right {
+    top: calc(var(--skacc-offset-y, 20px) + env(safe-area-inset-top, 0px));
+    right: calc(var(--skacc-offset-x, 20px) + env(safe-area-inset-right, 0px));
+    align-items: flex-end;
+}
+
+.skacc-pos-middle-left {
+    top: calc(50% + var(--skacc-shift-y, 0px));
+    transform: translateY(-50%);
+    left: calc(var(--skacc-offset-x, 20px) + env(safe-area-inset-left, 0px));
+    align-items: flex-start;
+}
+
+.skacc-pos-middle-right {
+    top: calc(50% + var(--skacc-shift-y, 0px));
+    transform: translateY(-50%);
+    right: calc(var(--skacc-offset-x, 20px) + env(safe-area-inset-right, 0px));
+    align-items: flex-end;
+}
+
+.skacc-pos-bottom-left {
+    bottom: calc(var(--skacc-offset-y, 20px) + env(safe-area-inset-bottom, 0px));
+    left: calc(var(--skacc-offset-x, 20px) + env(safe-area-inset-left, 0px));
+    align-items: flex-start;
+}
+
+.skacc-pos-bottom-center {
+    bottom: calc(var(--skacc-offset-y, 20px) + env(safe-area-inset-bottom, 0px));
+    left: calc(50% + var(--skacc-shift-x, 0px));
+    transform: translateX(-50%);
+    align-items: center;
+}
+
+.skacc-pos-bottom-right {
+    bottom: calc(var(--skacc-offset-y, 20px) + env(safe-area-inset-bottom, 0px));
+    right: calc(var(--skacc-offset-x, 20px) + env(safe-area-inset-right, 0px));
+    align-items: flex-end;
+}
+
+/* Panel placement: opens towards the inside of the viewport. */
+.skacc-pos-top-left .skacc-panel,
+.skacc-pos-top-center .skacc-panel,
+.skacc-pos-top-right .skacc-panel {
+    top: calc(100% + 10px);
+}
+
+.skacc-pos-bottom-left .skacc-panel,
+.skacc-pos-bottom-center .skacc-panel,
+.skacc-pos-bottom-right .skacc-panel {
+    bottom: calc(100% + 10px);
+}
+
+.skacc-pos-middle-left .skacc-panel {
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.skacc-pos-middle-right .skacc-panel {
+    right: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.skacc-pos-top-left .skacc-panel,
+.skacc-pos-bottom-left .skacc-panel {
+    left: 0;
+}
+
+.skacc-pos-top-right .skacc-panel,
+.skacc-pos-bottom-right .skacc-panel {
+    right: 0;
+}
+
+.skacc-pos-top-center .skacc-panel,
+.skacc-pos-bottom-center .skacc-panel {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Keep the button clear of the WordPress admin bar. */
+.skacc-widget.skacc-has-adminbar.skacc-pos-top-left,
+.skacc-widget.skacc-has-adminbar.skacc-pos-top-center,
+.skacc-widget.skacc-has-adminbar.skacc-pos-top-right {
+    top: calc(var(--skacc-offset-y, 20px) + 32px + env(safe-area-inset-top, 0px));
+}
+
+@media screen and (max-width: 782px) {
+    .skacc-widget.skacc-has-adminbar.skacc-pos-top-left,
+    .skacc-widget.skacc-has-adminbar.skacc-pos-top-center,
+    .skacc-widget.skacc-has-adminbar.skacc-pos-top-right {
+        top: calc(var(--skacc-offset-y, 20px) + 46px + env(safe-area-inset-top, 0px));
+    }
+}
+
+/* Small screens: the panel uses the available width. */
+@media screen and (max-width: 480px) {
+    /* A transformed widget would become the containing block of the fixed
+       panel, so the transforms are dropped and centered positions fall back
+       to the right edge. */
+    .skacc-widget.skacc-pos-top-center,
+    .skacc-widget.skacc-pos-bottom-center {
+        left: auto;
+        right: calc(var(--skacc-offset-x, 20px) + env(safe-area-inset-right, 0px));
+        transform: none;
+        align-items: flex-end;
+    }
+
+    .skacc-widget.skacc-pos-middle-left,
+    .skacc-widget.skacc-pos-middle-right {
+        transform: none;
+    }
+
+    .skacc-widget .skacc-panel {
+        position: fixed;
+        top: auto;
+        bottom: calc(var(--skacc-offset-y, 20px) + 64px + env(safe-area-inset-bottom, 0px));
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-height: 65vh;
+        transform: none;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   High contrast: the widget keeps its own colors and gets a stronger ring.
+   ------------------------------------------------------------------------- */
+html.skacc-contrast .skacc-toggle {
+    box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #000000;
+}
+
+html.skacc-contrast .skacc-panel {
+    outline: 3px solid #000000;
+    outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------------
+   Utility
+   ------------------------------------------------------------------------- */
+.skacc-visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}

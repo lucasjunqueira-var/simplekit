@@ -1,0 +1,567 @@
+# Copyright (C) 2026 Lucas Junqueira
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Simple Kit Accessibility 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/lucasjunqueira-var/simplekit\n"
+"POT-Creation-Date: 2026-10-23 18:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: simplekitaccessibility\n"
+
+#: includes/donate.php:9 includes/help.php:9 includes/setup.php:94
+msgid "Access denied."
+msgstr ""
+
+#: includes/settings.php:36
+msgid "Accessibility"
+msgstr ""
+
+#: includes/frontend.php:471 includes/settings.php:19
+msgid "Accessibility tools"
+msgstr ""
+
+#: includes/setup.php:169
+msgid "Accessible name"
+msgstr ""
+
+#: includes/setup.php:241
+msgid "Accessible name of the close button."
+msgstr ""
+
+#: includes/help.php:18
+msgid "Add reading tools to your site: text size, line spacing, letter spacing and high contrast. Visitors control everything from a small floating panel."
+msgstr ""
+
+#: includes/help.php:48
+msgid "Add the data-skacc-action attribute to any element, or use the shortcode, to create your own controls:"
+msgstr ""
+
+#: includes/setup.php:247
+msgid "Advanced"
+msgstr ""
+
+#: includes/setup.php:238
+msgid "Also used in the accessible name of the minus buttons."
+msgstr ""
+
+#: includes/setup.php:237
+msgid "Also used in the accessible name of the plus buttons."
+msgstr ""
+
+#: includes/setup.php:372
+msgid "Any element can drive the adjustments:"
+msgstr ""
+
+#: includes/setup.php:313
+msgid "Approximate preview of the button and the panel. The final result depends on the theme."
+msgstr ""
+
+#: includes/help.php:25
+msgid "A public JavaScript API so any element of the page can drive the adjustments."
+msgstr ""
+
+#: includes/help.php:53
+msgid "Available actions: font-up, font-down, font-reset, line-up, line-down, line-reset, letter-up, letter-down, letter-reset, contrast, reset-all and panel."
+msgstr ""
+
+#: includes/setup.php:211 includes/setup.php:220
+msgid "Background color"
+msgstr ""
+
+#: includes/setup.php:213
+msgid "Background color on hover"
+msgstr ""
+
+#: includes/setup.php:222
+msgid "Border color"
+msgstr ""
+
+#: includes/settings.php:95
+msgid "Bottom center"
+msgstr ""
+
+#: includes/settings.php:94
+msgid "Bottom left"
+msgstr ""
+
+#: includes/settings.php:96
+msgid "Bottom right"
+msgstr ""
+
+#: includes/setup.php:165
+msgid "Button"
+msgstr ""
+
+#: includes/setup.php:173
+msgid "Button image"
+msgstr ""
+
+#: includes/setup.php:199
+msgid "Button size"
+msgstr ""
+
+#: includes/setup.php:168
+msgid "Button text"
+msgstr ""
+
+#: includes/help.php:34
+msgid "By default the settings of each visitor are not saved: every new page starts from the original state. Change \"Remember choices\" on the Setup page to keep the choices in the browser."
+msgstr ""
+
+#: includes/setup.php:205
+msgid "Circle"
+msgstr ""
+
+#: includes/settings.php:45
+msgid "Close"
+msgstr ""
+
+#: includes/setup.php:241
+msgid "Close action"
+msgstr ""
+
+#: includes/setup.php:266
+msgid "Color palette overrides"
+msgstr ""
+
+#: includes/help.php:31
+msgid "Configure the floating button and the panel on the Setup page. The adjustments are applied by adding classes to the html element, so no page reload is needed."
+msgstr ""
+
+#: includes/setup.php:243
+msgid "Contrast state: off"
+msgstr ""
+
+#: includes/setup.php:242
+msgid "Contrast state: on"
+msgstr ""
+
+#: includes/setup.php:210 includes/setup.php:225
+msgid "Corner radius"
+msgstr ""
+
+#: includes/setup.php:267
+msgid "CSS contrast filter"
+msgstr ""
+
+#: includes/setup.php:255
+msgid "CSS selectors (default)"
+msgstr ""
+
+#: includes/setup.php:286
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/help.php:46 includes/setup.php:371
+msgid "Custom triggers"
+msgstr ""
+
+#: includes/frontend.php:439 includes/settings.php:42
+msgid "Decrease"
+msgstr ""
+
+#: includes/setup.php:238
+msgid "Decrease action"
+msgstr ""
+
+#: includes/setup.php:124
+msgid "Display"
+msgstr ""
+
+#: includes/setup.php:158
+msgid "Distance from the left or right edge, in pixels. Used by the positions anchored to a side."
+msgstr ""
+
+#: includes/setup.php:160
+msgid "Distance from the top or bottom edge, in pixels. Used by the top and bottom positions."
+msgstr ""
+
+#: includes/admin-menu.php:41 includes/admin-menu.php:42 includes/donate.php:13
+msgid "Donate"
+msgstr ""
+
+#: includes/donate.php:25
+msgid "Donate with PayPal button"
+msgstr ""
+
+#: includes/setup.php:277
+msgid "Do not remember (default)"
+msgstr ""
+
+#: includes/setup.php:146
+msgid "Entire site"
+msgstr ""
+
+#: includes/setup.php:127
+msgid "Floating button"
+msgstr ""
+
+#: includes/help.php:24
+msgid "Floating button in eight positions, with configurable size, shape, colors, image and texts."
+msgstr ""
+
+#: includes/setup.php:223
+msgid "Font size"
+msgstr ""
+
+#: includes/help.php:23
+msgid "Four independent adjustments, each with increase, decrease and reset actions."
+msgstr ""
+
+#: includes/admin-menu.php:32 includes/admin-menu.php:33
+msgid "Help"
+msgstr ""
+
+#: includes/help.php:13
+msgid "Help & Documentation"
+msgstr ""
+
+#: includes/post-meta.php:41
+msgid "Hide the accessibility button on this content"
+msgstr ""
+
+#: includes/settings.php:40
+msgid "High contrast"
+msgstr ""
+
+#: includes/setup.php:297
+msgid "High contrast CSS"
+msgstr ""
+
+#: includes/setup.php:236
+msgid "High contrast label"
+msgstr ""
+
+#: includes/setup.php:264
+msgid "High contrast method"
+msgstr ""
+
+#: includes/help.php:21
+msgid "Highlights"
+msgstr ""
+
+#: includes/setup.php:159
+msgid "Horizontal center shift"
+msgstr ""
+
+#: includes/setup.php:158
+msgid "Horizontal edge distance"
+msgstr ""
+
+#: includes/help.php:29
+msgid "How the plugin works"
+msgstr ""
+
+#: includes/setup.php:198
+msgid "Image alternative text"
+msgstr ""
+
+#: includes/frontend.php:440 includes/settings.php:41
+msgid "Increase"
+msgstr ""
+
+#: includes/setup.php:237
+msgid "Increase action"
+msgstr ""
+
+#: includes/setup.php:223
+msgid "In pixels."
+msgstr ""
+
+#: includes/setup.php:224
+msgid "In pixels. On small screens the panel uses the available width."
+msgstr ""
+
+#: includes/help.php:56
+msgid "JavaScript API"
+msgstr ""
+
+#: includes/settings.php:39
+msgid "Letter spacing"
+msgstr ""
+
+#: includes/setup.php:235
+msgid "Letter spacing label"
+msgstr ""
+
+#: includes/settings.php:38
+msgid "Line spacing"
+msgstr ""
+
+#: includes/setup.php:234
+msgid "Line spacing label"
+msgstr ""
+
+#: includes/setup.php:256
+msgid "Measured per element (best for themes using pixels)"
+msgstr ""
+
+#: includes/settings.php:92
+msgid "Middle left"
+msgstr ""
+
+#: includes/settings.php:93
+msgid "Middle right"
+msgstr ""
+
+#: includes/setup.php:199
+msgid "Minimum width and height in pixels."
+msgstr ""
+
+#: includes/setup.php:159
+msgid "Moves the button left or right of the horizontal center. Negative values move it left. Used by the top center and bottom center positions."
+msgstr ""
+
+#: includes/setup.php:161
+msgid "Moves the button up or down from the vertical center. Negative values move it up. Used by the middle left and middle right positions."
+msgstr ""
+
+#: includes/frontend.php:489 includes/settings.php:47
+msgid "Off"
+msgstr ""
+
+#: includes/settings.php:46
+msgid "On"
+msgstr ""
+
+#: includes/setup.php:168
+msgid "Optional. Leave empty to show only the image or the default icon."
+msgstr ""
+
+#: includes/setup.php:198
+msgid "Optional. The accessible name above is used by the button; keep this empty for a decorative image."
+msgstr ""
+
+#: includes/setup.php:188
+msgid "Optional. When empty, the default universal access icon is used."
+msgstr ""
+
+#: includes/setup.php:374
+msgid "Or use the shortcode:"
+msgstr ""
+
+#: includes/setup.php:217
+msgid "Panel"
+msgstr ""
+
+#: includes/setup.php:232
+msgid "Panel title"
+msgstr ""
+
+#: includes/setup.php:224
+msgid "Panel width"
+msgstr ""
+
+#: includes/setup.php:154
+msgid "Position"
+msgstr ""
+
+#: includes/help.php:40
+msgid "Positions anchored to a side use the edge distances. Positions centered on an axis use the center shift to move the button away from the center of that axis; negative values move it up or to the left."
+msgstr ""
+
+#: includes/setup.php:145
+msgid "Posts, pages and public custom post types"
+msgstr ""
+
+#: includes/setup.php:311
+msgid "Preview"
+msgstr ""
+
+#: includes/setup.php:291
+msgid "Printed after the plugin styles. Use it to adapt the reading adjustments to a specific theme."
+msgstr ""
+
+#: includes/setup.php:302
+msgid "Printed only while high contrast is active, after the default palette rules."
+msgstr ""
+
+#: includes/setup.php:169
+msgid "Read by screen readers. Always required, even when the button has a visible text."
+msgstr ""
+
+#: includes/setup.php:275
+msgid "Remember choices"
+msgstr ""
+
+#: includes/setup.php:278
+msgid "Remember in this browser"
+msgstr ""
+
+#: includes/setup.php:279
+msgid "Remember only during the visit"
+msgstr ""
+
+#: includes/setup.php:184
+msgid "Remove"
+msgstr ""
+
+#: includes/admin-menu.php:78
+msgid "Remove image"
+msgstr ""
+
+#: includes/frontend.php:441 includes/frontend.php:488 includes/settings.php:43
+msgid "Reset"
+msgstr ""
+
+#: includes/setup.php:239
+msgid "Reset action"
+msgstr ""
+
+#: includes/settings.php:44
+msgid "Reset all"
+msgstr ""
+
+#: includes/setup.php:240
+msgid "Reset all action"
+msgstr ""
+
+#: includes/setup.php:206
+msgid "Rounded square"
+msgstr ""
+
+#: includes/setup.php:376
+msgid "See the Help page for the complete list of actions and the JavaScript API."
+msgstr ""
+
+#: includes/admin-menu.php:76
+msgid "Select an image"
+msgstr ""
+
+#: includes/setup.php:181
+msgid "Select image"
+msgstr ""
+
+#: includes/admin-menu.php:23 includes/admin-menu.php:24 includes/setup.php:119
+msgid "Setup"
+msgstr ""
+
+#: includes/setup.php:203
+msgid "Shape"
+msgstr ""
+
+#: includes/setup.php:132
+msgid "Show the accessibility button on the site"
+msgstr ""
+
+#: includes/admin-menu.php:11 includes/help.php:16 includes/post-meta.php:23
+msgid "Simple Kit Accessibility"
+msgstr ""
+
+#: includes/admin-menu.php:12
+msgid "SK Accessibility"
+msgstr ""
+
+#: includes/setup.php:207
+msgid "Square"
+msgstr ""
+
+#: includes/setup.php:212 includes/setup.php:221
+msgid "Text color"
+msgstr ""
+
+#: includes/setup.php:229
+msgid "Texts"
+msgstr ""
+
+#: includes/settings.php:37
+msgid "Text size"
+msgstr ""
+
+#: includes/setup.php:233
+msgid "Text size label"
+msgstr ""
+
+#: includes/setup.php:253
+msgid "Text size method"
+msgstr ""
+
+#: includes/donate.php:31
+msgid "Thank you for your support!"
+msgstr ""
+
+#: includes/help.php:61
+msgid "The API is available on every page where the plugin is enabled, even when the floating button is hidden."
+msgstr ""
+
+#: includes/help.php:26
+msgid "The button can be hidden on individual posts, pages or any public custom post type."
+msgstr ""
+
+#: includes/setup.php:258
+msgid "The measured method reads the size of each text element before scaling, preserving the typographic hierarchy of the theme. It only runs in the browser and needs a little more processing when the page changes."
+msgstr ""
+
+#: includes/setup.php:269
+msgid "The palette never changes layout. The filter affects the whole page and can break fixed or sticky elements of the theme."
+msgstr ""
+
+#: includes/setup.php:148
+msgid "The per-content option in the editor only applies to single views."
+msgstr ""
+
+#: includes/post-meta.php:45
+msgid "The reading tools stay available for custom triggers on this page. Only the floating button is hidden."
+msgstr ""
+
+#: includes/help.php:37
+msgid "The text size can be applied by CSS selectors (default) or by measuring each text element in the browser. The measured method preserves the sizes defined by themes that use pixels and by page builders, at the cost of a little more processing when the page changes."
+msgstr ""
+
+#: includes/donate.php:16
+msgid "This is a free plugin. If you find its features useful, please consider making a donation of any amount to its creator, Lucas Junqueira. To do so, use the form below to donate via PayPal."
+msgstr ""
+
+#: includes/help.php:43
+msgid "To hide the button on a specific content, uncheck the option in the Simple Kit Accessibility box of the editor sidebar."
+msgstr ""
+
+#: includes/settings.php:90
+msgid "Top center"
+msgstr ""
+
+#: includes/settings.php:89
+msgid "Top left"
+msgstr ""
+
+#: includes/settings.php:91
+msgid "Top right"
+msgstr ""
+
+#: includes/setup.php:239
+msgid "Used by the per-group reset buttons."
+msgstr ""
+
+#: includes/setup.php:210
+msgid "Used by the rounded square shape."
+msgstr ""
+
+#: includes/admin-menu.php:77
+msgid "Use this image"
+msgstr ""
+
+#: includes/setup.php:161
+msgid "Vertical center shift"
+msgstr ""
+
+#: includes/setup.php:160
+msgid "Vertical edge distance"
+msgstr ""
+
+#: includes/setup.php:281
+msgid "When remembering is disabled, every page load starts from the original state. Remembering uses browser storage; no data is sent to the server."
+msgstr ""
+
+#: includes/setup.php:135
+msgid "When the plugin is enabled the JavaScript API is loaded on every page, even if the button is hidden here or on a specific page."
+msgstr ""
+
+#: includes/setup.php:143
+msgid "Where to show the button"
+msgstr ""
+

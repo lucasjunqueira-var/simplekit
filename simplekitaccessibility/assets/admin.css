@@ -1,0 +1,143 @@
+/* Simple Kit Accessibility - admin styles */
+
+.skacc-preview-icon svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.skacc-card {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    max-width: 960px;
+}
+
+.skacc-card h2 {
+    margin-top: 0;
+}
+
+.skacc-media-field {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.skacc-media-preview {
+    max-width: 64px;
+    max-height: 64px;
+    padding: 4px;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    background: #fff;
+}
+
+/* -------------------------------------------------------------------------
+   Preview
+   ------------------------------------------------------------------------- */
+.skacc-preview-area {
+    max-width: 960px;
+    margin: 12px 0 24px;
+    padding: 24px;
+    border: 1px solid #c3c4c7;
+    border-radius: 6px;
+    background: #f0f0f1;
+}
+
+.skacc-preview-widget {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.skacc-preview-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-sizing: border-box;
+    min-width: var(--skacc-btn-size, 48px);
+    min-height: var(--skacc-btn-size, 48px);
+    padding: 0 10px;
+    border: 0;
+    border-radius: var(--skacc-btn-radius, 50%);
+    background: var(--skacc-btn-bg, #1d2327);
+    color: var(--skacc-btn-fg, #ffffff);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.skacc-preview-icon {
+    display: block;
+    width: calc(var(--skacc-btn-size, 48px) * 0.55);
+    height: auto;
+}
+
+.skacc-preview-toggle-text {
+    white-space: nowrap;
+}
+
+.skacc-preview-panel {
+    box-sizing: border-box;
+    width: var(--skacc-panel-width, 280px);
+    padding: 12px;
+    background: var(--skacc-panel-bg, #ffffff);
+    color: var(--skacc-panel-fg, #1d2327);
+    border: 2px solid var(--skacc-panel-border, #1d2327);
+    border-radius: var(--skacc-panel-radius, 8px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+    font-size: var(--skacc-panel-font-size, 15px);
+    line-height: 1.4;
+}
+
+.skacc-preview-title {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.skacc-preview-row {
+    margin-bottom: 10px;
+}
+
+.skacc-preview-label {
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.skacc-preview-controls {
+    display: flex;
+    gap: 4px;
+}
+
+.skacc-preview-action {
+    flex: 0 0 auto;
+    min-width: 36px;
+    padding: 6px 8px;
+    border: 1px solid currentColor;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 1.1;
+}
+
+.skacc-preview-value {
+    flex: 1 1 auto;
+}
+
+.skacc-preview-wide {
+    flex: 1 1 auto;
+}
+
+.skacc-preview-footer {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid currentColor;
+    display: flex;
+}

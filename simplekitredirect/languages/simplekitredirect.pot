@@ -1,0 +1,228 @@
+# Copyright (C) 2026 Lucas Junqueira
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Simple Kit Redirect 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/lucasjunqueira-var/simplekit\n"
+"POT-Creation-Date: 2026-10-25 14:20+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: simplekitredirect\n"
+
+#: includes/helpers.php
+msgid "The redirect target must be a URL."
+msgstr ""
+
+#: includes/helpers.php
+msgid "The redirect target cannot be empty."
+msgstr ""
+
+#: includes/helpers.php
+msgid "The redirect target contains invalid characters."
+msgstr ""
+
+#: includes/helpers.php
+msgid "The redirect target must be a valid URL."
+msgstr ""
+
+#: includes/helpers.php
+msgid "Only http and https addresses are allowed."
+msgstr ""
+
+#: includes/helpers.php
+msgid "Addresses with a username or password are not allowed."
+msgstr ""
+
+#: includes/post-meta.php
+msgid "Simple Kit Redirect"
+msgstr ""
+
+#: includes/post-meta.php
+msgid "Redirect to"
+msgstr ""
+
+#: includes/post-meta.php
+msgid "Redirect type"
+msgstr ""
+
+#: includes/post-meta.php
+msgid "302 - Temporary (recommended)"
+msgstr ""
+
+#: includes/post-meta.php
+msgid "301 - Permanent"
+msgstr ""
+
+#: includes/post-meta.php
+msgid "Leave empty to display this content normally. Accepted formats: http(s) addresses or a path starting with \"/\"."
+msgstr ""
+
+#: includes/post-meta.php
+msgid "Permanent redirects are cached by browsers. Use 301 only when the new address will not change."
+msgstr ""
+
+#: includes/post-meta.php
+msgid "Current address:"
+msgstr ""
+
+#: includes/post-meta.php
+msgid "Editors can open this content by adding ?simplekitredirect=0 to the address."
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "SK Redirect"
+msgstr ""
+
+#: includes/admin-menu.php includes/donate.php
+msgid "Donate"
+msgstr ""
+
+#: includes/admin-menu.php
+msgid "Help"
+msgstr ""
+
+#: includes/help.php includes/donate.php
+msgid "Access denied."
+msgstr ""
+
+#: includes/help.php
+msgid "Help & Documentation"
+msgstr ""
+
+#: includes/help.php
+msgid "This plugin adds a redirect field to posts and pages. Fill in a new address and every visit to that content is sent there. Leave the field empty and the content is displayed normally."
+msgstr ""
+
+#: includes/help.php
+msgid "How to use"
+msgstr ""
+
+#: includes/help.php
+msgid "Open the post or page in the editor."
+msgstr ""
+
+#: includes/help.php
+msgid "Find the \"Simple Kit Redirect\" box in the sidebar."
+msgstr ""
+
+#: includes/help.php
+msgid "Type the destination address and choose the redirect type."
+msgstr ""
+
+#: includes/help.php
+msgid "Save or update the content."
+msgstr ""
+
+#: includes/help.php
+msgid "Accepted addresses"
+msgstr ""
+
+#: includes/help.php
+msgid "Absolute addresses, including other domains: https://example.com/new-page"
+msgstr ""
+
+#: includes/help.php
+msgid "Paths starting with a slash, resolved against this site address: /new-page"
+msgstr ""
+
+#: includes/help.php
+msgid "Protocol-relative addresses: //example.com/new-page"
+msgstr ""
+
+#: includes/help.php
+msgid "Anything else (javascript:, data:, mailto:, ftp:) is rejected."
+msgstr ""
+
+#: includes/help.php
+msgid "Redirect types"
+msgstr ""
+
+#: includes/help.php
+msgid "302 - Temporary: the default. Browsers do not keep it for long, so the destination can be changed later."
+msgstr ""
+
+#: includes/help.php
+msgid "301 - Permanent: browsers and search engines may cache it for a long time. Visitors may keep going to the old destination even after the field is cleared."
+msgstr ""
+
+#: includes/help.php
+msgid "Who still sees the original content"
+msgstr ""
+
+#: includes/help.php
+msgid "Previews, REST requests, feeds, robots.txt, sitemaps and 404 requests are never redirected. Password-protected content also keeps showing its password form."
+msgstr ""
+
+#: includes/help.php
+msgid "Logged-in editors are redirected like any visitor. To open the original content, add ?simplekitredirect=0 to the address. This only works for users who can edit the content."
+msgstr ""
+
+#: includes/help.php
+msgid "Query strings"
+msgstr ""
+
+#: includes/help.php
+msgid "When the destination has no query string, the query string of the original request is appended by default. Use the simplekitredirect_preserve_query filter to disable this behavior."
+msgstr ""
+
+#: includes/help.php
+msgid "Developer filters"
+msgstr ""
+
+#: includes/help.php
+msgid "changes which post types can be redirected. Default: post and page."
+msgstr ""
+
+#: includes/help.php
+msgid "decides at request time whether the redirect should happen."
+msgstr ""
+
+#: includes/help.php
+msgid "enables or disables query string preservation."
+msgstr ""
+
+#: includes/help.php
+msgid "changes the final destination before it is validated and sent."
+msgstr ""
+
+#: includes/help.php
+msgid "Troubleshooting"
+msgstr ""
+
+#: includes/help.php
+msgid "Nothing happens: confirm the field was saved, the target is a full http(s) address or a path starting with a slash, and the destination is not the same address as the content."
+msgstr ""
+
+#: includes/help.php
+msgid "Headers already sent: another plugin or the theme printed output before WordPress could send the redirect. Test with other plugins disabled."
+msgstr ""
+
+#: includes/help.php
+msgid "A 301 keeps redirecting after removal: the browser cached it. Clear the browser cache or test in a private window, and prefer 302 while testing."
+msgstr ""
+
+#: includes/help.php
+msgid "Page cache: purge the cache after changing a redirect."
+msgstr ""
+
+#: includes/donate.php
+msgid "This is a free plugin. If you find its features useful, please consider making a donation of any amount to its creator, Lucas Junqueira. To do so, use the form below to donate via PayPal."
+msgstr ""
+
+#: includes/donate.php
+msgid "Donate with PayPal button"
+msgstr ""
+
+#: includes/donate.php
+msgid "Thank you for your support!"
+msgstr ""
+
+#: includes/donate.php
+msgid "This is a free plugin. If you find its features useful, please consider making a donation of any amount to its creator. To do so, Please access the Donate sub menu."
+msgstr ""
