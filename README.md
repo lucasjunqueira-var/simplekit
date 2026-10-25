@@ -4,7 +4,13 @@ Simple Kit is a set of tools focused on bringing simple functionality to WordPre
 
 ## Plugins
 
-The kit currently has 7 plugins under development with varying functionalities, all found in this repository. Check out the ones currently under development below.
+The kit currently has 9 plugins under development with varying functionalities, all found in this repository. Check out the ones currently under development below.
+
+### Simple Kit Accessibility
+
+Include accessibility tools for the text on your website.
+
+Check out detailed information about this plugin at [https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitaccessibility](https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitaccessibility)
 
 ### Simple Kit Downloads
 
@@ -29,6 +35,12 @@ Check out detailed information about this plugin at [https://github.com/lucasjun
 Easily include PDFs in your posts and pages.
 
 Check out detailed information about this plugin at [https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitpdf](https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitpdf)
+
+### Simple Kit Redirect
+
+Send posts and pages to a new address, configured individually in the WordPress editor.
+
+Check out detailed information about this plugin at [https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitredirect](https://github.com/lucasjunqueira-var/simplekit/tree/main/simplekitredirect)
 
 ### Simple Kit QRCode
 
